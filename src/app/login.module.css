@@ -1,0 +1,73 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+.flexForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-block: 20px;
+}
+
+.h2title{
+    font-size: xx-large;
+    font-weight: 100;
+}
+
+.input{
+    text-align: right;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid hsla(0, 0%, 0%, 0.3);
+    font-size: large;
+}
+
+.inputLastChild{
+    margin-bottom: 20px;
+}
+
+.button{
+    background-color: var(--button-primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 200px;
+    font-size: large;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: var(--button-primary-color-hover);
+}
+
+.button:active{
+    background-color: var(--button-primary-color-active);
+}
+
+.logosImages{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+}
+
+.lastImage{
+    margin-left: auto;
+}
+
+.error{
+    color: red;
+    transform: translateY(-13px);
+}
+
+.f35Images{
+    margin-top: 10px;
+    transform: translateX(5rem);
+}
