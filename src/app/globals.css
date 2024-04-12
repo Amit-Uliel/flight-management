@@ -1,5 +1,5 @@
 :root {
-  --button-primary-color: rgb(0, 94, 255);
+  --primary-color: rgb(0, 94, 255);
   --button-primary-color-hover: rgba(0, 94, 255, 0.9);
   --button-primary-color-active: rgba(0, 94, 255, 0.7);
 }

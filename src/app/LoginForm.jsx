@@ -1,7 +1,8 @@
 "use client";
 import { useRouter } from 'next/navigation';
-import styles from './login.module.css';
 import { useState } from 'react';
+import styles from './login.module.css';
+import users from './_data/users.json';
 
 // login form component
 export default function LoginForm() {
@@ -14,29 +15,34 @@ export default function LoginForm() {
     // handle user login
     const handleLogin = (e) => {
         e.preventDefault();
-        
-        const correctCredentials = [
-            { username: "amit", password: "1234", role: "hatasa" },
-            { username: "matan", password: "5678", role: "techni" },
-        ];
     
-        const user = correctCredentials.find(user => user.username === username && user.password === password);
+        // find the user in the json (need to change it to database)
+        const user = users.find(user => user.name === username && user.password === password);
 
-        if (user) {
+        if (user) 
+        {
             // Redirect to the corresponding page based on the user's role
-            switch (user.role) {
-                case "hatasa":
-                    router.push("/hatasa");
+            switch (user.role) 
+            {
+                case "flight":
+                    router.push("/flight");
                     break;
-                case "techni":
-                    router.push("/techni");
+
+                case "technical":
+                    router.push("/technical");
                     break;
-                // Add cases for additional roles/pages
+
+                case "operations":
+                    router.push("/operations");
+                    break;
+
                 default:
                     router.push("/"); // Default redirect to login
                     break;
             }
-        } else {
+        } 
+        else 
+        {
             setError("שם משתמש או סיסמא לא נכונים");
             setTimeout(() => setError(""), 5000);
         }

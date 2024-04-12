@@ -34,7 +34,7 @@
 }
 
 .button{
-    background-color: var(--button-primary-color);
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 5px;

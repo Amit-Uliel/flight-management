@@ -1,0 +1,42 @@
+.navbar{
+    background:linear-gradient(70deg , var(--primary-color) , rgb(38, 150, 236));
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 2px rgba(42, 42, 42, 0.5);
+}
+
+.navbarList{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+    margin: 5px;
+    list-style: none;
+    gap: 5px;
+}
+
+.navbarItem{
+    padding: 5px 0px;
+}
+
+.link{
+    text-decoration: none;
+    color: white;
+    padding: 6px 20px;
+    font-size: x-large;
+}
+
+.hover:hover{
+    background-color: white;
+    color: rgb(65, 65, 65);
+    border-radius: 5px;
+}
+
+.active{
+    background-color: white;
+    border-radius: 5px;
+    color: rgb(65, 65, 65);
+}
+
+.logoutLinkItem{
+    margin-right: auto;
+}

@@ -1,0 +1,18 @@
+[
+    {
+      "name": "amit",
+      "password": "123",
+      "role": "flight"
+    },
+    {
+      "name": "matan",
+      "password": "456",
+      "role": "operations"
+    },
+    {
+      "name": "avi",
+      "password": "789",
+      "role": "technicial"
+    }
+  ]
+  
