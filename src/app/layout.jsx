@@ -1,8 +1,15 @@
 import { Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "../components/navbar/Navbar.jsx";
-
 const inter = Inter({ subsets: ["latin"] });
+import "./globals.css";
+
+// font awasome import
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
+
+// components import
+import Header from "@/components/header/Header";
+import Footer from "@/components/footer/Footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,8 +20,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-          {children}
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );

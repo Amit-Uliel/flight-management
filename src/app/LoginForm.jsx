@@ -50,7 +50,7 @@ export default function LoginForm() {
     
 
     return (
-        <form className={`${styles.flexForm} ${styles.form}`} onSubmit={handleLogin}>
+        <form className={`${styles.flexContainer} ${styles.form}`} onSubmit={handleLogin}>
             {/* displays an error if any */}
             <p className={styles.error}>{error}</p>
             {/* user name */}

@@ -1,0 +1,23 @@
+.div{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 5px;
+    border-radius: 5px 5px 0 0;
+}
+
+.roleContainer{
+    background-color: var(--primary-color);
+    direction: rtl;
+    padding: 10px 13px;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    margin-left: auto;
+    text-align: center;
+    color: white;
+}
+
+.roleName{
+    margin: 10px;
+}

@@ -1,12 +1,18 @@
+.main{
+    background: linear-gradient(30deg, rgb(20, 104, 231), rgba(183, 177, 106, 0.2));
+    height: 100vh;
+    padding-top: 10%;
+    position: relative;
+}
+
 .container{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 10%;
 }
 
-.flexForm{
+.flexContainer{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,7 +31,7 @@
     margin-bottom: 10px;
     width: 200px;
     border-radius: 5px;
-    border: 1px solid hsla(0, 0%, 0%, 0.3);
+    border: none;
     font-size: large;
 }
 
@@ -69,5 +75,7 @@
 
 .f35Images{
     margin-top: 10px;
-    transform: translateX(5rem);
+    position: absolute;
+    right: 20%;
+    bottom: 30%;
 }
