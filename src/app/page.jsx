@@ -37,6 +37,21 @@ export default function Home() {
 
         <div className={styles.f35Images}>
           <Image
+            className={styles.f35Image1}
+            src={'/F35.png'}
+            width={400}
+            height={100}
+            quality={100}
+            alt="F35"
+            style={{
+              position: 'absolute',
+              right: '0',
+              bottom: '0',
+              zIndex: '1',
+            }}
+          />
+          <Image
+            className={styles.f35Image2}
             src={'/F35.png'}
             width={280}
             height={70}
@@ -45,18 +60,6 @@ export default function Home() {
             style={{
               position: 'absolute',
               transform: 'translate(120px, 140px)',
-              right: '0',
-              bottom: '0',
-            }}
-          />
-          <Image 
-            src={'/F35.png'}
-            width={400}
-            height={100}
-            quality={100}
-            alt="F35"
-            style={{
-              position: 'absolute',
               right: '0',
               bottom: '0',
             }}

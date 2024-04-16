@@ -1,11 +1,12 @@
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
 import "./globals.css";
 
 // font awasome import
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
+
+// font import
+import { ibmhebrew } from "@/utils/fonts";
 
 // components import
 import Header from "@/components/header/Header";
@@ -19,7 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={ibmhebrew}>
         <Header />
         {children}
         <Footer />

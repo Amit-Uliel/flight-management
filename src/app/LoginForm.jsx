@@ -1,7 +1,14 @@
 "use client";
+
+// hooks import
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+
+// styles import
+import './globals.css';
 import styles from './login.module.css';
+
+// data import
 import users from './_data/users.json';
 
 // login form component
@@ -68,7 +75,7 @@ export default function LoginForm() {
                 placeholder='סיסמא'
             />
             {/* submit button */}
-            <button className={styles.button} type="submit">התחבר</button>
+            <button className={`ibmHebrew ${styles.button}`} type="submit">התחבר</button>
         </form>
     )
 }

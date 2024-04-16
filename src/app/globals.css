@@ -10,5 +10,6 @@
   box-sizing: border-box;
 }
 
-body{
+.ibmHebrew{
+  font-family: var(--font-ibm-hebrew);
 }

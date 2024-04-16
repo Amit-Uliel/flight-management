@@ -9,14 +9,6 @@ export default function LoginBackground() {
       placeholder="blur"
       quality={100}
       fill
-      style={{
-        objectFit: 'cover',
-        position: 'absolute',
-        zIndex: '-1',
-        // width: '750px',
-        // height: '1190px',
-        right: '0',
-      }}
     />
   )
 }
