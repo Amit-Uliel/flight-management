@@ -70,8 +70,6 @@ export default function Navbar(){
                             className={`${styles.logoutLink}`}
                             href={'/'}
                         >
-                            {/* i will implement here whoAmI() so i can show the user 
-                                to where he has connected and when he hover then options */}
                             יציאה
                         </Link>
                     </li>
@@ -101,8 +99,8 @@ export default function Navbar(){
                     </li>
                     <li className={styles.navbarItem}>
                         <Link 
-                            className={`${styles.link} ${pathname === '#' ? styles.active:styles.hover}`}
-                            href={'#'}
+                            className={`${styles.link} ${pathname === '/main' ? styles.active:styles.hover}`}
+                            href={'/main'}
                         >
                             ראשי
                         </Link>

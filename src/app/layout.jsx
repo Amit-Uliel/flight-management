@@ -1,6 +1,6 @@
 import "./globals.css";
 
-// font awasome import
+// FontAwasome import - * icons *
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;

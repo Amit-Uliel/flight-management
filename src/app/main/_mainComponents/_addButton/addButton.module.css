@@ -1,0 +1,38 @@
+.buttonWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-block: 4%;
+}
+
+.link{
+    text-decoration: none;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0.7em 0.7em 0.7em 1.3em;
+    color: white;
+    background: linear-gradient(0deg, rgb(104, 144, 219) 0%, rgba(0, 94, 255) 100%);
+    border: none;
+    box-shadow: 0 0.7em 1em -0.5em #1474ce98;
+    letter-spacing: 0.05em;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button .svg {
+    margin-right: 6px;
+  }
+  
+  .button:hover {
+    box-shadow: 0 0.5em .5em -0.5em #1474ce7e;
+  }
+  
+  .button:active {
+    box-shadow: 0 0.3em 1em -0.5em #1474ce4a;
+  }

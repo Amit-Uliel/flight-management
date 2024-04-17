@@ -78,8 +78,21 @@
 
 .error{
     color: red;
+    margin-top: 10px;
+    text-shadow: 0 0 12px rgb(255, 255, 255);
+    background-color: rgba(255, 0, 0, 0.3);
+    display: block;
+    border-radius: 5px;
+    padding: 5px 15px;
+    opacity: 1;
+    transition: 1s;
     transform: translateY(-13px);
 }
+
+/* .hidden{  
+    opacity: 0;
+    transition: 1s;
+} */
 
 .f35Images{
     margin-top: 10px;

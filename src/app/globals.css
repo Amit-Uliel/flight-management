@@ -2,6 +2,7 @@
   --primary-color: rgb(0, 94, 255);
   --button-primary-color-hover: rgba(0, 94, 255, 0.9);
   --button-primary-color-active: rgba(0, 94, 255, 0.7);
+  --text-primary-color: rgb(65, 65, 65);
 }
 
 *{
@@ -11,5 +12,22 @@
 }
 
 .ibmHebrew{
+  font-family: var(--font-ibm-hebrew);
+}
+
+body{
+  /* font-family: var(--font-ibm-hebrew); */
+}
+
+/* apply font on elements */
+input, textarea,
+button,
+p,
+h1, h2, h3, h4, h5, h6,
+div,
+span,
+li,
+table, th, td
+{
   font-family: var(--font-ibm-hebrew);
 }

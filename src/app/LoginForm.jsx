@@ -47,11 +47,14 @@ export default function LoginForm() {
                     router.push("/"); // Default redirect to login
                     break;
             }
-        } 
+        }
+        // did not find any user
         else 
         {
             setError("שם משתמש או סיסמא לא נכונים");
-            setTimeout(() => setError(""), 5000);
+            // setTimeout(() => {
+            //     setError('');
+            // } ,2000);
         }
     }
     
@@ -59,16 +62,18 @@ export default function LoginForm() {
     return (
         <form className={`${styles.flexContainer} ${styles.form}`} onSubmit={handleLogin}>
             {/* displays an error if any */}
-            <p className={styles.error}>{error}</p>
+            <p className={`${error ? styles.error : ''}`}>
+                {error}
+            </p>
             {/* user name */}
-            <input className={styles.input} 
+            <input className={`ibmHebrew ${styles.input}`} 
                 type="text" 
                 onChange={(e) => setUsername(e.target.value)}
                 value={username}
                 placeholder='שם משתמש'
             />
             {/* password */}
-            <input className={`${styles.input} ${styles.inputLastChild}`}
+            <input className={`ibmHebrew ${styles.input} ${styles.inputLastChild}`}
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}

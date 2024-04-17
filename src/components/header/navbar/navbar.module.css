@@ -6,6 +6,7 @@
 .navbarList{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 0px;
     margin: 5px;
     list-style: none;
@@ -14,9 +15,6 @@
 
 .navbarItem{
     padding: 5px 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .link{
