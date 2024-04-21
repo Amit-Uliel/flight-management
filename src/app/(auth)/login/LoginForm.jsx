@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 // styles import
-import './globals.css';
+import '../../globals.css';
 import styles from './login.module.css';
 
 // data import
-import users from './_data/users.json';
+import users from '@/app/_data/users.json';
 
 // login form component
 export default function LoginForm() {
@@ -32,19 +32,19 @@ export default function LoginForm() {
             switch (user.role) 
             {
                 case "flight":
-                    router.push("/flight");
+                    router.push("/main");
                     break;
 
                 case "technical":
-                    router.push("/technical");
+                    router.push("/main");
                     break;
 
                 case "operations":
-                    router.push("/operations");
+                    router.push("/main");
                     break;
 
                 default:
-                    router.push("/"); // Default redirect to login
+                    router.push("/login"); // Default redirect to login
                     break;
             }
         }

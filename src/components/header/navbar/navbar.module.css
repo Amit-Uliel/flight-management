@@ -1,24 +1,23 @@
 .navbar{
     background:linear-gradient(70deg , var(--primary-color) , rgb(38, 150, 236));
-    border-radius: 0px 0px 5px 5px;
 }
 
 .navbarList{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0px;
-    margin: 5px;
+    padding: 15px 0px;
     list-style: none;
-    gap: 5px;
+    /* gap: 5px; */
 }
 
 .navbarItem{
-    padding: 5px 0px;
+    /* padding: 5px 0px; */
 }
 
 .link{
     text-decoration: none;
+    margin-right: 5px;
     color: white;
     padding: 6px 20px;
     font-size: large;
@@ -49,6 +48,7 @@
     font-size: x-large;
     border-radius: 5px;
     transition: .5s;
+    margin-inline: 3px;
 }
 
 .logoutLink:hover{

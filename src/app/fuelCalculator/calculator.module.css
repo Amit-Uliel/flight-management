@@ -1,12 +1,8 @@
 .main{
-    height: 100vh;
-    /* padding-top: 150px; */
-    /* background: url('../../../public/clouds-wallpaper.jpeg'); */
-    /* background-color: rgb(0, 0, 0); */
+    /* height: 100%; */
     /* background-position: fixed;
     background-repeat: no-repeat;
     background-size: cover; */
-    
 }
 
 .container{
@@ -15,22 +11,13 @@
     align-items: center;
     justify-content: center;
     gap: 70px;
-    height: 100%;
-    /* margin-top: 60px; */
-    /* background-color: rgb(23, 14, 14); */
-    /* padding-bottom: 40px; */
-    /* width: 1000px; */
-    /* margin-inline: auto; */
-    /* backdrop-filter: blur(10px); */
-    /* border-radius: 10px; */
-    /* box-shadow: 0 6px 10px 1px rgba(0, 0, 0, 0.2); */
 }
 
 .title{
     color: white;
     text-shadow: 0px 0px 14px rgba(0, 0, 0, 0.7);
     text-align: center;
-    /* margin-top: 40px; */
+    margin-top: 40px;
 }
 
 .resultAndInputs
@@ -133,6 +120,7 @@
 
 .numberButton
 {
+    color: rgb(65 65 65);
     background-color: transparent;
 }
 

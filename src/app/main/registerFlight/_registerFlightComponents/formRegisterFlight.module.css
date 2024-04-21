@@ -18,6 +18,7 @@
 }
 
 .input,
+.select,
 .button,
 .textarea{
     border-radius: 5px;
@@ -25,11 +26,13 @@
 }
 
 .input:focus,
+.select:focus,
 .textarea:focus{
     outline: none;
 }
 
 .input,
+.select,
 .textarea{
     background: #ffffff;
     box-shadow: inset 5px 5px 10px #8b8b8b55,
@@ -65,3 +68,6 @@
     background-color: var(--primary-color);
 }
 
+.select{
+
+}

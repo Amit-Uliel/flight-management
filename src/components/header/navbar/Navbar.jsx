@@ -55,59 +55,53 @@ export default function Navbar(){
     //     } 
     // }
      
-    if(pathname === '/')
-    {
-        return '';
-    }
-
-    else
-    {
-        return(
-            <nav className={styles.navbar}>
-                <ul className={styles.navbarList}>
-                    <li className={`${styles.logoutLinkItem} ${styles.navbarItem}`}>
-                        <Link 
-                            className={`${styles.logoutLink}`}
-                            href={'/'}
-                        >
-                            יציאה
-                        </Link>
-                    </li>
-                    <li className={styles.navbarItem}>
-                        <Link 
-                            className={`${styles.link} ${pathname === '#' ? styles.active:styles.hover}`}
-                            href={'#'}
-                        >
-                            היסטוריה
-                        </Link>
-                    </li>
-                    <li className={styles.navbarItem}>
-                        <Link 
-                            className={`${styles.link} ${pathname === '#' ? styles.active:styles.hover}`}
-                            href={'#'}
-                        >
-                            תליית חימוש
-                        </Link>
-                    </li>
-                    <li className={styles.navbarItem}>
-                        <Link 
-                            className={`${styles.link} ${pathname === '/fuelCalculator' ? styles.active: styles.hover}`}
-                            href={'/fuelCalculator'}
-                        >
-                            חישוב דלק
-                        </Link>
-                    </li>
-                    <li className={styles.navbarItem}>
-                        <Link 
-                            className={`${styles.link} ${pathname === '/main' ? styles.active:styles.hover}`}
-                            href={'/main'}
-                        >
-                            ראשי
-                        </Link>
-                    </li>
-                    {/* {addRoleLinks()} */}
-                </ul>
-            </nav>
-        );
-    } 
+    
+    return(
+        <nav className={styles.navbar}>
+            <ul className={styles.navbarList}>
+                <li className={`${styles.logoutLinkItem} ${styles.navbarItem}`}>
+                    <Link 
+                        className={`${styles.logoutLink}`}
+                        href={'/login'}
+                    >
+                        יציאה
+                    </Link>
+                </li>
+                <li className={styles.navbarItem}>
+                    <Link 
+                        className={`${styles.link} ${pathname === '#' ? styles.active:styles.hover}`}
+                        href={'#'}
+                    >
+                        היסטוריה
+                    </Link>
+                </li>
+                <li className={styles.navbarItem}>
+                    <Link 
+                        className={`${styles.link} ${pathname.includes('/Armament') ? styles.active:styles.hover}`}
+                        href={'/armament'}
+                    >
+                        תליית חימוש
+                    </Link>
+                </li>
+                <li className={styles.navbarItem}>
+                    <Link 
+                        className={`${styles.link} ${pathname === '/fuelCalculator' ? styles.active: styles.hover}`}
+                        href={'/fuelCalculator'}
+                    >
+                        חישוב דלק
+                    </Link>
+                </li>
+                <li className={styles.navbarItem}>
+                    <Link 
+                        className={`${styles.link} ${pathname === '/main' ? styles.active:styles.hover}`}
+                        href={'/main'}
+                    >
+                        ראשי
+                    </Link>
+                </li>
+                {/* {addRoleLinks()} */}
+            </ul>
+        </nav>
+    );
+    
 }

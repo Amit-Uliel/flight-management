@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
       <>
-          {pathname !== '/' && (
+          {(pathname !== '/' && !pathname.includes('/login')) && (
               <header className={styles.header}>
                   <Indicator />
                   <Navbar />

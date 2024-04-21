@@ -16,7 +16,7 @@
 }
 
 body{
-  /* font-family: var(--font-ibm-hebrew); */
+  height: 100vh;
 }
 
 /* apply font on elements */
