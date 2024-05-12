@@ -1,0 +1,7 @@
+.row{
+    background-color: rgb(200, 200, 200);
+    border-bottom: 1px solid rgb(65 65 65);
+    padding: 12px;
+    transition: .7s;
+    color: black;
+}

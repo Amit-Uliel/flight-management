@@ -1,0 +1,6 @@
+.links{
+    display: flex;
+    direction: rtl;
+    align-items: center;
+    gap: 5px;
+}

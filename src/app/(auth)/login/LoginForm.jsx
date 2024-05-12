@@ -29,24 +29,7 @@ export default function LoginForm() {
         if (user) 
         {
             // Redirect to the corresponding page based on the user's role
-            switch (user.role) 
-            {
-                case "flight":
-                    router.push("/main");
-                    break;
-
-                case "technical":
-                    router.push("/main");
-                    break;
-
-                case "operations":
-                    router.push("/main");
-                    break;
-
-                default:
-                    router.push("/login"); // Default redirect to login
-                    break;
-            }
+            router.push('/main');
         }
         // did not find any user
         else 

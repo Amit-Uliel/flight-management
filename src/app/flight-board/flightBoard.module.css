@@ -1,0 +1,13 @@
+.main{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+}
+
+.container{
+    margin-top: 40px;
+    display: inline-flex;
+    padding: 10px;
+    flex-direction: column;
+}

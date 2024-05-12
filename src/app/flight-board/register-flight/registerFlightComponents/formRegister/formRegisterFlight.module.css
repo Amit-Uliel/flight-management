@@ -1,0 +1,108 @@
+.formWrapper{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputsWrapper{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 600px) {
+    .inputsWrapper{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .formWrapper{
+        padding: 10px;
+    }
+}
+
+.input,
+.select,
+.button,
+.textarea{
+    border-radius: 5px;
+    border: none;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus{
+    outline: none;
+}
+
+.input,
+.select,
+.textarea{
+    font-size: larger;
+    background: #ffffff;
+    box-shadow: inset 5px 5px 10px #8b8b8b55,
+                inset -5px -5px 10px #ffffff8b;
+}
+
+.input{
+    padding: 20px;
+    width: 100%;
+    cursor: text;
+}
+
+.textareaWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    grid-column: span 2;
+}
+  
+.textarea {
+    padding: 5px 10px;
+    width: 100%;
+    resize: none;
+    cursor: text;
+}
+
+.select{
+    cursor: pointer;
+}
+
+.button{
+    margin-top: 20px;
+    padding: 15px;
+    width: 100%;
+    cursor: pointer;
+    color: white;
+    font-size: large;
+    background-color: var(--primary-color);
+}
+
+.inputWrapper{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.inputTimeWrapper{
+    display: flex;
+    position: relative;
+    direction: ltr;
+}
+
+.inputTime{
+    text-align: center;
+}
+
+.colon{
+    display: flex;
+    align-items: center;
+    font-size: x-large;
+    padding: 5px;
+}

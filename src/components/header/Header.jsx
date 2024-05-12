@@ -11,12 +11,12 @@ export default function Header() {
 
   return (
       <>
-          {(pathname !== '/' && !pathname.includes('/login')) && (
-              <header className={styles.header}>
-                  <Indicator />
-                  <Navbar />
-              </header>
-          )}
+        {(pathname !== '/' && !pathname.includes('/login')) && (
+            <header className={styles.header}>
+                {/* <Indicator /> */}
+                <Navbar />
+            </header>
+        )}
       </>
   );
 }

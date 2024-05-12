@@ -1,107 +1,27 @@
-'use client'
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import Image from 'next/image';
+
+// components import
+import Links from './links/Links';
+
+// styles import
 import styles from './navbar.module.css';
 
-// i will need to implement the get user role so i can
-// display the right role based links
-// * i will do that with session *
-export default function Navbar(){
-    
-    // later i will use it to apply 'active' css
-    const pathname = usePathname();
-    
-    // show the link exclusive to the role of the user that
-    // signed in. 
-    // * maybe i will change that function to show what is the role
-    // of the user that signed in *
-    // const addRoleLinks = () => {
-        
-    //     if (pathname.includes('/flight')) {
-    //         return (
-    //             <li className={styles.navbarItem}>
-    //                 <Link 
-    //                     className={`${styles.link} ${pathname === '#' ? styles.active:styles.hover}`}
-    //                     href="/flight"
-    //                 >
-    //                     flight
-    //                 </Link>
-    //             </li>
-    //         );
-    //     } 
-    //     else if (pathname.includes('/operations')) {
-    //         return (
-    //             <li className={styles.navbarItem}>
-    //                 <Link 
-    //                     className={`${styles.link} ${pathname === '#' ? styles.active:styles.hover}`}
-    //                     href="/operations"
-    //                 >
-    //                     operations
-    //                 </Link>
-    //             </li>
-    //         );
-    //     } 
-    //     else if (pathname.includes('/technical')) {
-    //         return (
-    //             <li className={styles.navbarItem}>
-    //                 <Link 
-    //                     className={`${styles.link} ${pathname === '#' ? styles.active:styles.hover}`}
-    //                     href="/technical"
-    //                 >
-    //                     technical
-    //                 </Link>
-    //             </li>
-    //         );
-    //     } 
-    // }
-     
-    
-    return(
-        <nav className={styles.navbar}>
-            <ul className={styles.navbarList}>
-                <li className={`${styles.logoutLinkItem} ${styles.navbarItem}`}>
-                    <Link 
-                        className={`${styles.logoutLink}`}
-                        href={'/login'}
-                    >
-                        יציאה
-                    </Link>
-                </li>
-                <li className={styles.navbarItem}>
-                    <Link 
-                        className={`${styles.link} ${pathname === '#' ? styles.active:styles.hover}`}
-                        href={'#'}
-                    >
-                        היסטוריה
-                    </Link>
-                </li>
-                <li className={styles.navbarItem}>
-                    <Link 
-                        className={`${styles.link} ${pathname.includes('/Armament') ? styles.active:styles.hover}`}
-                        href={'/armament'}
-                    >
-                        תליית חימוש
-                    </Link>
-                </li>
-                <li className={styles.navbarItem}>
-                    <Link 
-                        className={`${styles.link} ${pathname === '/fuelCalculator' ? styles.active: styles.hover}`}
-                        href={'/fuelCalculator'}
-                    >
-                        חישוב דלק
-                    </Link>
-                </li>
-                <li className={styles.navbarItem}>
-                    <Link 
-                        className={`${styles.link} ${pathname === '/main' ? styles.active:styles.hover}`}
-                        href={'/main'}
-                    >
-                        ראשי
-                    </Link>
-                </li>
-                {/* {addRoleLinks()} */}
-            </ul>
-        </nav>
-    );
-    
+// the navigation bar
+export default function Navbar() {
+  return (
+    <div className={styles.container}>
+        <div>
+            <Image
+                src={'/AirForce.png'}
+                alt='air-force'
+                width={80}
+                height={80}
+                quality={100}
+            />
+        </div>
+        <div>
+            <Links />    
+        </div>
+    </div>
+  )
 }

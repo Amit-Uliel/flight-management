@@ -1,4 +1,6 @@
 :root {
+  --bg: #181A1A;
+  --text: white;
   --primary-color: rgb(0, 94, 255);
   --button-primary-color-hover: rgba(0, 94, 255, 0.9);
   --button-primary-color-active: rgba(0, 94, 255, 0.7);
@@ -16,7 +18,24 @@
 }
 
 body{
-  height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  /* width: 1536px; */
+  /* margin: auto; */
+  /* padding-inline: 50px; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* overflow: hidden; */
+  /* justify-content: space-between; */
 }
 
 /* apply font on elements */
