@@ -1,4 +1,3 @@
-import { Rowdies } from 'next/font/google'
 import styles from './table.module.css'
 import TableRow from './tableRow/TableRow'
 

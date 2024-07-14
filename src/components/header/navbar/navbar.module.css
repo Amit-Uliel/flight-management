@@ -10,8 +10,8 @@
 
 @media (max-width: 600px) {
     .container{
-        flex-direction: column; /* Align items to the top */
-        height: auto; /* Let the container height adjust automatically */
-        padding-block: 10px; /* Adjust vertical padding */
+        flex-direction: column;
+        height: auto;
+        padding-block: 10px; 
     }
 }

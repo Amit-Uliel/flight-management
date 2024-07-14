@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// ** npx prisma migrate dev --name init ** -> first time
+
+// ** npx prisma migrate dev ** -> generates migration files that represent the changes between 
+// the current state of your Prisma schema and the state of your database.
+// These migration files are stored in your project directory and can be version-controlled.
+
+// ** npx prisma db push ** -> applies the pending migrations directly to the database
+// without generating migration files. 
+// It's a more streamlined approach for deploying schema 
+// changes in production, but it doesn't generate migration files that 
+// can be inspected or version-controlled.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL") // uses connection pooling
+  directUrl = env("DIRECT_URL") // uses a direct connection
+}
+
+model User {
+  userId Int @id @default(autoincrement())
+  name     String
+  password String @unique
+  role String
+  squadron   Squadron @relation(fields: [squadronId], references: [squadronId])
+  squadronId Int
+}
+
+model Squadron {
+  squadronId Int @id
+  users User[]
+  aircrafts Aircraft[]
+}
+
+model Aircraft {
+  aircraftId Int        @id
+  model      AircraftModel
+  squadron   Squadron @relation(fields: [squadronId], references: [squadronId])
+  squadronId Int
+  armament   Armament?  @relation(fields: [armamentId], references: [armamentId]) // foreign key - armamentId
+  armamentId Int?       @unique
+  camera     Camera?    @relation(fields: [cameraId], references: [cameraId])
+  cameraId   Int?       @unique
+  assignments    Assignment[]
+}
+
+model Armament {
+  armamentId Int        @id @default(autoincrement())
+  weight     Float
+  type       ArmamentType
+  aircraft   Aircraft?
+}
+
+model Camera {
+  cameraId Int      @id @default(autoincrement())
+  weight Float
+  type     CameraType
+  aircraft Aircraft?
+}
+
+model Mission {
+  missionId Int @id @default(autoincrement())
+  missionName String
+  flight       Flight? @relation(fields: [flightId], references: [flightId])
+  flightId     Int @unique
+  assignments    Assignment[]
+}
+
+model Assignment {
+  id             Int          @id @default(autoincrement())
+  aircraft       Aircraft     @relation(fields: [aircraftId], references: [aircraftId])
+  aircraftId     Int
+  mission        Mission      @relation(fields: [missionId], references: [missionId])
+  missionId      Int
+  startTime      DateTime
+  endTime        DateTime?
+
+  @@unique([aircraftId, missionId])
+} 
+
+model Flight {
+  flightId     Int       @id @default(autoincrement())
+  takeoffTime  DateTime
+  landingTime  DateTime
+  status       FlightStatus
+  notes        String
+  mission      Mission[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+enum AircraftModel {
+  hermes_450
+  hermes_900
+  hermes_1000
+}
+
+enum ArmamentType {
+  yellow
+  red
+  blue
+  none
+}
+
+enum CameraType {
+  night_vision
+  black_and_white
+  thermal
+}
+
+enum FlightStatus {
+  sky
+  landed
+}

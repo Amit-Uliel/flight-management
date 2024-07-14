@@ -3,13 +3,11 @@ import Link from 'next/link';
 
 export default function AddButton() {
   return (
-    <div className={styles.buttonWrapper}>
-        <Link className={styles.link} href={'./flight-board/register-flight'}>
-            <button className={styles.button}>
-                <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
-                <span>הוספה</span>
-            </button>
-        </Link>
-    </div>
+    <Link href={'./flight-board/register-flight'} class={styles.link}>
+      <span class={styles.IconContainer}> 
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class={styles.cart}><path d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"></path></svg>
+      </span>
+      <p class={styles.text}>הוספת טיסה</p>
+    </Link>
   )
 }

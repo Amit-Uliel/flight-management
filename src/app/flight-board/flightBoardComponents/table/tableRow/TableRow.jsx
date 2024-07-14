@@ -19,7 +19,7 @@ function TableRow({ rowData }) {
     const handleEditClick = () => {
         if(!isDevoted)
         {
-            router.push(`/flight-board/edit/${rowData.id}`);
+            router.push(`/flight-board/edit-flight/${rowData.id}`);
         }
     };  
 

@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 // styles import
 import styles from './links.module.css';
 
@@ -21,6 +19,10 @@ export default function Links() {
         {
             title: "חישוב דלק",
             path: "/fuel-calculator",
+        },
+        {
+            title: "הוספת ציוד",
+            path: "/add-equipment",
         },
         {
             title: "היסטוריית טיסות",

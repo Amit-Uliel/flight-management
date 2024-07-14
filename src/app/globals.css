@@ -1,9 +1,9 @@
 :root {
-  --bg: #181A1A;
+  --bg: #2e2e2e;
   --text: white;
-  --primary-color: rgb(0, 94, 255);
-  --button-primary-color-hover: rgba(0, 94, 255, 0.9);
-  --button-primary-color-active: rgba(0, 94, 255, 0.7);
+  --primary-color: #1c7fa3;
+  --button-primary-color-hover: #1c7fa3ca;
+  --button-primary-color-active: #1c7fa390;
   --text-primary-color: rgb(65, 65, 65);
 }
 

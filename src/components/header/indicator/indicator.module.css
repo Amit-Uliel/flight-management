@@ -1,23 +1,45 @@
-.div{
+.container {
     background-color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px;
-    border-radius: 5px 5px 0 0;
+    /* direction: rtl; */
 }
 
-.roleContainer{
-    background-color: var(--primary-color);
+.relative {
+    position: relative;
     direction: rtl;
-    padding: 5px 5px;
-    border-radius: 5px;
-    font-size: 1.5rem;
-    /* margin-left: auto; */
-    text-align: center;
-    color: white;
+    padding: 3px;
 }
 
-.roleName{
-    margin: 10px;
+.dropdownHider{
+    background-color: white;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 20;
+    border-radius: 0px 15px 15px 0px;
+}
+
+.roleContainer {
+    background-color: var(--bg);
+    position: relative;
+    z-index: 30;
+    padding: 5px 15px;
+    margin-left: 2px;
+    border-radius: 0px;
+    font-size: 1.3rem;
+    color: white;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: .5s;
+}
+
+.roleContainer:hover{
+    padding: 5px 20px;
+}
+
+.roleName {
+    margin: 3px;
 }

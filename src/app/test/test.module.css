@@ -1,0 +1,112 @@
+.div{
+    background-color: #f23145;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    font-size: 100px;
+    justify-content: center;
+}
+
+.divTwo{
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+}
+
+.dotOne, .dotTwo, .dotThree{
+    box-shadow: 3px 10px 10px 0px #191919;
+} 
+
+.dotOne{
+    content: "";
+    position: absolute;
+    bottom: 29px;
+    right: -25px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 50%;
+    animation: floating 2.5s 1.75s ease-in-out infinite;
+}
+ 
+.dotTwo{
+    content: "";
+    position: absolute;
+    bottom: 29px;
+    right: -50px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 50%;
+    animation: floating 2.5s 2s ease-in-out infinite;
+}
+
+.dotThree{
+    content: "";
+    position: absolute;
+    bottom: 29px;
+    right: -75px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 50%;
+    animation: floating 2.5s 2.25s ease-in-out infinite;
+}
+
+.l,.o,.a,.d,.i,.n,.g{
+    text-shadow: 3px 10px 10px #191919;
+}
+
+.o,.a,.d,.i,.n,.g{
+    margin-left: 10px;
+}
+
+.l{
+    animation: floating 2.5s ease-in-out infinite;
+}
+
+.o{
+    animation: floating 2.5s .25s ease-in-out infinite;
+}
+
+.a{
+    animation: floating 2.5s .5s ease-in-out infinite;
+}
+
+.d{
+    animation: floating 2.5s .75s ease-in-out infinite;
+}
+
+.i{
+    animation: floating 2.5s 1s ease-in-out infinite;
+}
+
+.n{
+    animation: floating 2.5s  1.25s ease-in-out infinite;
+}
+
+.g{
+    animation: floating 2.5s  1.5s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%{
+        border-radius: 50%;
+    }
+
+    50%{
+        transform: translateY(-10px);
+        border-radius: 10%;
+    }
+
+    100%{
+        border-radius: 50%;
+    }
+}

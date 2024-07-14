@@ -43,6 +43,10 @@
     font-size: large;
 }
 
+.input:focus{
+    outline: none;
+}
+
 .inputLastChild{
     margin-bottom: 20px;
 }
@@ -89,16 +93,26 @@
     transform: translateY(-13px);
 }
 
-/* .hidden{  
-    opacity: 0;
-    transition: 1s;
-} */
-
 .f35Images{
     margin-top: 10px;
     position: absolute;
     right: 20%;
     bottom: 30%;
+}
+
+@media (max-width: 1600px) {
+    .f35Images{
+        right: 12%;
+        bottom: 24%;
+    }
+}
+
+@media (max-width: 1250px) {
+    .f35Images{
+        transform: scale(0.8);
+        right: 10%;
+        bottom: 20%;
+    }
 }
 
 .f35Image1{

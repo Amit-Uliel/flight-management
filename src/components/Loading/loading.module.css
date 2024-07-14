@@ -1,0 +1,137 @@
+.div{
+    padding: 5px;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    font-size: 100px;
+    overflow: hidden;
+    justify-content: center;
+    /* background-color: #4fa876; */
+}
+
+.divTwo{
+    position: relative;
+    direction: rtl;
+    /* overflow: hidden; */
+    display: flex;
+}
+
+.dotOne, .dotTwo, .dotThree{
+    box-shadow: 3px 10px 10px 0px #191919;
+} 
+
+.dotOne{
+    content: "";
+    position: absolute;
+    bottom: 29px;
+    left: -25px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 50%;
+    animation: floating 2.5s 1.75s ease-in-out infinite;
+}
+ 
+.dotTwo{
+    content: "";
+    position: absolute;
+    bottom: 29px;
+    left: -50px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 50%;
+    animation: floating 2.5s 2s ease-in-out infinite;
+}
+
+.dotThree{
+    content: "";
+    position: absolute;
+    bottom: 29px;
+    left: -75px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 50%;
+    animation: floating 2.5s 2.25s ease-in-out infinite;
+}
+
+.firstLetter,
+.secondLetter,
+.thirdLetter,
+.forthLetter,
+.fifthLetter{
+    text-shadow: 3px 10px 10px #191919;
+    color: #ffffff;
+}
+
+.firstLetter,
+.secondLetter,
+.thirdLetter,
+.forthLetter,
+.fifthLetter{
+    margin-left: 10px;
+}
+
+.firstLetter{
+    animation: floating 2.5s ease-in-out infinite;
+}
+
+.secondLetter{
+    animation: floating 2.5s .25s ease-in-out infinite;
+}
+
+.thirdLetter{
+    animation: floating 2.5s .5s ease-in-out infinite;
+}
+
+.forthLetter{
+    animation: floating 2.5s .75s ease-in-out infinite;
+}
+
+.fifthLetter{
+    animation: floating 2.5s 1s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%{
+        border-radius: 50%;
+    }
+
+    50%{
+        transform: translateY(-10px);
+        border-radius: 10%;
+    }
+
+    100%{
+        border-radius: 50%;
+    }
+}
+
+.circle{
+    content: "";
+    position: absolute;
+    border-radius: 30%;
+    padding: 60px 100px;
+    background-color: black;
+    left: -30%;
+    top: 0;
+    bottom: 0;
+    /* animation: slideRight 5s linear infinite; */
+}
+
+@keyframes slideRight {
+    from{
+        left: -30%;
+    }
+    
+    to{
+        left: 100%;
+    }
+}

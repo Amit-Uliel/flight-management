@@ -8,7 +8,7 @@ import EditForm from '../../flightBoardComponents/editForm/EditForm';
 export default function Edit({ params, rowData }) {
   return (
     <main>
-      <h1>Edit {params.id}</h1>
+      <h1>Edit {params.flightId}</h1>
       <EditForm formData={rowData} />
     </main>
   )
