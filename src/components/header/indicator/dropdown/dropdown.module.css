@@ -42,9 +42,9 @@
     white-space: nowrap;
     border: none;
     cursor: pointer;
-    background-color: #2f5fce;
+    background-color: var(--third-bg);
     /* box-shadow: 10px 2px 13px black; */
-    color: white;
+    color: var(--text);
     padding: 5px 10px;
     border-radius: 15px;
     font-size: 1.3rem;

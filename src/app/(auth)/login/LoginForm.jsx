@@ -29,12 +29,12 @@ export default function LoginForm() {
         if (user) 
         {
             // Redirect to the corresponding page based on the user's role
-            router.push('/main');
+            router.push('/dashboard');
         }
         // did not find any user
         else 
         {
-            setError("שם משתמש או סיסמא לא נכונים");
+            setError("שם משתמש או סיסמא אינם נכונים");
             // setTimeout(() => {
             //     setError('');
             // } ,2000);

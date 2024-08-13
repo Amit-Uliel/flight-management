@@ -42,29 +42,29 @@ model Squadron {
 }
 
 model Aircraft {
-  aircraftId Int        @id
+  tailNumber String        @id
   model      AircraftModel
   squadron   Squadron @relation(fields: [squadronId], references: [squadronId])
   squadronId Int
-  armament   Armament?  @relation(fields: [armamentId], references: [armamentId]) // foreign key - armamentId
-  armamentId Int?       @unique
-  camera     Camera?    @relation(fields: [cameraId], references: [cameraId])
-  cameraId   Int?       @unique
+  armament     Armament?  @relation(fields: [armamentType], references: [armamentType])
+  armamentType String?
+  camera       Camera?    @relation(fields: [cameraType], references: [cameraType])
+  cameraType   String?
   assignments    Assignment[]
 }
 
 model Armament {
-  armamentId Int        @id @default(autoincrement())
-  weight     Float
-  type       ArmamentType
-  aircraft   Aircraft?
+  armamentType String @id
+  weight       Float
+  quantity     Int          @default(0)
+  aircraft     Aircraft[]
 }
 
 model Camera {
-  cameraId Int      @id @default(autoincrement())
-  weight Float
-  type     CameraType
-  aircraft Aircraft?
+  cameraType     String @id
+  weight   Float
+  quantity Int       @default(0)
+  aircraft Aircraft[]   // One-to-many relation: One CameraType can be assigned to zero, one, or many Aircraft
 }
 
 model Mission {
@@ -77,14 +77,14 @@ model Mission {
 
 model Assignment {
   id             Int          @id @default(autoincrement())
-  aircraft       Aircraft     @relation(fields: [aircraftId], references: [aircraftId])
-  aircraftId     Int
+  aircraft       Aircraft     @relation(fields: [tailNumber], references: [tailNumber])
+  tailNumber     String
   mission        Mission      @relation(fields: [missionId], references: [missionId])
   missionId      Int
   startTime      DateTime
   endTime        DateTime?
 
-  @@unique([aircraftId, missionId])
+  @@unique([tailNumber, missionId])
 } 
 
 model Flight {
@@ -99,25 +99,14 @@ model Flight {
 }
 
 enum AircraftModel {
-  hermes_450
-  hermes_900
-  hermes_1000
-}
-
-enum ArmamentType {
-  yellow
-  red
-  blue
-  none
-}
-
-enum CameraType {
-  night_vision
-  black_and_white
-  thermal
+  HERMES_450
+  HERMES_900
+  HERMES_1000
 }
 
 enum FlightStatus {
-  sky
-  landed
+  SCHEDULED   // The flight is scheduled for takeoff.
+  IN_FLIGHT   // The flight is currently in the sky.
+  LANDED      // The flight has landed.
+  CANCELED    // The flight was canceled.
 }

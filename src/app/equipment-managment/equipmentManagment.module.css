@@ -1,0 +1,38 @@
+.gridContainer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 40px;
+    gap: 30px;
+    text-align: center;
+    direction: rtl;
+    overflow: hidden;
+    padding: 0 80px 0 80px;
+}
+
+.addOperations {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.updateOperations {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.deleteOperations {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+@media (max-width: 1100px) {
+    .container{
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}

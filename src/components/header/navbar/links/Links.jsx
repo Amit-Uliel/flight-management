@@ -10,7 +10,7 @@ export default function Links() {
     const links = [
         {
             title: "ראשי",
-            path: "/main",
+            path: "/dashboard",
         },
         {
             title: "לוח טיסות",
@@ -21,8 +21,8 @@ export default function Links() {
             path: "/fuel-calculator",
         },
         {
-            title: "הוספת ציוד",
-            path: "/add-equipment",
+            title: "ציוד",
+            path: "/equipment-managment",
         },
         {
             title: "היסטוריית טיסות",

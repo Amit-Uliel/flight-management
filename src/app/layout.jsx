@@ -21,11 +21,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={ibmhebrew}>
-        <div className="container">
-          <Header />
-          {children}
-          <Footer />
-        </div>
+          <div className="container">
+            <Header />
+            {children}
+            <Footer />
+          </div>
       </body>
     </html>
   );

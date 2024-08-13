@@ -1,0 +1,67 @@
+.container{
+    padding: 10px 20px 100px 20px;
+    border-radius: 10px;
+    position: relative;
+    background-color: black;
+    /* box-shadow: 0 10px 2px -1px rgba(100, 100, 100, 0.5); */
+}
+
+.planeContainer,
+.armamentContainer,
+.cameraContainer{
+    width: 21%;
+    height: 500px;
+}
+
+@media (max-width: 1300px) {
+    .planeContainer,
+    .armamentContainer,
+    .cameraContainer{
+        width: 300px;
+        height: 500px;
+    }
+}
+
+.planeContainer,
+.armamentContainer,
+.cameraContainer{
+    background-color: var(--secondary-bg);
+}
+
+.planeContainer{
+    /* right: -700px; */
+    /* animation: slideLeft 1s ease-out forwards; */
+}
+
+.armamentContainer{
+    /* top: -700px; */
+    /* animation: slideDown 1s ease-out forwards; */
+}
+
+.cameraContainer{
+    /* left: -700px; */
+    /* animation: slideRight 1s ease-out forwards; */
+}
+
+/* @keyframes slideLeft {
+    to{
+        right: 0;
+    }
+}
+
+@keyframes slideDown {
+    to{
+        top: 0;
+    }
+}
+
+@keyframes slideRight {
+    to{
+        left: 0;
+    }
+} */
+
+.h3{
+    direction: ltr;
+    font-size: x-large;
+}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from './test.module.css';
+import { LineChart } from '@mui/x-charts/LineChart';
 import Loading from "@/components/Loading/Loading";
 
 export default function test() {
@@ -25,7 +26,23 @@ export default function test() {
     }, []);
   
     if (users.length !== 0) {
-        return <Loading />;
+        return (
+            <div className={styles.container}>
+                <h3 className={styles.title}>כותרת</h3>
+                <LineChart
+                    className={styles.chart}
+                    xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+                    series={[
+                        {
+                            data: [2, 5.5, 2, 8.5, 1.5, 5],
+                        },
+                    ]}
+                    width={500}
+                    height={300}
+                />
+            </div>
+        )
+        //return <Loading />;
     }
 
   
