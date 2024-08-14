@@ -1,6 +1,5 @@
 .storageInfo {
-    padding: 20px;
-    /* background-color: #f0f0f0; */
+    padding: 10px 100px;
     margin-bottom: 40px;
     border-radius: 10px;
     text-align: center;
@@ -8,16 +7,53 @@
 }
   
 .storageGrid {
-    display: flex;
+    display: grid;
     margin-top: 20px;
-    justify-content: space-around;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 100px;
+    justify-items: center;
+    transition: .5s ease-in-out;
 }
   
 .storageItem {
-    padding: 10px 20px;
+    padding: 10px;
+    width: 120px;
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: .5s ease-in-out;
+    cursor: default;
+}
+
+@media (max-width: 1000px) {
+    .storageGrid{
+        gap: 75px;
+    }
+}
+
+@media (max-width: 925px) {
+    .storageGrid{
+        gap: 50px;
+        transform: translateX(-10px);
+    }
+}
+
+@media (max-width: 900px) {
+    .storageGrid{
+        gap: 50px;
+        transform: translateX(-20px);
+    }
+}
+
+@media (max-width: 870px) {
+    .storageGrid{
+        gap: 160px;
+        transform: translateX(-25px);
+    }
+}
+
+.storageItem:hover{
+    transform: scale(1.2);
 }
   
 .storageItem .title {
@@ -25,7 +61,7 @@
     color: #333;
 }
   
-.storageItem p {
+.storageItem .storageItemText {
     font-size: 18px;
     color: #666;
 }

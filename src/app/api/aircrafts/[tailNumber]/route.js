@@ -35,15 +35,33 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: 'מספר זנב, דגם וטייסת נדרשים' }, { status: 400 });
     }
 
-    try {  
+    try {
+        // Set the weight based on the model
+        let weight;
+        switch (model) {
+            case 'HERMES_450':
+                weight = 450;
+                break;
+            case 'HERMES_900':
+                weight = 970;
+                break;
+            case 'HERMES_1000':
+                weight = 1250;
+                break;
+            default:
+                return NextResponse.json({ error: 'Model is not recognized' }, { status: 400 });
+        }
+
+        // Update the aircraft details with the new model and weight
         const updatedAircraft = await prismaClient.aircraft.update({
             where: { tailNumber },
-            data: { model, squadronId },
+            data: { model, squadronId, weight },
         });
   
         return NextResponse.json(updatedAircraft, { status: 200 });
     } catch (error) {
-        return NextResponse.json({ error: 'בעיה בעדכון מטוס' }, { status: 500 });
+        console.error('Error updating aircraft:', error);
+        return NextResponse.json({ error: 'בעיה בעדכון מטוס', details: error.message }, { status: 500 });
     }
 }
 

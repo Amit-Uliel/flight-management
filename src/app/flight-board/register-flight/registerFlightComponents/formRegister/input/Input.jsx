@@ -3,7 +3,6 @@ import TextInput from './inputs/TextInput'
 import TextAreaInput from './inputs/TextAreaInput';
 import SelectInput from './inputs/SelectInput';
 import DatePickerInput from './inputs/DatePickerInput';
-import { Dela_Gothic_One } from 'next/font/google';
 import TimeInput from './inputs/TimeInput';
 
 export default function Input({ type, onChange, value, name, label }) {

@@ -22,6 +22,22 @@ export async function POST(request) {
       return NextResponse.json({ error: 'מטוס עם מספר זנב זה כבר קיים' }, { status: 409 });
     }
 
+    // Set the weight based on the model
+    let weight;
+    switch (model) {
+      case 'HERMES_450':
+        weight = 450;
+        break;
+      case 'HERMES_900':
+        weight = 970;
+        break;
+      case 'HERMES_1000':
+        weight = 1250;
+        break;
+      default:
+        return NextResponse.json({ error: 'Model is not recognized' }, { status: 400 });
+    }
+
     // Attempt to find the squadron by ID
     let squadronData = await prismaClient.squadron.findUnique({
       where: {
@@ -44,6 +60,7 @@ export async function POST(request) {
         tailNumber,
         model,
         squadronId: squadronData.squadronId,
+        weight,
       },
     });
 

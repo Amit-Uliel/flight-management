@@ -2,7 +2,9 @@ import Card from '../Card/Card';
 import AddAircraftForm from './AddAircraftForm';
 import UpdateAircraftForm from './UpdateAircraftForm';
 import DeleteAircraftForm from './DeleteAircraftForm';
-import { faPlane } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlane, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import styles from '../styles/warningIcons.module.css';
 
 export default function AircraftCard({ operation }) {
   const renderForm = () => {
@@ -30,6 +32,12 @@ export default function AircraftCard({ operation }) {
 
   return (
     <Card title={title} icon={faPlane}>
+      {operation === 'delete' && (
+        <div className={styles.warnignContainer}>
+            <div className={styles.circle}></div>
+            <FontAwesomeIcon className={styles.triangleExclamation} icon={faTriangleExclamation} />
+        </div>
+      )}    
       {renderForm()}
     </Card>
   );

@@ -33,7 +33,7 @@ export async function POST(request) {
 
     return NextResponse.json(camera, { status: 201 });
   } catch (error) {
-    console.error('Error adding camera:', error);
-    return NextResponse.json({ error: 'Failed to add camera' }, { status: 500 });
+      console.error('Error adding camera:', error);
+      return NextResponse.json({ error: 'Failed to add camera' }, { status: 500 });
   }
 }

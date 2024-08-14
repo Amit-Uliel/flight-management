@@ -7,10 +7,11 @@ export default function UpdateArmamentForm() {
     const [armamentTypes, setArmamentTypes] = useState([]);
     const [selectedArmamentType, setSelectedArmamentType] = useState('');
     const [currentQuantity, setCurrentQuantity] = useState(0);
-    const [addQuantity, setAddQuantity] = useState('');
+    const [updateQuantity, setUpdateQuantity] = useState('');
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [operation, setOperation] = useState('increase'); // Track the current operation
 
     // Fetch all armament types from the database when the component mounts
     useEffect(() => {
@@ -62,17 +63,19 @@ export default function UpdateArmamentForm() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ quantity: parseInt(addQuantity, 10) }),
+                body: JSON.stringify({
+                    quantity: operation === 'increase' ? parseInt(updateQuantity, 10) : -parseInt(updateQuantity, 10),
+                }),
             });
 
             if (!response.ok) {
-                throw new Error(response.error || 'בעיה בעדכון חימוש');
+                throw new Error('בעיה בעדכון חימוש');
             }
 
             const data = await response.json();
             setSuccessMessage('חימוש עודכן בהצלחה');
             setCurrentQuantity(data.quantity);
-            setAddQuantity('');
+            setUpdateQuantity('');
         } catch (error) {
             console.error('Error updating armament:', error);
             setError(error.message);
@@ -98,20 +101,38 @@ export default function UpdateArmamentForm() {
                 ))}
             </select>
 
-            
             {selectedArmamentType && (<p>כמות נוכחית: {currentQuantity}</p>)}
 
-            <label className={styles.label} htmlFor="addQuantity">הכנס כמות להוספה</label>
+            <div className={styles.operationButtons}>
+                <button
+                    type="button"
+                    className={`${styles.operationButton} ${operation === 'increase' && styles.activeButton}`}
+                    onClick={() => setOperation('increase')}
+                >
+                    +
+                </button>
+                <button
+                    type="button"
+                    className={`${styles.operationButton} ${operation === 'decrease' && styles.activeButton}`}
+                    onClick={() => setOperation('decrease')}
+                >
+                    -
+                </button>
+            </div>
+
+            <label className={styles.label} htmlFor="updateQuantity">
+                {operation === 'increase' ? 'הכנס כמות להוספה' : 'הכנס כמות להורדה'}
+            </label>
             <input
                 className={styles.input}
                 type="number"
-                id="addQuantity"
-                value={addQuantity}
-                onChange={(e) => setAddQuantity(e.target.value)}
+                id="updateQuantity"
+                value={updateQuantity}
+                onChange={(e) => setUpdateQuantity(e.target.value)}
                 min="1"
             />
 
-            <button className={styles.button} type="submit" disabled={isLoading || !addQuantity}>
+            <button className={styles.button} type="submit" disabled={isLoading || !updateQuantity}>
                 {isLoading ? '...מעדכן' : 'עדכון חימוש'}
             </button>   
             

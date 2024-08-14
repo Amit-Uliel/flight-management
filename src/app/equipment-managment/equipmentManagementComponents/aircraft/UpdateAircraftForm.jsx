@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import styles from '../styles/forms.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 export default function UpdateAircraftForm() {
     const [tailNumber, setTailNumber] = useState('');
@@ -66,7 +68,7 @@ export default function UpdateAircraftForm() {
         setIsLoading(true);
 
         try {
-            const response = await fetch('/api/aircrafts', {
+            const response = await fetch(`/api/aircrafts/${tailNumber}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -96,13 +98,18 @@ export default function UpdateAircraftForm() {
     return (
         <form className={styles.form} onSubmit={handleUpdateAircraft}>
             <label className={styles.label} htmlFor="tailNumber">הזן מספר זנב</label>
-            <input
-                className={styles.input}
-                type="text"
-                id="tailNumber"
-                value={tailNumber}
-                onChange={(e) => setTailNumber(e.target.value)}
-            />
+            <div className={styles.inputContainer}>
+                <input
+                    className={`${styles.tailNumbderInput} ${error ? styles.inputError : ''}`}
+                    type="text"
+                    id="tailNumber"
+                    value={tailNumber}
+                    onChange={(e) => setTailNumber(e.target.value)}
+                />
+                {error && (
+                    <FontAwesomeIcon icon={faTimesCircle} className={styles.errorIcon} />
+                )}
+            </div>
 
             {isLoading && <p className={styles.loading}>...מחפש את המטוס</p>}
             {successMessage && <p className={styles.success}>{successMessage}</p>}

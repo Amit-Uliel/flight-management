@@ -44,6 +44,7 @@ model Squadron {
 model Aircraft {
   tailNumber String        @id
   model      AircraftModel
+  weight     Float
   squadron   Squadron @relation(fields: [squadronId], references: [squadronId])
   squadronId Int
   armament     Armament?  @relation(fields: [armamentType], references: [armamentType])

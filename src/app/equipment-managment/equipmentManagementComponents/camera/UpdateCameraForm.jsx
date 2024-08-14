@@ -7,12 +7,12 @@ export default function UpdateCameraForm() {
     const [cameraTypes, setCameraTypes] = useState([]);
     const [selectedCameraType, setSelectedCameraType] = useState('');
     const [currentQuantity, setCurrentQuantity] = useState(0);
-    const [addQuantity, setAddQuantity] = useState('');
+    const [updateQuantity, setUpdateQuantity] = useState('');
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [operation, setOperation] = useState('increase');
 
-    // Fetch all camera types from the database when the component mounts
     useEffect(() => {
         const fetchCameraTypes = async () => {
             try {
@@ -27,7 +27,6 @@ export default function UpdateCameraForm() {
         fetchCameraTypes();
     }, []);
 
-    // Fetch the current quantity when a camera type is selected
     useEffect(() => {
         if (selectedCameraType) {
             const fetchCurrentQuantity = async () => {
@@ -48,7 +47,6 @@ export default function UpdateCameraForm() {
         }
     }, [selectedCameraType]);
 
-    // Handle form submission
     const handleUpdate = async (e) => {
         e.preventDefault();
         setError(null);
@@ -61,17 +59,19 @@ export default function UpdateCameraForm() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ quantity: parseInt(addQuantity, 10) }),
+                body: JSON.stringify({
+                    quantity: operation === 'increase' ? parseInt(updateQuantity, 10) : -parseInt(updateQuantity, 10),
+                }),
             });
 
             if (!response.ok) {
-                throw new Error(response.error || 'בעיה בעדכון מצלמות');
+                throw new Error('בעיה בעדכון מצלמות');
             }
 
             const data = await response.json();
             setSuccessMessage('מצלמות עודכנו בהצלחה');
             setCurrentQuantity(data.quantity);
-            setAddQuantity('');
+            setUpdateQuantity('');
         } catch (error) {
             setError(error.message);
         } finally {
@@ -96,23 +96,41 @@ export default function UpdateCameraForm() {
                 ))}
             </select>
 
-            
             {selectedCameraType && (<p>כמות נוכחית: {currentQuantity}</p>)}
+                
+            <div className={styles.operationButtons}>
+                <button
+                    type="button"
+                    className={`${styles.operationButton} ${operation === 'increase' && styles.activeButton}`}
+                    onClick={() => setOperation('increase')}
+                >
+                    +
+                </button>
+                <button
+                    type="button"
+                    className={`${styles.operationButton} ${operation === 'decrease' && styles.activeButton}`}
+                    onClick={() => setOperation('decrease')}
+                >
+                    -
+                </button>
+            </div>
 
-            <label className={styles.label} htmlFor="addQuantity">הכנס כמות להוספה</label>
+            <label className={styles.label} htmlFor="updateQuantity">
+                {operation === 'increase' ? 'הכנס כמות להוספה' : 'הכנס כמות להורדה'}
+            </label>
             <input
                 className={styles.input}
                 type="number"
-                id="addQuantity"
-                value={addQuantity}
-                onChange={(e) => setAddQuantity(e.target.value)}
+                id="updateQuantity"
+                value={updateQuantity}
+                onChange={(e) => setUpdateQuantity(e.target.value)}
                 min="1"
             />
 
-            <button className={styles.button} type="submit" disabled={isLoading || !addQuantity}>
+            <button className={styles.button} type="submit" disabled={isLoading || !updateQuantity}>
                 {isLoading ? '...מעדכן' : 'עדכון מצלמות'}
             </button>
-
+                
             {error && <p className={styles.error}>{error}</p>}
             {successMessage && <p className={styles.success}>{successMessage}</p>}
         </form>

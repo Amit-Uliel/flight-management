@@ -2,7 +2,9 @@ import Card from '../Card/Card';
 import AddArmamentForm from './AddArmamentForm';
 import UpdateArmamentForm from './UpdateArmamentForm';
 import DeleteArmamentForm from './DeleteArmamentForm';
-import { faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBoxesStacked, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import styles from '../styles/warningIcons.module.css';
 
 export default function ArmamentCard({ operation }) {
     const renderForm = () => {
@@ -29,6 +31,12 @@ export default function ArmamentCard({ operation }) {
 
     return (
         <Card title={title} icon={faBoxesStacked}>
+            {operation === 'delete' && (
+                <div className={styles.warnignContainer}>
+                    <div className={styles.circle}></div>
+                    <FontAwesomeIcon className={styles.triangleExclamation} icon={faTriangleExclamation} />
+                </div>
+            )}
             {renderForm()}
         </Card>
     );

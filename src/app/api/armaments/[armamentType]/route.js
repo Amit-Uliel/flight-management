@@ -27,7 +27,7 @@ export async function PUT(request, { params }) {
   const { armamentType } = params;
   const { quantity } = await request.json();
 
-  if (!quantity || quantity <= 0) {
+  if (quantity == null) {
     return NextResponse.json({ error: 'כמות חוקית נדרשת לעדכון' }, { status: 400 });
   }
 
@@ -40,10 +40,16 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: 'חימוש לא נמצא' }, { status: 404 });
     }
 
+    const newQuantity = existingArmament.quantity + quantity;
+
+    if (newQuantity < 0) {
+      return NextResponse.json({ error: 'הכמות לא יכולה להיות פחות מאפס' }, { status: 400 });
+    }
+
     const updatedArmament = await prismaClient.armament.update({
       where: { armamentType },
       data: {
-        quantity: existingArmament.quantity + quantity, // Increase the quantity by the specified amount
+        quantity: newQuantity,
       },
     });
 
