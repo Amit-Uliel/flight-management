@@ -27,76 +27,95 @@ datasource db {
 }
 
 model User {
-  userId Int @id @default(autoincrement())
-  name     String
-  password String @unique
-  role String
+  userId     Int      @id @default(autoincrement())
+  name       String
+  password   String   @unique
+  role       String
   squadron   Squadron @relation(fields: [squadronId], references: [squadronId])
   squadronId Int
 }
 
 model Squadron {
-  squadronId Int @id
-  users User[]
-  aircrafts Aircraft[]
+  squadronId Int        @id
+  users      User[]
+  aircrafts  Aircraft[]
 }
 
 model Aircraft {
-  tailNumber String        @id
-  model      AircraftModel
-  weight     Float
-  squadron   Squadron @relation(fields: [squadronId], references: [squadronId])
-  squadronId Int
-  armament     Armament?  @relation(fields: [armamentType], references: [armamentType])
-  armamentType String?
-  camera       Camera?    @relation(fields: [cameraType], references: [cameraType])
-  cameraType   String?
-  assignments    Assignment[]
+  tailNumber              String                    @id
+  model                   AircraftModel
+  weight                  Float
+  squadron                Squadron                  @relation(fields: [squadronId], references: [squadronId])
+  squadronId              Int
+  assignments             Assignment[]
+  isAvailable             Boolean                   @default(true) // track availability
+  AssignmentArmamentUsage AssignmentArmamentUsage[]
 }
 
 model Armament {
-  armamentType String @id
-  weight       Float
-  quantity     Int          @default(0)
-  aircraft     Aircraft[]
+  armamentType            String                    @id
+  weight                  Float
+  quantity                Int                       @default(0)
+  AssignmentArmamentUsage AssignmentArmamentUsage[]
 }
 
 model Camera {
-  cameraType     String @id
-  weight   Float
-  quantity Int       @default(0)
-  aircraft Aircraft[]   // One-to-many relation: One CameraType can be assigned to zero, one, or many Aircraft
+  cameraType String       @id
+  weight     Float
+  quantity   Int          @default(0)
+  Assignment Assignment[]
 }
 
 model Mission {
-  missionId Int @id @default(autoincrement())
+  missionId   Int          @id @default(autoincrement())
   missionName String
-  flight       Flight? @relation(fields: [flightId], references: [flightId])
-  flightId     Int @unique
-  assignments    Assignment[]
+  flight      Flight?
+  assignments Assignment[]
+  MissonStatus MissonStatus @default(ONGOING)
+  createdAt   DateTime     @default(now())
 }
 
 model Assignment {
-  id             Int          @id @default(autoincrement())
-  aircraft       Aircraft     @relation(fields: [tailNumber], references: [tailNumber])
-  tailNumber     String
-  mission        Mission      @relation(fields: [missionId], references: [missionId])
-  missionId      Int
-  startTime      DateTime
-  endTime        DateTime?
+  id                      Int                       @id @default(autoincrement())
+  aircraft                Aircraft                  @relation(fields: [tailNumber], references: [tailNumber])
+  tailNumber              String
+  mission                 Mission                   @relation(fields: [missionId], references: [missionId])
+  missionId               Int
+  takeOffTime             DateTime
+  scheduledLandingTime    DateTime
+  actualLandingTime       DateTime?
+  status                  AssignmentStatus          @default(ONGOING)
+  camera                  Camera                   @relation(fields: [cameraType], references: [cameraType])
+  cameraType              String
+  AssignmentArmamentUsage AssignmentArmamentUsage[]
 
   @@unique([tailNumber, missionId])
-} 
+}
+
+model AssignmentArmamentUsage {
+  id           Int        @id @default(autoincrement())
+  assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  assignmentId Int
+  aircraft     Aircraft   @relation(fields: [tailNumber], references: [tailNumber])
+  tailNumber   String
+  armament     Armament   @relation(fields: [armamentType], references: [armamentType])
+  armamentType String
+  quantity     Int // Quantity of this specific armament type used by this aircraft in this assignment
+
+  @@unique([assignmentId, tailNumber, armamentType]) // Ensures unique combination of assignment, aircraft, and armament type
+}
 
 model Flight {
-  flightId     Int       @id @default(autoincrement())
-  takeoffTime  DateTime
-  landingTime  DateTime
-  status       FlightStatus
-  notes        String
-  mission      Mission[]
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  flightId             Int          @id @default(autoincrement())
+  takeoffTime          DateTime
+  scheduledLandingTime DateTime
+  actualLandingTime    DateTime?
+  status               FlightStatus @default(SCHEDULED)
+  notes                String
+  mission              Mission      @relation(fields: [missionId], references: [missionId])
+  missionId            Int          @unique
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
 }
 
 enum AircraftModel {
@@ -106,8 +125,21 @@ enum AircraftModel {
 }
 
 enum FlightStatus {
-  SCHEDULED   // The flight is scheduled for takeoff.
-  IN_FLIGHT   // The flight is currently in the sky.
-  LANDED      // The flight has landed.
-  CANCELED    // The flight was canceled.
+  SCHEDULED // The flight is scheduled for takeoff.
+  IN_FLIGHT // The flight is currently in the sky.
+  LANDED // The flight has landed.
+  CANCELED // The flight was canceled.
+}
+
+enum MissonStatus {
+  ONGOING
+  ONHOLD
+  COMPLETED
+  CANCELED
+}
+
+enum AssignmentStatus {
+  ONGOING
+  COMPLETED
+  CANCELED
 }

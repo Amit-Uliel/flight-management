@@ -1,12 +1,9 @@
+
 import styles from './registerFlight.module.css';
 import Link from 'next/link';
-
-// icons import
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlaneDeparture } from '@fortawesome/free-solid-svg-icons';
-
-// components
-import FormRegisterFlight from './registerFlightComponents/formRegister/FormRegisterFlight.jsx';
+import FlightForm from '../flightBoardComponents/FlightForm';
 
 export default function RegisterFlight() {
   return (
@@ -14,9 +11,9 @@ export default function RegisterFlight() {
         <div className={styles.container}>
           <Link href={'/flight-board'} className={styles.link}>חזרה</Link>
           <h2 className={styles.title}>
-            הוספת טיסה <FontAwesomeIcon className={styles.icon} icon={faPlaneDeparture} />
+            הוספת טיסה &nbsp; <FontAwesomeIcon className={styles.icon} icon={faPlaneDeparture} />
           </h2>
-          <FormRegisterFlight/>
+          <FlightForm />
         </div>
     </main>
   )

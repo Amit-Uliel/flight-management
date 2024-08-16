@@ -1,4 +1,4 @@
-import styles from '../tableCell.module.css';
+import styles from '../../../../styles/tableCell.module.css';
 
 
 export default function CheckboxCell({ onChange, checked }) {

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import TableCell from "./tableCell/TableCell";
-import styles from './tableRow.module.css';
+import styles from '../../styles/tableRow.module.css';
 
 function TableRow({ rowData }) {
     const router = useRouter();

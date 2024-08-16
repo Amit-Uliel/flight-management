@@ -1,4 +1,4 @@
-import styles from './tableCell.module.css';
+import styles from '../../../styles/tableCell.module.css';
 import IdCell from './cells/IdCell';
 import CheckboxCell from './cells/CheckboxCell';
 

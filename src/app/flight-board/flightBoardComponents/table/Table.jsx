@@ -1,4 +1,4 @@
-import styles from './table.module.css'
+import styles from '../styles/table.module.css'
 import TableRow from './tableRow/TableRow'
 
 export default function Table({ data }) {

@@ -1,0 +1,106 @@
+.form {
+    max-width: 600px;
+    margin: auto;
+}
+
+.label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+.aircraftConfiguration {
+    margin-block: 20px;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 40px -20px white;
+}
+
+.label {
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-block: 10px;
+    cursor: default;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.table th {
+    background-color: #ffffff;
+    color: black;
+    font-weight: bold;
+}
+
+.table tbody tr:hover {
+    background-color: #f9f9f915;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+.confirmationDiv {
+    box-shadow: 0 0px 10px 0 white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    left: 30px;
+    width: 300px;
+    height: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, .001);
+    text-shadow: 0 0 15px black;
+    backdrop-filter: blur(5px); /* Blur effect */
+}
+
+.p {
+    font-size: 2.5rem;
+    color: rgb(31, 231, 91); /* Optional: Set text color */
+}
+

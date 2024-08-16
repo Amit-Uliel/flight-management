@@ -1,4 +1,4 @@
-import styles from './legend.module.css';
+import styles from './styles/legend.module.css';
 
 export default function Legend() {
 

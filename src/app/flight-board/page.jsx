@@ -3,8 +3,8 @@ import styles from './flightBoard.module.css';
 
 // components
 import Table from '@/app/flight-board/flightBoardComponents/table/Table';
-import AddButton from './flightBoardComponents/addButton/AddButton.jsx';
-import Legend from './flightBoardComponents/legend/Legend';
+import AddButton from './flightBoardComponents/AddButton.jsx';
+import Legend from './flightBoardComponents/Legend';
 
 export default function FlightBoard() {
   const sampleData1 = {
