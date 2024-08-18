@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import styles from './test.module.css';
 import { LineChart } from '@mui/x-charts/LineChart';
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/loading/Loading";
 
 export default function test() {
     const [users, setUsers] = useState([]);

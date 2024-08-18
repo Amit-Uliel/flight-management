@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import AircraftSelectionTable from './AircraftSelectionTable';
 import AircraftConfiguration from './AircraftConfiguration';
 import styles from './styles/flightForm.module.css';
+import OrbitLoadingButton from '@/components/ui/buttons/orbitLoadingButton/OrbitLoadingButton';
 
 export default function FlightForm() {
     const [missionName, setMissionName] = useState('');
@@ -17,6 +18,7 @@ export default function FlightForm() {
     const [cameraTypes, setCameraTypes] = useState([]);
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     // Fetch available armament and camera types when the component mounts
     useEffect(() => {
@@ -59,6 +61,7 @@ export default function FlightForm() {
         e.preventDefault();
         setError(null);
         setSuccessMessage(null);
+        setIsLoading(true);
     
         try {
             // Create the mission
@@ -194,6 +197,8 @@ export default function FlightForm() {
             setSuccessMessage('Flight created successfully');
         } catch (error) {
             setError(error.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -254,15 +259,15 @@ export default function FlightForm() {
                 onChange={(e) => setNotes(e.target.value)}
             />
 
-            <button className={styles.button} type="submit">
-                צור טיסה
-            </button>
+            <OrbitLoadingButton
+                initialText="צור טיסה"
+                loadingText="יוצר טיסה"
+                isLoading={isLoading}
+                style={{ width: '150px' }}
+            />
             
-            <div className={styles.confirmationDiv}>
-                <p className={styles.p}>טיסה נוספה בהצלחה !</p>
-                {error && <p className={styles.error}>{error}</p>}
-                {successMessage && <p className={styles.success}>{successMessage}</p>}
-            </div>
+            {error && <p className={styles.error}>{error}</p>}
+            {successMessage && <p className={styles.success}>{successMessage}</p>}
         </form>
     );
 }

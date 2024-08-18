@@ -8,13 +8,13 @@ import FlightForm from '../flightBoardComponents/FlightForm';
 export default function RegisterFlight() {
   return (
     <main className={styles.main}>
-        <div className={styles.container}>
-          <Link href={'/flight-board'} className={styles.link}>חזרה</Link>
-          <h2 className={styles.title}>
-            הוספת טיסה &nbsp; <FontAwesomeIcon className={styles.icon} icon={faPlaneDeparture} />
-          </h2>
-          <FlightForm />
-        </div>
+      <div className={styles.container}>
+        <Link href={'/flight-board'} className={styles.link}>חזרה</Link>
+        <h2 className={styles.title}>
+          הוספת טיסה &nbsp; <FontAwesomeIcon className={styles.icon} icon={faPlaneDeparture} />
+        </h2>
+        <FlightForm />
+      </div>
     </main>
   )
 }

@@ -16,19 +16,12 @@
     margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
 }
 
-.button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #0056b3;
+.textarea{
+    height: 80px;
 }
 
 .error {
@@ -79,28 +72,5 @@
 .error {
     color: red;
     margin-top: 10px;
-}
-
-.confirmationDiv {
-    box-shadow: 0 0px 10px 0 white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    text-align: center;
-    top: 10px;
-    left: 30px;
-    width: 300px;
-    height: 150px;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, .001);
-    text-shadow: 0 0 15px black;
-    backdrop-filter: blur(5px); /* Blur effect */
-}
-
-.p {
-    font-size: 2.5rem;
-    color: rgb(31, 231, 91); /* Optional: Set text color */
 }
 
