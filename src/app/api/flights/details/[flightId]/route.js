@@ -7,19 +7,35 @@ export async function GET(req, { params }) {
     const { flightId } = params;
 
     try {
-        // Fetch the flight to verify it exists, but only return the ID
-        const flight = await prisma.flight.findUnique({
+        const flightDetails = await prisma.flight.findUnique({
             where: { flightId: parseInt(flightId) },
-            select: { flightId: true } // Only select the flightId
+            include: {
+                mission: {
+                    include: {
+                        assignments: {
+                            include: {
+                                aircraft: true, // Include the related aircraft details
+                                camera: true, // Include the related camera details
+                                AssignmentArmamentUsage: {
+                                    include: {
+                                        armament: true, // Include the related armament details
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
         });
 
-        if (!flight) {
+        if (!flightDetails) {
             return NextResponse.json({ message: 'Flight not found' }, { status: 404 });
         }
 
-        return NextResponse.json({ flightId: flight.flightId }, { status: 200 });
+        console.log(flightDetails); // Log the details for debugging
+        return NextResponse.json(flightDetails, { status: 200 });
     } catch (error) {
-        console.error('Error fetching flight:', error);
+        console.error('Error fetching flight details:', error);
         return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
     }
 }

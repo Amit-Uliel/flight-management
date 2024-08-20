@@ -1,47 +1,35 @@
-.flightDetailsContainer {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    direction: rtl; /* Ensures right-to-left text direction for Hebrew */
+.container{
+    padding: 25px;
 }
 
-.title {
-    margin-bottom: 20px;
-    font-size: 2rem;
-    text-align: center;
+.flightDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content horizontally */
+    justify-content: center; /* Center the content vertically */
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px; /* Limit the maximum width for better readability */
+    border-radius: 10px;
+    box-shadow: 0 0px 8px rgba(238, 238, 238, 0.8);
+    direction: rtl;
 }
 
 .section {
     margin-bottom: 20px;
+    width: 100%;
 }
 
-.sectionTitle {
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-    color: #333;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
+    gap: 20px; /* Space between grid items */
+    width: 100%;
 }
 
-.detail {
-    margin-bottom: 5px;
-    font-size: 1.1rem;
-    color: #555;
-}
-
-.assignment, .usage {
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #ffffff;
+.assignmentSection {
+    padding: 15px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.loading {
-    font-size: 1.5rem;
-    color: #999;
-    text-align: center;
-    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
