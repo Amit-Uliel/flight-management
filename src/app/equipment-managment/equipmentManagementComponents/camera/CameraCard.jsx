@@ -23,7 +23,7 @@ export default function CameraCard({ operation }) {
   // Map operations to their corresponding Hebrew titles
   const operationTitles = {
     add: 'הוספת מצלמה',
-    update: 'עדכון מצלמה',
+    update: 'עדכון מלאי מצלמה',
     delete: 'מחיקת מצלמה',
   };
 

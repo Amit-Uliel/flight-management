@@ -1,0 +1,16 @@
+.main{
+    /* height: 100vh; */
+    direction: rtl;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 90px;
+    padding: 0 50px;
+}
+
+.title{
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}

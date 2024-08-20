@@ -23,7 +23,7 @@ export default function ArmamentCard({ operation }) {
     // Map operations to their corresponding Hebrew titles
     const operationTitles = {
         add: 'הוספת חימוש',
-        update: 'עדכון חימוש',
+        update: 'עדכון מלאי חימוש',
         delete: 'מחיקת חימוש',
     };
 

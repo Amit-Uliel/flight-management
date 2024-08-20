@@ -40,11 +40,12 @@ export default function CameraForm() {
         body: JSON.stringify({ type: cameraType, weight: weightValue, quantity: quantityValue }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
+        throw new Error( data.error || `Error: ${response.statusText}`);
       }
 
-      const data = await response.json();
       console.log('Camera added:', data);
       setSuccessMessage('מצלמה נוספה בהצלחה');
       setCameraType('');

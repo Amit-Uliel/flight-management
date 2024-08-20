@@ -76,7 +76,7 @@ model Mission {
 }
 
 model Assignment {
-  id                      Int                       @id @default(autoincrement())
+  assignmentId                      Int                       @id @default(autoincrement())
   aircraft                Aircraft                  @relation(fields: [tailNumber], references: [tailNumber])
   tailNumber              String
   mission                 Mission                   @relation(fields: [missionId], references: [missionId])
@@ -93,8 +93,8 @@ model Assignment {
 }
 
 model AssignmentArmamentUsage {
-  id           Int        @id @default(autoincrement())
-  assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  assignmentArmamentUsageId           Int        @id @default(autoincrement())
+  assignment   Assignment @relation(fields: [assignmentId], references: [assignmentId])
   assignmentId Int
   aircraft     Aircraft   @relation(fields: [tailNumber], references: [tailNumber])
   tailNumber   String
@@ -128,6 +128,7 @@ enum FlightStatus {
   SCHEDULED // The flight is scheduled for takeoff.
   IN_FLIGHT // The flight is currently in the sky.
   LANDED // The flight has landed.
+  COMPLETED // The flight was completed
   CANCELED // The flight was canceled.
 }
 

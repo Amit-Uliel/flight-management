@@ -9,8 +9,8 @@ config.autoAddCss = false;
 import { ibmhebrew } from "@/utils/fonts";
 
 // components import
-import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import Navbar from "@/components/navbar/Navbar";
 
 export const metadata = {
   title: "Create Next App",
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={ibmhebrew}>
           <div className="container">
-            <Header />
+            <Navbar />
             {children}
             <Footer />
           </div>
