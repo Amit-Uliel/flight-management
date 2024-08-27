@@ -5,13 +5,21 @@ const prisma = new PrismaClient();
 
 export async function PATCH(request, { params }) {
     const { flightId } = params; // Get flightId from the URL
-    const { status } = await request.json(); // Get the status from the request body
+    const { status, actualLandingTime } = await request.json(); // Get status and actualLandingTime from the request body
 
     try {
-        // Update the flight status in the database
+        // Prepare the data object to update
+        const data = { status };
+
+        // If the status is COMPLETED and actualLandingTime is provided, add it to the update object
+        if (status === 'COMPLETED' && actualLandingTime) {
+            data.actualLandingTime = new Date(actualLandingTime); // Convert to a Date object
+        }
+
+        // Update the flight status and possibly actualLandingTime in the database
         const updatedFlight = await prisma.flight.update({
             where: { flightId: parseInt(flightId, 10) },
-            data: { status },
+            data: data,
         });
 
         return NextResponse.json(updatedFlight, { status: 200 });

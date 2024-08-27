@@ -1,37 +1,29 @@
 "use client";
 
-import styles from './flightHistory.module.css';
-import HistoryCard from './flightHistoryComponents/historyCard/HistoryCard';
 import React, { useEffect, useState } from 'react';
+import FlightHistoryTable from './flightHistoryComponents/FlightHistoryTable';
+import styles from './flightHistory.module.css';
 
-export default function FlightHistory() {
+const FlightHistory = () => {
+    const [flights, setFlights] = useState([]);
 
-  const [flights, setFlights] = useState([]);
+    useEffect(() => {
+        fetch('/api/flights/history')
+            .then((response) => response.json())
+            .then((data) => {
+                setFlights(data.filter(flight => flight.status === 'COMPLETED' || flight.status === 'CANCELED'));
+            })
+            .catch((error) => {
+                console.error('Failed to fetch flight history:', error);
+            });
+    }, []);
 
-  // useEffect(() => {
-  //   const fetchFlightInfo = async () => {
-  //     try {
-  //       const response = await fetch('/api/flight-details');
-  //       const data = await response.json();
-  //       setFlights(data);
-  //     } catch (error) {
-  //       console.error('Error fetching flight details:', error);
-  //     }
-  //   };
+    return (
+        <div className={styles.historyPage}>
+            <h2 className={styles.title}>היסטוריית טיסות</h2>
+            <FlightHistoryTable flights={flights} />
+        </div>
+    );
+};
 
-  //   fetchFlightInfo();
-  // }, []);
-
-  if (flights.length === 0) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <main>
-      <div className={styles.container}>
-        <HistoryCard />
-        <HistoryCard />
-      </div>
-    </main>
-  );
-}
+export default FlightHistory;

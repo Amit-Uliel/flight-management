@@ -1,19 +1,21 @@
 "use client";
 
 import styles from './indicator.module.css'
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function Indicator() {
     
     const roleName = "הטסה";
+    const router = useRouter();
 
     const handleSignOut = () => {
-        // Handle sign-out logic here
-        // session clearance
-        // redirect to login page
-        alert('Signed out');
+        // Clear the JWT token from cookies
+        document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+        
+        // Redirect to login page
+        router.push('/login');
     };
 
     return (

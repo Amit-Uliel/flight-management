@@ -68,8 +68,16 @@ const FlightTable = ({ flights }) => {
         }
     }, [flights]);
 
-    const completeFlight = async (flightId) => {
-        await updateFlightStatusInDatabase(flightId, 'COMPLETED');
+    const completeFlight = async (flightId, missionId) => {
+        const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000); // Calculate 5 minutes earlier
+        
+        // Update flight status to COMPLETED and set actualLandingTime
+        await updateFlightStatusInDatabase(flightId, 'COMPLETED', fiveMinutesAgo);
+    
+        // Update mission status to COMPLETED
+        await updateMissionStatusInDatabase(missionId, 'COMPLETED');
+    
+        // Update local state to remove completed flight
         setFlightData((prevFlights) =>
             prevFlights.filter((flight) => flight.flightId !== flightId)
         );
@@ -77,7 +85,7 @@ const FlightTable = ({ flights }) => {
         localStorage.removeItem(`flightPendingStatus-${flightId}`);
     };
 
-    const handleStatusChange = async (flightId, newStatus) => {
+    const handleStatusChange = async (flightId, newStatus, missionId) => {
         const userConfirmed = window.confirm(`Are you sure you want to change the flight status to "${newStatus}"?`);
         if (!userConfirmed) return;
     
@@ -100,14 +108,23 @@ const FlightTable = ({ flights }) => {
             )
         );
     
-        // Set timeout for "LANDED" or "CANCELED" statuses
-        if (newStatus === 'LANDED' || newStatus === 'CANCELED') {
+        // Set timeout for "LANDED" status to update both flight and mission status
+        if (newStatus === 'LANDED') {
             const timeoutId = setTimeout(async () => {
-                if (newStatus === 'LANDED') {
-                    await completeFlight(flightId); // Mark as completed after timeout
-                } else if (newStatus === 'CANCELED') {
-                    await removeFlight(flightId); // Remove canceled flight after timeout
-                }
+                await completeFlight(flightId, missionId); // Mark flight and mission as completed after timeout
+            }, 5 * 60 * 1000); // 5 minutes timeout
+    
+            timeoutRefs.current[flightId] = timeoutId;
+            localStorage.setItem(
+                `flightPendingStatus-${flightId}`,
+                JSON.stringify({ status: newStatus, timestamp: Date.now() })
+            );
+        }
+    
+        // Set timeout for "CANCELED" status
+        if (newStatus === 'CANCELED') {
+            const timeoutId = setTimeout(async () => {
+                await removeFlight(flightId); // Remove canceled flight after timeout
             }, 5 * 60 * 1000);
     
             timeoutRefs.current[flightId] = timeoutId;
@@ -127,9 +144,30 @@ const FlightTable = ({ flights }) => {
         localStorage.removeItem(`flightPendingStatus-${flightId}`);
     };
 
-    const updateFlightStatusInDatabase = async (flightId, status) => {
+    const updateFlightStatusInDatabase = async (flightId, status, actualLandingTime = null) => {
         try {
+            const body = { status };
+    
+            // Include actualLandingTime if provided
+            if (actualLandingTime) {
+                body.actualLandingTime = actualLandingTime.toISOString();
+            }
+    
             await fetch(`/api/flights/${flightId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            });
+        } catch (error) {
+            console.error('Failed to update flight status:', error);
+        }
+    };
+
+    const updateMissionStatusInDatabase = async (missionId, status) => {
+        try {
+            await fetch(`/api/missions/${missionId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -137,12 +175,12 @@ const FlightTable = ({ flights }) => {
                 body: JSON.stringify({ status }),
             });
         } catch (error) {
-            console.error('Failed to update flight status:', error);
+            console.error('Failed to update mission status:', error);
         }
     };
 
     const handleFlightClick = (flightId) => {  
-        router.push(`/flights/flight-board/${flightId}`);    
+        router.push(`/flights/details/${flightId}`);    
     };
 
     return (

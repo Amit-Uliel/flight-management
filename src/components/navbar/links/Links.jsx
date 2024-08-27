@@ -24,7 +24,11 @@ export default function Links() {
         },
         {
             title: "ציוד",
-            path: "/equipment-managment",
+            path: "/equipment",
+            dropdown: [
+                { title: "ניהול ציוד", path: "/equipment/equipment-management"},
+                { title: "מלאי ציוד", path: "/equipment/equipment-storage"},
+            ]
         }
     ];
 

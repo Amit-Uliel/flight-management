@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import styles from '../flightBoardComponents/styles/FlightDetails.module.css';
+import styles from './FlightDetails.module.css';
 
 // Translation dictionaries and date formatting function
 const flightStatusTranslation = {
@@ -85,6 +85,19 @@ const FlightDetails = () => {
                     <div className={styles.dateTimeRow}>
                         <p><strong>תאריך נחיתה מתוכנן:</strong> {formatDateTime(flightData.scheduledLandingTime).formattedDate}</p>
                         <p><strong>זמן נחיתה מתוכנן:</strong> {formatDateTime(flightData.scheduledLandingTime).formattedTime}</p>
+                    </div>
+                    <div className={styles.dateTimeRow}>
+                        {flightData.actualLandingTime ? (
+                            <>
+                                <p><strong>תאריך נחיתה בפועל :</strong> {formatDateTime(flightData.actualLandingTime).formattedDate}</p>
+                                <p><strong>זמן נחיתה בפועל:</strong> {formatDateTime(flightData.actualLandingTime).formattedTime}</p>
+                            </>
+                        ) : (
+                            <>
+                                <p><strong>תאריך נחיתה בפועל :</strong> לא דווח תאריך נחיתה בפועל</p>
+                                <p><strong>זמן נחיתה בפועל:</strong> לא דווח זמן נחיתה בפועל</p>
+                            </>
+                        )}
                     </div>
                     <p><strong>סטטוס טיסה:</strong> {flightStatusTranslation[flightData.status]}</p>
                 </div>

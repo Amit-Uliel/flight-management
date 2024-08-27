@@ -1,15 +1,9 @@
-.main{
-    background: linear-gradient(30deg, rgb(20, 104, 231), rgba(255, 255, 255, 0.1));
-    height: 100vh;
-    padding-top: 10%;
-    position: relative;
-}
-
 .container{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height: 100vh;
 }
 
 .flexContainer{

@@ -1,5 +1,13 @@
-.container{
-    direction: rtl;
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
+.historyPage {
+    padding: 20px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    align-self: flex-end;
+    color: white;
+    margin-block: 50px 20px;
 }

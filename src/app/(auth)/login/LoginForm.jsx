@@ -1,69 +1,52 @@
 "use client";
 
-// hooks import
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-// styles import
-import '../../globals.css';
-import styles from './login.module.css';
-
-// data import
-import users from '@/app/_data/users.json';
-
-// login form component
 export default function LoginForm() {
-    
-    const router = useRouter();
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+  const [militaryId, setMilitaryId] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const router = useRouter();
 
-    // handle user login
-    const handleLogin = (e) => {
-        e.preventDefault();
-    
-        // find the user in the json (need to change it to database)
-        const user = users.find(user => user.name === username && user.password === password);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        if (user) 
-        {
-            // Redirect to the corresponding page based on the user's role
-            router.push('/dashboard');
-        }
-        // did not find any user
-        else 
-        {
-            setError("שם משתמש או סיסמא אינם נכונים");
-            // setTimeout(() => {
-            //     setError('');
-            // } ,2000);
-        }
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ militaryId, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      router.push('/dashboard'); // Redirect to a protected page
+    } else {
+      setError(data.error);
     }
-    
+  };
 
-    return (
-        <form className={`${styles.flexContainer} ${styles.form}`} onSubmit={handleLogin}>
-            {/* displays an error if any */}
-            <p className={`${error ? styles.error : ''}`}>
-                {error}
-            </p>
-            {/* user name */}
-            <input className={`ibmHebrew ${styles.input}`} 
-                type="text" 
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}
-                placeholder='שם משתמש'
-            />
-            {/* password */}
-            <input className={`ibmHebrew ${styles.input} ${styles.inputLastChild}`}
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                placeholder='סיסמא'
-            />
-            {/* submit button */}
-            <button className={`ibmHebrew ${styles.button}`} type="submit">התחבר</button>
-        </form>
-    )
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={militaryId}
+        onChange={(e) => setMilitaryId(e.target.value)}
+        placeholder="Military ID"
+        required
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+        required
+      />
+      {error && <p>{error}</p>}
+      <button type="submit">Login</button>
+    </form>
+  );
 }

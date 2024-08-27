@@ -178,28 +178,7 @@ export async function POST(request) {
 
         return NextResponse.json(result, { status: 201 });
     } catch (error) {
-        console.error('Error creating flight:', error);
-        return NextResponse.json({ error: errorMessages.flightCreationFailed, details: error.message }, { status: 500 });
-    }
-}
-
-// method to fetch ongoing flights
-export async function GET() {
-    try {
-        const ongoingFlights = await prisma.flight.findMany({
-            where: {
-                status: {
-                    in: ['SCHEDULED', 'IN_FLIGHT'],
-                },
-            },
-            include: {
-                mission: true, // Include mission details
-            },
-        });
-
-        return NextResponse.json(ongoingFlights, { status: 200 });
-    } catch (error) {
-        console.error('Error fetching ongoing flights:', error);
-        return NextResponse.json({ error: 'Failed to fetch ongoing flights', details: error.message }, { status: 500 });
+        console.error('Error creating flight:', error.message);
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

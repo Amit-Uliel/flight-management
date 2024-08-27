@@ -70,7 +70,7 @@ export default function FlightForm() {
         setIsLoading(true);
     
         try {
-            // Send all required data to the new consolidated endpoint
+            // Send all required data
             const response = await fetch('/api/flights', {
                 method: 'POST',
                 headers: {

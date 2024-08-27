@@ -1,16 +1,17 @@
 .main{
-    /* height: 100vh; */
     direction: rtl;
 }
 
 .container{
     display: flex;
     flex-direction: column;
-    margin-top: 90px;
-    padding: 0 50px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 70px;
 }
 
 .title{
-    margin-bottom: 20px;
+    align-self: flex-start;
+    margin-block: 50px 20px;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }

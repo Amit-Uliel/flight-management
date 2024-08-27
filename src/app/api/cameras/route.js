@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
-import prisma from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
-const { PrismaClient } = prisma;
 const prismaClient = new PrismaClient();
 
 // Add new camera to the database
@@ -35,5 +34,15 @@ export async function POST(request) {
   } catch (error) {
       console.error('Error adding camera:', error);
       return NextResponse.json({ error: 'Failed to add camera' }, { status: 500 });
+  }
+}
+
+export async function GET() {
+  try {
+      const cameras = await prismaClient.camera.findMany();
+      return NextResponse.json(cameras, { status: 200 });
+  } catch (error) {
+      console.error('Failed to fetch cameras:', error);
+      return NextResponse.json({ error: 'Failed to fetch cameras' }, { status: 500 });
   }
 }

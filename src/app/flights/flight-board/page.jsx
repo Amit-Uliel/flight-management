@@ -3,15 +3,25 @@
 import styles from './flightBoard.module.css';
 import FlightTable from '@/app/flights/flight-board/flightBoardComponents/FlightTable';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function FlightBoard() {
   
   const [flights, setFlights] = useState([]);
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   const token = document.cookie.split('; ').find(row => row.startsWith('token='));
+
+  //   if (!token) {
+  //       router.push('/login');
+  //   }
+  // }, []);
 
   useEffect(() => {
     const fetchFlights = async () => {
       try{
-        const response = await fetch('/api/flights');
+        const response = await fetch('/api/flights/flightBoard');
 
         const data = await response.json();
 

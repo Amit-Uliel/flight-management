@@ -36,3 +36,13 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Failed to add armament', details: error.message }, { status: 500 });
   }
 }
+
+export async function GET() {
+  try {
+      const armaments = await prismaClient.armament.findMany();
+      return NextResponse.json(armaments, { status: 200 });
+  } catch (error) {
+      console.error('Failed to fetch armaments:', error);
+      return NextResponse.json({ error: 'Failed to fetch armaments' }, { status: 500 });
+  }
+}
