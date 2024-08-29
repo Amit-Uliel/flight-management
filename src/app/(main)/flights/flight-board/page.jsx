@@ -1,7 +1,7 @@
 "use client";
 
 import styles from './flightBoard.module.css';
-import FlightTable from '@/app/flights/flight-board/flightBoardComponents/FlightTable';
+import FlightTable from './flightBoardComponents/FlightTable';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -39,11 +39,9 @@ export default function FlightBoard() {
   }, []);
 
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <h2 className={styles.title}>לוח טיסות</h2>   
-        <FlightTable flights={flights} />
-      </div>
-    </main>
+    <div className={styles.container}>
+      <h2 className={styles.title}>לוח טיסות</h2>   
+      <FlightTable flights={flights} />
+    </div>
   )
 }

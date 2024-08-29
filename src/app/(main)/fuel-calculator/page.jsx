@@ -8,13 +8,11 @@ import { faGasPump } from '@fortawesome/free-solid-svg-icons';
 export default function FuelCalculator() {
   
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <h2 className={styles.title}>
-          <FontAwesomeIcon className={styles.icon} icon={faGasPump} />  חישוב דלק
-        </h2>
-        <Calculator/>
-      </div>
-    </main>
+    <div className={styles.container}>
+      <h2 className={styles.title}>
+        <FontAwesomeIcon className={styles.icon} icon={faGasPump} />  חישוב דלק
+      </h2>
+      <Calculator/>
+    </div>
   )
 }

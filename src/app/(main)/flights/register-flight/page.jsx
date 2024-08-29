@@ -7,7 +7,7 @@ import FlightForm from './components/FlightForm';
 
 export default function RegisterFlight() {
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       <div className={styles.container}>
         <Link href={'/flight-board'} className={styles.link}>חזרה</Link>
         <h2 className={styles.title}>
@@ -15,6 +15,6 @@ export default function RegisterFlight() {
         </h2>
         <FlightForm />
       </div>
-    </main>
+    </div>
   )
 }

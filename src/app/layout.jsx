@@ -1,4 +1,4 @@
-import "./globals.css";
+import "../app/globals.css";
 
 // FontAwasome import - * icons *
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -10,7 +10,6 @@ import { ibmhebrew } from "@/utils/fonts";
 
 // components import
 import Footer from "@/components/footer/Footer";
-import Navbar from "@/components/navbar/Navbar";
 
 export const metadata = {
   title: "Create Next App",
@@ -21,11 +20,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={ibmhebrew}>
-          <div className="container">
-            <Navbar />
-            {children}
-            <Footer />
-          </div>
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );

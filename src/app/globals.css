@@ -15,22 +15,35 @@
   box-sizing: border-box;
 }
 
-.ibmHebrew{
-  font-family: var(--font-ibm-hebrew);
-}
-
 body{
   background-color: var(--bg);
   color: var(--text);
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
   overflow-y: overlay;
+  font-family: var(--font-ibm-hebrew);
+}
+
+/* apply font on elements */
+input, textarea,
+button,
+p,
+a,
+h1, h2, h3, h4, h5, h6,
+div,
+label,
+span,
+li,
+table, th, td
+{
+  /* font-family: var(--font-ibm-hebrew); */
 }
 
 a{
   text-decoration: none;
   color: inherit;
 }
+
 
 .container {
   /* width: 1536px; */
@@ -43,18 +56,6 @@ a{
   /* justify-content: space-between; */
 }
 
-/* apply font on elements */
-input, textarea,
-button,
-p,
-h1, h2, h3, h4, h5, h6,
-div,
-span,
-li,
-table, th, td
-{
-  font-family: var(--font-ibm-hebrew);
-}
 
 /* For WebKit-based browsers (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {

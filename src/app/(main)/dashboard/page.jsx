@@ -3,7 +3,6 @@ import Card from './dashboardComponents/card/Card';
 
 export default function Dashboard() {
   return (
-    <main>
       <div className={styles.container}>
         <Card />
         <Card />
@@ -11,7 +10,6 @@ export default function Dashboard() {
         <Card />
         <Card />
         <Card />
-      </div>
-    </main>
+    </div>
   )
 }

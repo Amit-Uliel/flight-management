@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import styles from './equipmentManagment.module.css';
-import AircraftCard from './equipmentManagementComponents/aircraft/AircraftCard';
-import ArmamentCard from './equipmentManagementComponents/armament/ArmamentCard';
-import CameraCard from './equipmentManagementComponents/camera/CameraCard';
-import StorageInfo from './equipmentManagementComponents/storageInfo/StorageInfo';
+import AircraftCard from './components/aircraft/AircraftCard';
+import ArmamentCard from './components/armament/ArmamentCard';
+import CameraCard from './components/camera/CameraCard';
+import StorageInfo from './components/storageInfo/StorageInfo';
 
 export default function EquipmentManagment() {
   const [activeTab, setActiveTab] = useState('add');
@@ -42,7 +42,6 @@ export default function EquipmentManagment() {
   };
 
   return (
-    <main>
       <div className={styles.container}>
         <StorageInfo />
         <div className={styles.tabs}>
@@ -66,7 +65,6 @@ export default function EquipmentManagment() {
           </button>
         </div>
         {renderTabContent()}
-      </div>
-    </main>
+    </div>
   );
 }

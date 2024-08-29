@@ -1,19 +1,13 @@
 import '@/app/globals.css';
 import Image from "next/image";
 import styles from './login.module.css';
-
-// Images import
-import clouds from '@/../public/clouds.png'
-
-// components
+// import clouds from '@/../public/clouds.png'
 import LoginForm from "./LoginForm";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <h1>Login</h1>
-      <LoginForm />
-    </div>
+    <LoginForm/>
+
     // <main className={styles.main}>
     //   <div className={styles.container}>
     //     {/* logo images - air force & IDF */}

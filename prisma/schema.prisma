@@ -28,7 +28,7 @@ datasource db {
 
 model User {
   militaryId String    @id @unique
-  password   String    // Hashed password
+  password   String
   name String
   role       String
   squadron   Squadron? @relation(fields: [squadronId], references: [squadronId])
