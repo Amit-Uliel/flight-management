@@ -20,8 +20,8 @@ export async function login(formData) {
     });
 
     if (!user) {
-        console.log('User not found in the database.');
-        redirect('/error');
+        console.error('User not found in the database.');
+        throw new Error('User not found in the database.');
     }
 
     const { error } = await supabase.auth.signInWithPassword({
@@ -31,7 +31,7 @@ export async function login(formData) {
 
     if (error) {
         console.log(error);
-        redirect('/error');
+        throw new Error('Authentication failed: ' + error.message);
     }
 
     // Store all user data in a cookie as a JSON string

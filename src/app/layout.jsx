@@ -20,9 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={ibmhebrew}>
-        <main>
-          {children}
-        </main>
+        {children} 
       </body>
     </html>
   );

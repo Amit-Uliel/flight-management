@@ -9,10 +9,10 @@ export default async function PrivatePage() {
   const userData = cookieStore.get('userData')?.value; // Retrieve the userData cookie
   const user = userData ? JSON.parse(userData) : null; // Parse the JSON string
 
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect('/login');
-  }
+  // const { data, error } = await supabase.auth.getUser();
+  // if (error || !data?.user) {
+  //   redirect('/login');
+  // }
 
   return (
     <div>
