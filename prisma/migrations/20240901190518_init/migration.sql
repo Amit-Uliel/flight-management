@@ -2,7 +2,7 @@
 CREATE TYPE "AircraftModel" AS ENUM ('HERMES_450', 'HERMES_900', 'HERMES_1000');
 
 -- CreateEnum
-CREATE TYPE "FlightStatus" AS ENUM ('SCHEDULED', 'IN_FLIGHT', 'LANDED', 'CANCELED');
+CREATE TYPE "FlightStatus" AS ENUM ('SCHEDULED', 'IN_FLIGHT', 'LANDED', 'COMPLETED', 'CANCELED');
 
 -- CreateEnum
 CREATE TYPE "MissonStatus" AS ENUM ('ONGOING', 'ONHOLD', 'COMPLETED', 'CANCELED');
@@ -12,13 +12,15 @@ CREATE TYPE "AssignmentStatus" AS ENUM ('ONGOING', 'COMPLETED', 'CANCELED');
 
 -- CreateTable
 CREATE TABLE "User" (
-    "userId" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
+    "militaryId" TEXT NOT NULL,
     "password" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "role" TEXT NOT NULL,
     "squadronId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "User_pkey" PRIMARY KEY ("userId")
+    CONSTRAINT "User_pkey" PRIMARY KEY ("militaryId")
 );
 
 -- CreateTable
@@ -61,7 +63,7 @@ CREATE TABLE "Camera" (
 CREATE TABLE "Mission" (
     "missionId" SERIAL NOT NULL,
     "missionName" TEXT NOT NULL,
-    "MissonStatus" "MissonStatus" NOT NULL DEFAULT 'ONGOING',
+    "MissionStatus" "MissonStatus" NOT NULL DEFAULT 'ONGOING',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Mission_pkey" PRIMARY KEY ("missionId")
@@ -108,7 +110,7 @@ CREATE TABLE "Flight" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_password_key" ON "User"("password");
+CREATE UNIQUE INDEX "User_militaryId_key" ON "User"("militaryId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Assignment_tailNumber_missionId_key" ON "Assignment"("tailNumber", "missionId");

@@ -37,9 +37,10 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <label htmlFor="email" className={styles.label}>מספר אישי:</label>
+      <h2 className={styles.title}>התחברות</h2>
+      <label htmlFor="militaryId" className={styles.label}>מספר אישי:</label>
       <input
-        id="email"
+        id="militaryId"
         name="militaryId"
         type="text"
         value={militaryId}
@@ -58,7 +59,7 @@ export default function LoginForm() {
       <span className={`${styles.error} ${error ? styles.active : ''}`}>{error}</span>
       <OrbitLoadingButton
         className={styles.button}
-        initialText = {'התחברות'}
+        initialText = {'התחבר'}
         isLoading={isLoading}
         loadingText={'מתחבר'}
       />

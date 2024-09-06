@@ -5,9 +5,3 @@
     justify-content: center;
     align-items: center;
 }
-
-.title {
-    align-self: flex-end;
-    color: white;
-    margin-block: 50px 20px;
-}

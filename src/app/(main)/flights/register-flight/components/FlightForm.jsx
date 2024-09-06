@@ -20,6 +20,8 @@ export default function FlightForm() {
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [onHoldMissions, setOnHoldMissions] = useState([]);
+    const [selectedMissionId, setSelectedMissionId] = useState('');
 
     // Function to fetch available aircraft
     const fetchAvailableAircraft = async () => {
@@ -32,8 +34,20 @@ export default function FlightForm() {
         }
     };
 
+    // Function to fetch on-hold missions
+    const fetchOnHoldMissions = async () => {
+        try {
+            const response = await fetch('/api/missions/onhold');
+            const data = await response.json();
+            setOnHoldMissions(data);
+        } catch (error) {
+            console.error('Error fetching on-hold missions:', error);
+        }
+    };
+
     useEffect(() => {
         fetchAvailableAircraft();
+        fetchOnHoldMissions(); // Fetch on-hold missions when component mounts
     }, []);
 
     // Fetch available armament and camera types when the component mounts
@@ -68,7 +82,7 @@ export default function FlightForm() {
         setError(null);
         setSuccessMessage(null);
         setIsLoading(true);
-    
+
         try {
             // Send all required data
             const response = await fetch('/api/flights', {
@@ -77,7 +91,8 @@ export default function FlightForm() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    missionName,
+                    missionName: selectedMissionId ? null : missionName, // Use missionName only if no mission is selected
+                    selectedMissionId, // Include selected mission ID
                     selectedAircrafts,
                     armamentSelections,
                     cameraSelections,
@@ -86,7 +101,7 @@ export default function FlightForm() {
                     notes,
                 }),
             });
-    
+
             // Parse the response data
             const data = await response.json();
 
@@ -94,9 +109,10 @@ export default function FlightForm() {
             if (!response.ok) {
                 throw new Error(data.error || 'Failed to create flight');
             }
-    
+
             // clear all form fields
             setMissionName('');
+            setSelectedMissionId('');
             setSelectedAircrafts([]);
             setArmamentSelections({});
             setCameraSelections({});
@@ -130,15 +146,43 @@ export default function FlightForm() {
                 )}
             </div>
 
-            <label className={styles.label} htmlFor="missionName">שם המשימה</label>
-            <input
-                className={styles.input}
-                type="text"
-                id="missionName"
-                value={missionName}
-                onChange={(e) => setMissionName(e.target.value)}
-            />
+            <label className={styles.label} htmlFor="missionSelection">בחר משימה קיימת או צור משימה חדשה</label>
+            <div className={styles.missionContainer}>
+                <select
+                    className={styles.input}
+                    id="missionSelection"
+                    value={selectedMissionId}
+                    onChange={(e) => {
+                        setSelectedMissionId(e.target.value);
+                        // Clear the missionName state when selecting an existing mission
+                        if (e.target.value) {
+                            setMissionName('');
+                        }
+                    }}
+                >
+                    <option value="">-- בחר משימה קיימת --</option>
+                    {onHoldMissions.map((mission) => (
+                        <option key={mission.missionId} value={mission.missionId}>
+                            {mission.missionName}
+                        </option>
+                    ))}
+                </select>
 
+                {/* Show the mission name input only if no mission is selected */}
+                {!selectedMissionId && (
+                    <>
+                        <label className={styles.label} htmlFor="missionName">צור משימה</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            id="missionName"
+                            placeholder='שם משימה'
+                            value={missionName}
+                            onChange={(e) => setMissionName(e.target.value)}
+                        />
+                    </>
+                )}
+            </div>
             <AircraftSelectionTable
                 selectedAircrafts={selectedAircrafts}
                 setSelectedAircrafts={setSelectedAircrafts}
@@ -149,16 +193,35 @@ export default function FlightForm() {
                 availableAircraft={availableAircraft}
             />
 
-            {selectedAircrafts.map((tailNumber) => (
-                <AircraftConfiguration
-                    key={tailNumber}
-                    tailNumber={tailNumber}
-                    setArmamentSelections={setArmamentSelections}
-                    setCameraSelections={setCameraSelections}
-                    armamentTypes={armamentTypes}
-                    cameraTypes={cameraTypes}
-                />
-            ))}
+            <h3 className={styles.label}>תצורת מטוסים</h3>
+            <table className={styles.configurationTable}>
+                <thead>
+                    <tr>
+                        <th>מספר זנב</th>
+                        <th>בחר חימוש</th>
+                        <th>כמות</th>
+                        <th>בחר סוג מצלמה</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {selectedAircrafts.length > 0 ? (
+                        selectedAircrafts.map((tailNumber) => (
+                            <AircraftConfiguration
+                                key={tailNumber}
+                                tailNumber={tailNumber}
+                                setArmamentSelections={setArmamentSelections}
+                                setCameraSelections={setCameraSelections}
+                                armamentTypes={armamentTypes}
+                                cameraTypes={cameraTypes}
+                            />
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="4" className={styles.noAircraftMessage}>לא נבחרו מטוסים</td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
 
             <label className={styles.label} htmlFor="takeoffTime">זמן המראה</label>
             <input
@@ -187,6 +250,7 @@ export default function FlightForm() {
             />
 
             <OrbitLoadingButton
+                className={styles.submitButton}
                 initialText="צור טיסה"
                 loadingText="יוצר טיסה"
                 isLoading={isLoading}

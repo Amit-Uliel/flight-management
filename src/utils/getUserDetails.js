@@ -30,3 +30,8 @@ export async function getUserName() {
     const userDetails = await getUserDetails();
     return userDetails?.name || '';
 }
+
+export async function getSquadronId() {
+    const userDetails = await getUserDetails();
+    return userDetails?.squadronId || '';
+}

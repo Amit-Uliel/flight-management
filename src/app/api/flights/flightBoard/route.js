@@ -6,11 +6,24 @@ const prisma = new PrismaClient();
 // method to fetch flights to flight board
 export async function GET() {
     try {
+        // Calculate the date and time from 5 minutes ago
+        const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+
+        // Fetch flights based on the given conditions
         const ongoingFlights = await prisma.flight.findMany({
             where: {
-                status: {
-                    in: ['SCHEDULED', 'IN_FLIGHT'],
-                },
+                OR: [
+                    {
+                        status: {
+                            in: ['SCHEDULED', 'IN_FLIGHT'],
+                        },
+                    },
+                    {
+                        updatedAt: {
+                            gte: fiveMinutesAgo, // Greater than or equal to 5 minutes ago
+                        },
+                    },
+                ],
             },
             include: {
                 mission: true, // Include mission details

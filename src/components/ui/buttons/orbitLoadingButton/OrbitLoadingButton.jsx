@@ -1,9 +1,9 @@
 import styles from './OrbitLoadingButton.module.css';
 
 // loading button
-export default function OrbitLoadingButton({ className, initialText, isLoading, loadingText, style = {} }) {
+export default function OrbitLoadingButton({ className, initialText, isLoading, loadingText }) {
   return (
-    <button className={`${className || ''} ${styles.button}`} style={style} type="submit" disabled={isLoading}>
+    <button className={`${styles.button} ${className}`} type="submit" disabled={isLoading}>
       {isLoading ? (
         <>
             <div className={styles.chaoticOrbit}></div>

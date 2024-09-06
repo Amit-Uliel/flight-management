@@ -8,7 +8,7 @@
 
 .active {
     background-color: var(--text);
-    color: var(--bg);
+    color: black;
 }
 
 .navLink {
@@ -38,7 +38,7 @@
 }
 
 .dropdown.open {
-    max-height: 200px; /* Adjust as necessary */
+    max-height: 200px;
     opacity: 1;
 }
 

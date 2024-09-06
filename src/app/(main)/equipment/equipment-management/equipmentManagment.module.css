@@ -15,9 +15,9 @@
 .tabButton {
     padding: 10px 20px;
     margin-inline: 5px;
-    background-color: #007bff;
+    background-color: transparent;
     color: white;
-    border: none;
+    border: 1px solid #F5F5F5;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
@@ -25,17 +25,19 @@
 }
   
 .tabButton:hover {
-    background-color: #0056b3;
-}
-  
-.tabButton:focus {
-    outline: none;
-    background-color: #0056b3;
+    background-color: #304653;
 }
   
 .activeTabButton {
-    background-color: #0056b3;
+    background-color: #FFFFFF;
+    color: #4B6572;
+    font-weight: bold;
     transform: translateY(-5px);
+}
+
+.activeTabButton:hover{
+    background-color: #FFF;
+    color: #4B6572;
 }
   
 .tabContent {
@@ -50,7 +52,6 @@
     width: 100%;
     text-align: center;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     transition: transform 0.3s ease;
 }

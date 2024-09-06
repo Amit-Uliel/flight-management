@@ -42,45 +42,42 @@ export default function AircraftConfiguration({
     };
 
     return (
-        <div className={styles.aircraftConfiguration}>
-            <h2>תצורה עבור {tailNumber}</h2>
-
-            <label className={styles.label} htmlFor={`armament-${tailNumber}`}>בחר חימוש</label>
-            <select
-                className={styles.select}
-                id={`armament-${tailNumber}`}
-                onChange={handleArmamentChange}
-            >
-                <option value="">בחר חימוש</option>
-                {armamentTypes.map((type) => (
-                <option key={type.armamentType} value={type.armamentType}>
-                    {type.armamentType}
-                </option>
-                ))}
-            </select>
-
-            <label className={styles.label} htmlFor={`quantity-${tailNumber}`}>כמות</label>
-            <input
-                className={styles.input}
-                type="number"
-                id={`quantity-${tailNumber}`}
-                min="1"
-                onChange={handleQuantityChange}
-            />
-
-            <label className={styles.label} htmlFor={`camera-${tailNumber}`}>בחר סוג מצלמה</label>
-            <select
-                className={styles.select}
-                id={`camera-${tailNumber}`}
-                onChange={handleCameraChange}
-            >
-                <option value="">בחר סוג מצלמה</option>
-                {cameraTypes.map((type) => (
-                <option key={type.cameraType} value={type.cameraType}>
-                    {type.cameraType}
-                </option>
-                ))}
-            </select>
-        </div>
+        <tr>
+            <td>{tailNumber}</td>
+            <td>
+                <select
+                    className={styles.select}
+                    onChange={handleArmamentChange}
+                >
+                    <option value="">בחר חימוש</option>
+                    {armamentTypes.map((type) => (
+                        <option key={type.armamentType} value={type.armamentType}>
+                            {type.armamentType}
+                        </option>
+                    ))}
+                </select>
+            </td>
+            <td>
+                <input
+                    className={styles.input}
+                    type="number"
+                    min="1"
+                    onChange={handleQuantityChange}
+                />
+            </td>
+            <td>
+                <select
+                    className={styles.select}
+                    onChange={handleCameraChange}
+                >
+                    <option value="">בחר סוג מצלמה</option>
+                    {cameraTypes.map((type) => (
+                        <option key={type.cameraType} value={type.cameraType}>
+                            {type.cameraType}
+                        </option>
+                    ))}
+                </select>
+            </td>
+        </tr>
     );
 }

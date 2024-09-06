@@ -2,7 +2,7 @@ import styles from '../styles/indicator.module.css';
 import { logout } from '../../../../app/(auth)/actions/logout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { getRoleName, getUserName } from './userInfo';
+import { getRoleName, getUserName } from '../../../../utils/getUserDetails';
 
 export default async function Indicator() {  
     const roleName = await getRoleName();

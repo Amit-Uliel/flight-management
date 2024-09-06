@@ -4,38 +4,24 @@ import Image from 'next/image';
 import Links from './components/links/Links';
 import styles from './navbar.module.css';
 import Indicator from './components/indicator/Indicator';
-// import { usePathname } from 'next/navigation';
 
 // the navigation bar
 export default function Navbar() {
-  // const pathname = usePathname();
-
-  // Check if the current path is '/login'
-  // const isLoginPage = pathname === '/login' || pathname === '/';
-
-  // Don't render the navbar if the user is on the login page
-  // if (isLoginPage) {
-  //   return null;
-  // }
-
   return (
-    <div className={styles['navbar-container']}>
-      <div className={styles.navbar}>
-        <div className={styles.logo}>
-          <Image
-            src={'/AirForce.png'}
-            alt='air-force'
-            width={80}
-            height={80}
-            quality={100}
-          />
-        </div>
-        <div className={styles.links}>
-          <Links />
-        </div>
-        <div className={styles.indicator}>
-          <Indicator />
-        </div>
+    <div className={styles.navbar}>
+      <Image
+        className={styles.logo}
+        src={'/AirForce.png'}
+        alt='air-force'
+        width={80}
+        height={80}
+        quality={100}
+      />
+      <div className={styles.links}>
+        <Links />
+      </div>
+      <div className={styles.indicator}>
+        <Indicator />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prismaClient = new PrismaClient();
 
+// get the total quantity of armaments
 export async function GET() {
   try {
     // Sum the quantities of all cameras in the database

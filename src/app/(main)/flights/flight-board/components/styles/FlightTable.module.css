@@ -55,21 +55,21 @@
 
 /* Status Colors */
 .statusScheduled {
-    color: #fd7e14; /* Orange */
+    color: #fd7e14;
 }
 
 .statusInFlight {
-    color: #3898ff; /* Blue */
+    color: #3898ff;
 }
 
 .statusLanded {
-    color: #28a745; /* Green */
+    color: #28a745;
 }
 
 .statusCanceled {
-    color: #dc3545; /* Red */
+    color: #dc3545;
 }
 
 .statusCompleted {
-    color: #6c757d; /* Gray */
+    color: #a2a2a2;
 }

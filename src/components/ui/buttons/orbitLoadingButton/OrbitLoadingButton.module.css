@@ -152,25 +152,10 @@
 }
 
 .button {
-    /* need to have these */
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-
-    /* to override if needed */
-    padding: 10px 20px;
-    font-size: 1.3rem;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    height: 50px;
-    width: 200px;
     transition: .2s ease-in-out;
-}
-
-.button:hover {
-    background-color: #0056b3;
 }

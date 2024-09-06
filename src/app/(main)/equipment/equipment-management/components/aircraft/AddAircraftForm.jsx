@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from '../styles/forms.module.css';
+import { getSquadronId } from "@/utils/getUserDetails";
 
 export default function AircraftForm() {
   const [tailNumber, setTailNumber] = useState('');
@@ -9,6 +10,21 @@ export default function AircraftForm() {
   const [squadron, setSquadron] = useState('');
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+
+  useEffect(() => {
+    const fetchSquadronId = async () => {
+      try {
+        const squadronId = await getSquadronId();
+        setSquadron(squadronId); // Set squadronId into the state
+      } catch (error) {
+        console.error('Failed to fetch squadronId:', error);
+        setError('לא הצליח לטעון מספר טייסת, אנא נסה להיכנס שוב או לדבר עם תמיכה');
+      }
+    };
+
+    fetchSquadronId();
+  }, []); 
+  
 
   const handleAircraftSubmit = async (e) => {
     e.preventDefault();
@@ -72,16 +88,12 @@ export default function AircraftForm() {
       </select>
 
       <label className={styles.label} htmlFor="squadron">טייסת</label>
-      <select
-        className={styles.input}
+      <input
+        className={`${styles.input} ${styles.squadronInput}`}
         id="squadron"
         value={squadron}
-        onChange={(e) => setSquadron(e.target.value)}
-      >
-        <option value="">בחר טייסת</option>
-        <option value="161">161</option>
-        <option value="166">166</option>
-      </select>
+        readOnly
+      />
 
       <button className={styles.button} type="submit">הוספת מטוס</button>
 

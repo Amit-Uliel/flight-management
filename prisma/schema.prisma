@@ -28,7 +28,6 @@ datasource db {
 
 model User {
   militaryId String    @id @unique
-  password   String
   name String
   role       String
   squadron   Squadron? @relation(fields: [squadronId], references: [squadronId])
@@ -71,9 +70,9 @@ model Camera {
 model Mission {
   missionId   Int          @id @default(autoincrement())
   missionName String
-  flight      Flight?
+  flight      Flight[]
   assignments Assignment[]
-  MissonStatus MissonStatus @default(ONGOING)
+  MissionStatus MissonStatus @default(ONGOING)
   createdAt   DateTime     @default(now())
 }
 
@@ -115,7 +114,7 @@ model Flight {
   status               FlightStatus @default(SCHEDULED)
   notes                String
   mission              Mission      @relation(fields: [missionId], references: [missionId])
-  missionId            Int          @unique
+  missionId            Int          
   createdAt            DateTime     @default(now())
   updatedAt            DateTime     @updatedAt
 }

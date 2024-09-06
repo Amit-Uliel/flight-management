@@ -3,23 +3,11 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const errorMessages = {
-    missingFields: 'כל השדות הנדרשים חייבים להיות מסופקים',
-    armamentNotFound: 'החימוש {armamentType} לא נמצא',
-    insufficientArmament: 'כמות לא מספיקה לחימוש {armamentType}',
-    cameraNotFound: 'המצלמה {cameraType} לא נמצאת',
-    insufficientCamera: 'כמות לא מספיקה למצלמה {cameraType}',
-    aircraftNotFound: 'המטוס {tailNumber} לא נמצא',
-    aircraftNotAvailable: 'המטוס {tailNumber} אינו זמין',
-    flightCreationFailed: 'יצירת טיסה נכשלה',
-    takeoffTimeInPast: 'זמן המראה לא יכול להיות לפני הזמן הנוכחי',
-    landingTimeBeforeTakeoff: 'זמן הנחיתה המתוכננת לא יכול להיות לפני זמן ההמראה',
-};
-
 export async function POST(request) {
     try {
         const {
             missionName,
+            selectedMissionId,
             selectedAircrafts,
             armamentSelections,
             cameraSelections,
@@ -28,14 +16,13 @@ export async function POST(request) {
             notes,
         } = await request.json();
 
-        // Convert times to Date objects
+        const missionId = selectedMissionId ? parseInt(selectedMissionId, 10) : null;
         const takeoffDate = new Date(takeoffTime);
         const landingDate = new Date(scheduledLandingTime);
         const currentDate = new Date();
 
-        // Validate required fields
-        if (!missionName) {
-            return NextResponse.json({ error: 'שם המשימה חסר' }, { status: 400 });
+        if (!missionId && !missionName) {
+            return NextResponse.json({ error: 'יש לספק שם משימה או לבחור משימה קיימת' }, { status: 400 });
         }
 
         if (!selectedAircrafts || selectedAircrafts.length === 0) {
@@ -47,7 +34,7 @@ export async function POST(request) {
         }
 
         if (takeoffDate < currentDate) {
-            return NextResponse.json({ error: errorMessages.takeoffTimeInPast }, { status: 400 });
+            return NextResponse.json({ error: 'זמן המראה לא יכול להיות לפני הזמן הנוכחי' }, { status: 400 });
         }
 
         if (!scheduledLandingTime) {
@@ -55,7 +42,7 @@ export async function POST(request) {
         }
 
         if (landingDate <= takeoffDate) {
-            return NextResponse.json({ error: errorMessages.landingTimeBeforeTakeoff }, { status: 400 });
+            return NextResponse.json({ error: 'זמן הנחיתה המתוכננת לא יכול להיות לפני זמן ההמראה' }, { status: 400 });
         }
 
         // Aggregate and validate total armament and camera quantities
@@ -74,9 +61,9 @@ export async function POST(request) {
             const armament = await prisma.armament.findUnique({
                 where: { armamentType },
             });
-            if (!armament) throw new Error(errorMessages.armamentNotFound.replace('{armamentType}', armamentType));
+            if (!armament) throw new Error(`החימוש ${armamentType} לא נמצא`);
             if (armament.quantity < totalQuantity) {
-                throw new Error(errorMessages.insufficientArmament.replace('{armamentType}', armamentType));
+                throw new Error(`כמות לא מספיקה לחימוש ${armamentType}`);
             }
         });
 
@@ -85,9 +72,9 @@ export async function POST(request) {
                 const camera = await prisma.camera.findUnique({
                     where: { cameraType },
                 });
-                if (!camera) throw new Error(errorMessages.cameraNotFound.replace('{cameraType}', cameraType));
+                if (!camera) throw new Error(`המצלמה ${cameraType} לא נמצאת`);
                 if (camera.quantity < 1) {
-                    throw new Error(errorMessages.insufficientCamera.replace('{cameraType}', cameraType));
+                    throw new Error(`כמות לא מספיקה למצלמה ${cameraType}`);
                 }
             }
         });
@@ -95,12 +82,30 @@ export async function POST(request) {
         await Promise.all([...armamentChecks, ...cameraChecks]);
 
         const result = await prisma.$transaction(async (prisma) => {
-            // Create the mission
-            const mission = await prisma.mission.create({
-                data: { missionName },
-            });
+            let missionIdToUse;
+            if (missionId) {
+                // Ensure mission exists and update its status
+                const existingMission = await prisma.mission.findUnique({
+                    where: { missionId },
+                });
 
-            const missionId = mission.missionId;
+                if (!existingMission) {
+                    throw new Error('משימה עם מזהה זה אינה קיימת');
+                }
+
+                // Update mission status to ONGOING
+                missionIdToUse = missionId;
+                await prisma.mission.update({
+                    where: { missionId },
+                    data: { MissionStatus: 'ONGOING' },
+                });
+            } else {
+                // Create a new mission
+                const mission = await prisma.mission.create({
+                    data: { missionName },
+                });
+                missionIdToUse = mission.missionId;
+            }
 
             // Create assignments for each selected aircraft
             const assignmentPromises = selectedAircrafts.map(async (tailNumber) => {
@@ -116,7 +121,7 @@ export async function POST(request) {
                 const assignment = await prisma.assignment.create({
                     data: {
                         tailNumber,
-                        missionId,
+                        missionId: missionIdToUse,
                         takeOffTime: new Date(takeoffTime),
                         scheduledLandingTime: new Date(scheduledLandingTime),
                         cameraType: cameraSelections[tailNumber]?.cameraType || null,
@@ -166,7 +171,7 @@ export async function POST(request) {
             // Create the flight
             const flight = await prisma.flight.create({
                 data: {
-                    missionId,
+                    missionId: missionIdToUse,
                     takeoffTime: new Date(takeoffTime),
                     scheduledLandingTime: new Date(scheduledLandingTime),
                     notes: notes || '',

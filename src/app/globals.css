@@ -1,5 +1,6 @@
 :root {
-  --bg: #181A1A;
+  /* --bg: #181A1A; */
+  --bg: #4A6572;
   --secondary-bg: #242727;
   --third-bg: #83c2c2;
   --text: white;
@@ -16,7 +17,10 @@
 }
 
 body{
-  background-color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  height: 100vh;
   color: var(--text);
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
@@ -24,8 +28,12 @@ body{
   font-family: var(--font-ibm-hebrew);
 }
 
+main{
+  flex: 1;
+}
+
 /* apply font on elements */
-input, textarea,
+input, textarea, select, option,
 button,
 p,
 a,
@@ -36,7 +44,7 @@ span,
 li,
 table, th, td
 {
-  /* font-family: var(--font-ibm-hebrew); */
+  font-family: var(--font-ibm-hebrew);
 }
 
 a{

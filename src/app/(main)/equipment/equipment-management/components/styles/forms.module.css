@@ -33,19 +33,18 @@
 }
 
 .button{
-    padding: 15px;
+    padding: 7px;
     cursor: pointer;
     border: none;
-    background-color: #262626;
-    color: var(--text);
+    background-color: #4B5865;
+    color: white;
+    font-size: 1.2rem;
     border-radius: 5px;
     position: absolute;
     bottom: 25px;
     width: 90%;
     left: 50%;
     transform: translateX(-50%);
-    box-shadow: inset 2px 3px 0px 0px rgb(255, 255, 255),
-                inset -2px -3px 0px 0px rgb(255, 255, 255);
     transition: .5s ease-in-out;
 }
 
@@ -76,7 +75,6 @@
 
 .error{
     color: #ff5656;
-    text-shadow: 0 0 30px white;
 }
 
 .success{
@@ -118,11 +116,26 @@
     color: #666;
     font-size: 1.2rem;
     border-radius: 4px;
-    box-shadow: 0 0 50px 0 rgba(255, 255, 255, 0.7);
     transition: .3s ease-in-out;
     cursor: pointer;
 }
 
 .activeButton{
     border: #83c2c2 solid 1px;
+}
+
+.currentQuantity{
+    background-color: #FFA500;
+    width: fit-content;
+    margin-inline: auto;
+    border-radius: 5px;
+    color: black;
+    margin-block: 15px;
+    padding: 4px 12px;
+}
+
+.input.squadronInput{
+    background-color: rgb(200, 200, 200);
+    color: #000;
+    cursor: not-allowed;
 }

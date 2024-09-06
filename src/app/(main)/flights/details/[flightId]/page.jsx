@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import styles from './FlightDetails.module.css';
+import RadarLoader from '@/components/ui/loaders/RadarLoader';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faX, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
 
 // Translation dictionaries and date formatting function
 const flightStatusTranslation = {
@@ -43,6 +46,7 @@ const formatDateTime = (dateString) => {
 
 const FlightDetails = () => {
     const { flightId } = useParams();
+    const router = useRouter();
     const [flightData, setFlightData] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -62,85 +66,118 @@ const FlightDetails = () => {
     }, [flightId]);
 
     if (loading) {
-        return <div>טוען...</div>;
+        return (
+            <div className={styles.loaderContainer}>
+                <RadarLoader />
+            </div>
+        );
     }
 
-    if (!flightData) {
-        return <div>לא נמצאו פרטי טיסה</div>;
+    if (!flightData || !flightData.flightId) {
+        return (
+            <div className={styles.notFoundContainer}>
+                <FontAwesomeIcon icon={faX} className={styles.xIcon}/>
+                <p className={styles.notFoundText}>לא נמצאו פרטי טיסה</p>
+            </div>
+        );
     }
 
     const { mission } = flightData;
 
     return (
-        <div className={styles.container}>
-            <div className={styles.flightDetailsContainer}>
-                <h1>פרטי טיסה {flightData.flightId}</h1>
-
-                <div className={styles.section}>
-                    <h2>פרטי טיסה</h2>
-                    <div className={styles.dateTimeRow}>
-                        <p><strong> תאריך המראה:</strong> {formatDateTime(flightData.takeoffTime).formattedDate}</p>
-                        <p><strong>זמן המראה:</strong> {formatDateTime(flightData.takeoffTime).formattedTime}</p>
-                    </div>
-                    <div className={styles.dateTimeRow}>
-                        <p><strong>תאריך נחיתה מתוכנן:</strong> {formatDateTime(flightData.scheduledLandingTime).formattedDate}</p>
-                        <p><strong>זמן נחיתה מתוכנן:</strong> {formatDateTime(flightData.scheduledLandingTime).formattedTime}</p>
-                    </div>
-                    <div className={styles.dateTimeRow}>
-                        {flightData.actualLandingTime ? (
-                            <>
-                                <p><strong>תאריך נחיתה בפועל :</strong> {formatDateTime(flightData.actualLandingTime).formattedDate}</p>
-                                <p><strong>זמן נחיתה בפועל:</strong> {formatDateTime(flightData.actualLandingTime).formattedTime}</p>
-                            </>
-                        ) : (
-                            <>
-                                <p><strong>תאריך נחיתה בפועל :</strong> לא דווח תאריך נחיתה בפועל</p>
-                                <p><strong>זמן נחיתה בפועל:</strong> לא דווח זמן נחיתה בפועל</p>
-                            </>
-                        )}
-                    </div>
-                    <p><strong>סטטוס טיסה:</strong> {flightStatusTranslation[flightData.status]}</p>
+        <div className={styles.flightDetailsContainer}>
+            <div className={styles.section}>
+                <h2 className={styles.title}>פרטי טיסה {flightData.flightId}</h2>
+                <div className={styles.dateTimeRow}>
+                    <p><strong> תאריך המראה:</strong> {formatDateTime(flightData.takeoffTime).formattedDate}</p>
+                    <p><strong>זמן המראה:</strong> {formatDateTime(flightData.takeoffTime).formattedTime}</p>
                 </div>
+                <div className={styles.dateTimeRow}>
+                    <p><strong>תאריך נחיתה מתוכנן:</strong> {formatDateTime(flightData.scheduledLandingTime).formattedDate}</p>
+                    <p><strong>זמן נחיתה מתוכנן:</strong> {formatDateTime(flightData.scheduledLandingTime).formattedTime}</p>
+                </div>
+                <div className={styles.dateTimeRow}>
+                    {flightData.actualLandingTime ? (
+                        <>
+                            <p><strong>תאריך נחיתה בפועל :</strong> {formatDateTime(flightData.actualLandingTime).formattedDate}</p>
+                            <p><strong>זמן נחיתה בפועל:</strong> {formatDateTime(flightData.actualLandingTime).formattedTime}</p>
+                        </>
+                    ) : (
+                        <>
+                            <p><strong>תאריך נחיתה בפועל :</strong> לא דווח תאריך נחיתה בפועל</p>
+                            <p><strong>זמן נחיתה בפועל:</strong> לא דווח זמן נחיתה בפועל</p>
+                        </>
+                    )}
+                </div>
+                <p><strong>סטטוס טיסה:</strong> {flightStatusTranslation[flightData.status]}</p>
+                <p><strong>הערות:</strong> {flightData.notes}</p>
 
-                {mission && (
-                    <div className={styles.section}>
-                        <h2>פרטי המשימה</h2>
-                        <p><strong>שם המשימה:</strong> {mission.missionName}</p>
-                        <p><strong>סטטוס משימה:</strong> {missionStatusTranslation[mission.MissonStatus]}</p>
-                        <p><strong>נוצר בתאריך:</strong> {formatDateTime(mission.createdAt).formattedDate} {formatDateTime(mission.createdAt).formattedTime}</p>
-                    </div>
-                )}
-
-                {mission?.assignments && mission.assignments.length > 0 && (
-                    <div className={styles.gridContainer}>
-                        {mission.assignments.map((assignment) => (
-                            <div key={assignment.assignmentId} className={styles.assignmentSection}>
-                                <div className={styles.section}>
-                                    <h2>פרטי מטוס (מספר זנב: {assignment.aircraft?.tailNumber || 'N/A'})</h2>
-                                    <p><strong>דגם:</strong> {aircraftModelTranslation[assignment.aircraft?.model] || 'N/A'}</p>
-                                    <p><strong>משקל:</strong> {assignment.aircraft?.weight ? `${assignment.aircraft.weight} ק"ג` : 'N/A'}</p>
-                                    <p><strong>מספר טייסת:</strong> {assignment.aircraft?.squadronId || 'N/A'}</p>
-                                    <p><strong>מצלמה:</strong> {assignment.camera?.cameraType || 'N/A'}</p>
-                                </div>
-
-                                <div className={styles.section}>
-                                    <h2>שימוש בחימוש</h2>
-                                    {assignment.AssignmentArmamentUsage.length > 0 ? (
-                                        assignment.AssignmentArmamentUsage.map((usage) => (
-                                            <div key={usage.assignmentArmamentUsageId} className={styles.usage}>
-                                                <p><strong>סוג חימוש:</strong> {usage.armamentType || 'N/A'}</p>
-                                                <p><strong>כמות בשימוש:</strong> {usage.quantity || 'N/A'}</p>
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <p>לא נעשה שימוש בחימוש</p>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                {(flightData.status === 'SCHEDULED' || flightData.status === 'IN_FLIGHT') && (
+                    <button
+                        className={styles.editButton}
+                        onClick={() => router.push(`/flights/edit/${flightData.flightId}`)}
+                    >
+                        <FontAwesomeIcon className={styles.editIcon} icon={faPenToSquare} /> ערוך טיסה
+                    </button>
                 )}
             </div>
+
+            {mission && (
+                <div className={styles.section}>
+                    <h2 className={styles.title}>פרטי המשימה</h2>
+                    <p><strong>שם המשימה:</strong> {mission.missionName}</p>
+                    <p><strong>סטטוס משימה:</strong> {missionStatusTranslation[mission.MissionStatus]}</p>
+                    <p><strong>נוצר בתאריך:</strong> {formatDateTime(mission.createdAt).formattedDate} {formatDateTime(mission.createdAt).formattedTime}</p>
+                </div>
+            )}
+
+            {mission?.assignments && mission.assignments.length > 0 && (
+                <div className={styles.tableContainer}>
+                    <h2 className={styles.title}>מטוסים שהשתתפו בטיסה</h2>
+
+                    {/* Check if the flight is canceled */}
+                    {flightData.status === 'CANCELED' ? (
+                        <p className={styles.canceledMessage}>הטיסה בוטלה</p>
+                    ) : (
+                        <table className={styles.table}>
+                            <thead>
+                                <tr>
+                                    <th>מספר זנב</th>
+                                    <th>דגם</th>
+                                    <th>משקל</th>
+                                    <th>מספר טייסת</th>
+                                    <th>מצלמה</th>
+                                    <th>שימוש בחימוש</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {mission.assignments.map((assignment) => (
+                                    <tr key={assignment.assignmentId}>
+                                        <td>{assignment.aircraft?.tailNumber || 'N/A'}</td>
+                                        <td>{aircraftModelTranslation[assignment.aircraft?.model] || 'N/A'}</td>
+                                        <td>{assignment.aircraft?.weight ? `${assignment.aircraft.weight} ק"ג` : 'N/A'}</td>
+                                        <td>{assignment.aircraft?.squadronId || 'N/A'}</td>
+                                        <td>{assignment.camera?.cameraType || 'N/A'}</td>
+                                        <td>
+                                            {assignment.AssignmentArmamentUsage.length > 0 ? (
+                                                <ul className={styles.list}>
+                                                    {assignment.AssignmentArmamentUsage.map((usage) => (
+                                                        <li key={usage.assignmentArmamentUsageId}>
+                                                            <strong>סוג:</strong> {usage.armamentType || 'N/A'}, <strong>כמות:</strong> {usage.quantity || 'N/A'}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            ) : (
+                                                <p>לא נעשה שימוש בחימוש</p>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

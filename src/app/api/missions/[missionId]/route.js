@@ -19,7 +19,7 @@ export async function PATCH(req, { params }) {
         // Update mission status in the database
         const updatedMission = await prisma.mission.update({
             where: { missionId: parseInt(missionId, 10) },
-            data: { MissonStatus: status },
+            data: { MissionStatus: status },
         });
 
         return NextResponse.json(updatedMission, { status: 200 });

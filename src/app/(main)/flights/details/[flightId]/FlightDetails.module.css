@@ -1,18 +1,48 @@
-.container{
-    padding: 25px;
+.loaderContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.notFoundContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.xIcon{
+    color: rgb(255, 60, 60);
+    font-size: 5rem;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px rgb(0, 0, 0));
+}
+
+.notFoundText{
+    font-size: 2rem;
+    text-shadow: 0 0 10px rgb(0, 0, 0);
 }
 
 .flightDetailsContainer {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the content horizontally */
-    justify-content: center; /* Center the content vertically */
-    margin: 0 auto;
-    padding: 20px;
-    max-width: 1200px; /* Limit the maximum width for better readability */
+    align-items: center;
+    justify-content: center;
+    margin: 30px auto;
+    padding: 25px;
+    max-width: 950px;
+    border: 1px solid rgb(238, 238, 238);
     border-radius: 10px;
     box-shadow: 0 0px 8px rgba(238, 238, 238, 0.8);
     direction: rtl;
+}
+
+.title{
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    margin-bottom: 10px;
 }
 
 .section {
@@ -20,16 +50,73 @@
     width: 100%;
 }
 
-.gridContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
-    gap: 20px; /* Space between grid items */
+.tableContainer {
+    margin-top: 20px;
     width: 100%;
 }
 
-.assignmentSection {
-    padding: 15px;
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    cursor: default;
+}
+
+.table tr{
+    transition: .2s ease-in-out;
+}
+
+.table th, .table td {
     border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    text-align: center;
+}
+
+.table th {
+    background-color: #272727;
+    color: white;
+    font-weight: bold;
+}
+
+.table tr{
+    background-color: #616161;
+}
+
+.table tr:nth-child(even) {
+    background-color: #353535;
+}
+
+.table tr:hover {
+    background-color: #ffffff;
+    color: black;
+}
+
+.list{
+    list-style: none;
+}
+
+.editButton{
+    background-color: #009dffcc;
+    border: 1px solid #009dff;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px 0 black;
+    cursor: pointer;
+}
+
+.editButton:hover{
+    background-color: #009dffa0;
+}
+
+.editIcon{
+    font-size: 0.9rem;
+    margin-left: 2px;
+}
+
+.canceledMessage{
+    color: rgb(209, 72, 72);
+    font-size: 1.5rem;
 }

@@ -14,8 +14,8 @@ export async function GET(req, { params }) {
                     include: {
                         assignments: {
                             include: {
-                                aircraft: true, // Include the related aircraft details
-                                camera: true, // Include the related camera details
+                                aircraft: true,
+                                camera: true,
                                 AssignmentArmamentUsage: {
                                     include: {
                                         armament: true, // Include the related armament details
@@ -32,7 +32,6 @@ export async function GET(req, { params }) {
             return NextResponse.json({ message: 'Flight not found' }, { status: 404 });
         }
 
-        console.log(flightDetails); // Log the details for debugging
         return NextResponse.json(flightDetails, { status: 200 });
     } catch (error) {
         console.error('Error fetching flight details:', error);

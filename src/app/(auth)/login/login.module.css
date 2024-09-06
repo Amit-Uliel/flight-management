@@ -3,85 +3,38 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
     direction: rtl;
     background-image: url("/background.WEBP");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    padding: 10px;
 }
 
 .wrapper{
     position: relative;
-}
-
-.flexContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding-block: 20px;
-}
-
-.h2title{
-    font-size: xx-large;
-    font-weight: 100;
-    color: white;
-    animation: breath 5s infinite linear;
-}
-
-@keyframes breath {
-    0%{text-shadow: 0px 0px 14px rgba(0, 0, 0, 0.7);}
-    50%{text-shadow: 0px 0px 14px rgba(0, 0, 0, 0.2);}
-    100%{text-shadow: 0px 0px 14px rgba(0, 0, 0, 0.7);}
-}
-
-.input{
-    text-align: right;
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 200px;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.2);
+    min-width: 340px;
+    height: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    border: none;
-    font-size: large;
-}
-
-.input:focus{
-    outline: none;
-}
-
-.inputLastChild{
-    margin-bottom: 20px;
-}
-
-.button{
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    width: 200px;
-    font-size: large;
-    cursor: pointer;
-}
-
-.button:hover{
-    background-color: var(--button-primary-color-hover);
-}
-
-.button:active{
-    background-color: var(--button-primary-color-active);
+    box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.9);
+    transform: translateX(15px);
 }
 
 .logoImages{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 50px;
-    bottom: calc(100% + 40px);
+    top: 40px;
     right: 50%;
     transform: translateX(50%);
     position: absolute;
+    z-index: 1;
 }
 
 .firstImage{
@@ -91,62 +44,4 @@
 .lastImage{
     margin-left: auto;
     filter: drop-shadow(0px 0px 3px #fff) drop-shadow(0px 0px 3px #fff);
-}
-
-.error{
-    color: red;
-    margin-top: 10px;
-    text-shadow: 0 0 12px rgb(255, 255, 255);
-    background-color: rgba(255, 0, 0, 0.3);
-    display: block;
-    border-radius: 5px;
-    padding: 5px 15px;
-    opacity: 1;
-    transition: 1s;
-    transform: translateY(-13px);
-}
-
-.f35Images{
-    margin-top: 10px;
-    position: absolute;
-    right: 20%;
-    bottom: 30%;
-}
-
-@media (max-width: 1600px) {
-    .f35Images{
-        right: 12%;
-        bottom: 24%;
-    }
-}
-
-@media (max-width: 1250px) {
-    .f35Images{
-        transform: scale(0.8);
-        right: 10%;
-        bottom: 20%;
-    }
-}
-
-.f35Image1{
-    animation: flying1 5s infinite ease-in-out;
-}
-
-@keyframes flying1 {
-    0%{transform: translate(0px, 0px);}
-    50%{
-        transform:  translate(7px, 5px)
-                    rotateZ(-3deg);
-    }
-    100%{transform: translate(0px, 0px);}
-}
-
-.f35Image2{
-    animation: flying2 4s infinite ease-in-out;
-}
-
-@keyframes flying2 {
-    0%{transform: translate(120px, 160px);}
-    50%{transform: translate(130px, 155px);}
-    100%{transform: translate(120px, 160px);}
 }
