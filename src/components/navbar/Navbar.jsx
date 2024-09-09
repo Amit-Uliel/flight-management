@@ -16,6 +16,7 @@ export default function Navbar() {
         width={80}
         height={80}
         quality={100}
+        priority={true}
       />
       <div className={styles.links}>
         <Links />

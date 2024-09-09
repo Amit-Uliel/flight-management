@@ -85,7 +85,7 @@ export default function AircraftSelectionTable({ selectedAircrafts, setSelectedA
                                 </td>
                                 <td>{aircraft.tailNumber}</td>
                                 <td>{translateAircraftModel(aircraft.model)}</td>
-                                <td>{aircraft.weight} ק"ג</td>
+                                <td>{aircraft.weight} ק&quot;ג</td>
                             </tr>
                         ))}
                     </tbody>

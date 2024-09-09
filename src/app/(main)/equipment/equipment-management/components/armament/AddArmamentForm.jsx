@@ -72,7 +72,7 @@ export default function ArmamentForm() {
         onChange={(e) => setArmament(e.target.value)}
       />
 
-      <label className={styles.label} htmlFor="weight">משקל ליחידה (ק"ג)</label>
+      <label className={styles.label} htmlFor="weight">משקל ליחידה (ק&quot;ג)</label>
       <input
         className={styles.input}
         id="weight"

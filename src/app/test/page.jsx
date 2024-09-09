@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './test.module.css';
 import OrbitLoadingButton from '@/components/ui/buttons/orbitLoadingButton/OrbitLoadingButton';
 
-export default function test() {  
+export default function Test() {  
   const [isLoading, setIsLoading] = useState(false);
     return (
       <div className={styles.container}>

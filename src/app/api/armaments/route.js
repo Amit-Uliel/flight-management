@@ -37,6 +37,7 @@ export async function POST(request) {
   }
 }
 
+// get all armaments types
 export async function GET() {
   try {
       const armaments = await prismaClient.armament.findMany();

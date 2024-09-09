@@ -1,0 +1,17 @@
+.armamentInfoBarChartBox{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.armamentInfoBarChartBox .title{
+    margin-bottom: 20px;
+}
+
+.armamentInfoBarChartBox .chart{
+    direction: ltr;
+    height: 300px;
+    width: 100%;
+}

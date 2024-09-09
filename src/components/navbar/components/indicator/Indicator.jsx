@@ -3,6 +3,7 @@ import { logout } from '../../../../app/(auth)/actions/logout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { getRoleName, getUserName } from '../../../../utils/getUserDetails';
+import Image from 'next/image';
 
 export default async function Indicator() {  
     const roleName = await getRoleName();
@@ -20,6 +21,13 @@ export default async function Indicator() {
             <div className={styles.dropdown}>
                 <form action={logout}>
                     <button type='submit' className={styles.signOutButton}>
+                        <Image
+                            src="/skydiving.png"
+                            alt="Skydiving Icon"
+                            width={20}
+                            height={20}
+                            className={styles.skydivingIcon}
+                        />
                         יציאה
                     </button>
                 </form>

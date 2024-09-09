@@ -1,0 +1,61 @@
+.flightsListBox{
+}
+
+.flightsListBox .title{
+    margin-bottom: 15px;
+}
+
+.flightsListBox .headerRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.flightsListBox .legend{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.flightsListBox .legend > div{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.flightsListBox .list{
+}
+
+.flightsListBox .list .listItem{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.flightsListBox .list .listItem .id{
+    display: flex;
+    align-items: center;
+}
+
+.flightsListBox .list .listItem .id .flightId{
+    margin-right: 10px;
+}
+
+.flightsListBox .statusDot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%
+}
+
+.flightsListBox .line{
+    border: none;
+    height: 3px;
+    background-color: #4B6572;
+    margin: 20px 0;
+}

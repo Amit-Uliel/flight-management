@@ -1,0 +1,25 @@
+.dashboard {
+    direction: rtl;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 20px;
+    padding: 20px;
+}
+
+.dashboard .box{
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid gainsboro;
+}
+
+.dashboard .box1,
+.dashboard .box4{
+    grid-column: span 1;
+    grid-row: span 3;
+}
+
+.dashboard .box7{
+    grid-column: span 2;
+    grid-row: span 2;
+}

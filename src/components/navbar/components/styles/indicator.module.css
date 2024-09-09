@@ -60,10 +60,14 @@
 }
 
 .signOutButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     padding: 10px;
     background-color: #dc3545;
     color: #FFFFFF;
+    font-size: 1.1rem;
     border: none;
     border-radius: 5px;
     text-align: center;
@@ -77,4 +81,10 @@
 
 .signOutButton:focus {
     outline: none;
+}
+
+.skydivingIcon{
+    color: white;
+    transform: scale(1.1);
+    margin-left: 5px;
 }
