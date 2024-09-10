@@ -3,12 +3,12 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-// get top 10 flights - ordered by the newest creation date
+// get top 10 flights - ordered by the newest update date
 export async function GET(){
     try{
         const flights = await prisma.flight.findMany({
             orderBy: {
-                createdAt: 'desc',
+                updatedAt: 'desc',
             },
             take: 10,
             include: {

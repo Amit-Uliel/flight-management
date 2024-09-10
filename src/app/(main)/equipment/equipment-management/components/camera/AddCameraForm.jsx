@@ -4,9 +4,9 @@ import { useState } from "react";
 import styles from '../styles/forms.module.css';
 
 export default function CameraForm() {
-  const [cameraType, setCameraType] = useState(''); // Changed to input field
+  const [cameraType, setCameraType] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [weight, setWeight] = useState(''); // New state for weight
+  const [weight, setWeight] = useState('');
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
@@ -46,7 +46,6 @@ export default function CameraForm() {
         throw new Error( data.error || `Error: ${response.statusText}`);
       }
 
-      console.log('Camera added:', data);
       setSuccessMessage('מצלמה נוספה בהצלחה');
       setCameraType('');
       setQuantity('');
