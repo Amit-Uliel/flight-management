@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import styles from './FlightsList.module.css';
+import Image from 'next/image';
 
 const COLORS = {
     SCHEDULED: '#fd7e14',  
@@ -36,7 +37,17 @@ export default function FlightsList() {
 
     return (
         <div className={styles.flightsListBox}>
-            <h2 className={styles.title}>סטטוסי 10 טיסות אחרונות</h2>
+            <div className={styles.titleBox}>
+                <Image
+                    src="/flight-statuses.png"
+                    alt="flight statuses icon"
+                    width={38}
+                    height={38}
+                    quality={100}
+                    className={styles.flightStatusesIcon}
+                />
+                <h2 className={styles.title}>סטטוסי 10 טיסות אחרונות</h2>
+            </div>
             <div className={styles.headerRow}>
                 <span className={styles.headerId}>מספר טיסה</span>
                 <span className={styles.headerMission}>שם משימה</span>

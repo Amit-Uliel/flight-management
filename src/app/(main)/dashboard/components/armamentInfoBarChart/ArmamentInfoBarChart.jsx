@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import styles from './ArmamentInfoBarChart.module.css';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import useFetch from "@/hooks/useFetch";
+import Image from 'next/image';
 
 const COLORS = ['#4E79A7', '#F28E2B', '#E15759', '#76B7B2', '#59A14F', '#EDC948'];
 
@@ -21,7 +21,17 @@ export default function ArmamentInfoBarChart() {
 
     return (
         <div className={styles.armamentInfoBarChartBox}>
-            <h2 className={styles.title}>כמות חימוש</h2>
+            <div className={styles.titleBox}>
+                <Image
+                    src="/missles.png"
+                    alt="missles icon"
+                    width={38}
+                    height={38}
+                    quality={100}
+                    className={styles.misslesIcon}
+                />
+                <h2 className={styles.title}>כמות חימוש</h2>
+            </div>
             <div className={styles.chart}>
                 <ResponsiveContainer width="100%" height={'100%'}>
                     <BarChart

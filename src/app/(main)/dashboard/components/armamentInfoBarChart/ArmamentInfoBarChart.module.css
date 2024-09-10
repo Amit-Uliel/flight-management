@@ -6,8 +6,18 @@
     justify-content: space-between;
 }
 
-.armamentInfoBarChartBox .title{
-    margin-bottom: 20px;
+.armamentInfoBarChartBox .titleBox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.armamentInfoBarChartBox .titleBox .misslesIcon {
+    margin-left: 15px;
+}
+
+.armamentInfoBarChartBox .titleBox .title{
+    white-space: nowrap;
 }
 
 .armamentInfoBarChartBox .chart{

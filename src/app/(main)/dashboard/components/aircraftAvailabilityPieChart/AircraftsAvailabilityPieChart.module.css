@@ -1,11 +1,25 @@
-.AircraftsAvailabilityPieChartBox{
+.aircraftsAvailabilityPieChartBox{
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.AircraftsAvailabilityPieChartBox .chart{
+.aircraftsAvailabilityPieChartBox .titleBox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.aircraftsAvailabilityPieChartBox .titleBox .uavIcon {
+    margin-left: 15px;
+}
+
+.aircraftsAvailabilityPieChartBox .titleBox .title{
+    white-space: nowrap;
+}
+
+.aircraftsAvailabilityPieChartBox .chart{
     position: relative;
     display: flex;
     align-items: center;
@@ -14,41 +28,41 @@
     height: 300px;
 }
 
-.AircraftsAvailabilityPieChartBox .chart .totalAircraftsContainer {
+.aircraftsAvailabilityPieChartBox .chart .totalAircraftsContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: absolute;
 }
 
-.AircraftsAvailabilityPieChartBox .chart .totalAircraftsValue {
+.aircraftsAvailabilityPieChartBox .chart .totalAircraftsValue {
     font-size: 24px;
     font-weight: bold;
     margin-top: 10px;
 }
 
-.AircraftsAvailabilityPieChartBox .options{
+.aircraftsAvailabilityPieChartBox .options{
     display: flex;
     justify-content: space-between;
     gap: 10px;
     font-size: 1.1rem;
 }
 
-.AircraftsAvailabilityPieChartBox .options .option{
+.aircraftsAvailabilityPieChartBox .options .option{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
 }
 
-.AircraftsAvailabilityPieChartBox .title{
+.aircraftsAvailabilityPieChartBox .title{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
 
-.AircraftsAvailabilityPieChartBox .title .dot{
+.aircraftsAvailabilityPieChartBox .title .dot{
     width: 10px;
     height: 10px;
     border-radius: 50%

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// hook to fetch data from the database
 const useFetch = (url) => {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
