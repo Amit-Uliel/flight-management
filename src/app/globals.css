@@ -1,5 +1,5 @@
 :root {
-  --bg: #2b424e;
+  --bg: #2b374e;
   --secondary-bg: #242727;
   --third-bg: #83c2c2;
   --text: white;
@@ -16,8 +16,8 @@
 }
 
 body{
-  /* display: flex;
-  flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   background: var(--bg);
   height: 100vh;
   color: var(--text);

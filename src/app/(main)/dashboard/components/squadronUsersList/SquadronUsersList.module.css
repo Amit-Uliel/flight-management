@@ -23,6 +23,7 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    overflow: hidden;
 }
 
 .listItem {
@@ -40,11 +41,8 @@
     cursor: default;
 }
 
-.listItem:hover{
-    transform: scale(1.3);
-}
-
 .imageBox {
+    position: relative;
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -56,6 +54,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.noImage{
+    position: absolute;
+    z-index: 0;
+    transform: translateX(-50%);
+    left: 50%;
 }
 
 .username {
@@ -91,6 +96,7 @@
     margin: 0 5px;
     padding: 8px 12px;
     border: none;
+    border-radius: 5px;
     background-color: #ddd;
     cursor: pointer;
 }

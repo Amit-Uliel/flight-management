@@ -1,0 +1,25 @@
+.FlightsAssignedCurrentMonthLineChartBox {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.titleBox {
+    flex: 1;
+}
+
+.chart{
+    direction: ltr;
+    width: 100%;
+    height: 200px;
+    flex: 3;
+}
+
+.customTooltip{
+    direction: rtl;
+    padding: 5px;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    background-color: #00000052;
+}
