@@ -2,6 +2,7 @@ import styles from './dashboard.module.css';
 import AircraftsAvailabilityPieChart from './components/aircraftAvailabilityPieChart/AircraftsAvailabilityPieChart';
 import FlightsList from './components/flightsList/FlightsList';
 import ArmamentInfoBarChart from './components/armamentInfoBarChart/ArmamentInfoBarChart';
+import SquadronUsersList from './components/squadronUsersList/SquadronUsersList';
 
 export default function Dashboard() {
   return (
@@ -10,19 +11,10 @@ export default function Dashboard() {
         <AircraftsAvailabilityPieChart />
       </div>
       <div className={`${styles.box} ${styles.box2}`}>
-        box 2
-      </div>
-      <div className={`${styles.box} ${styles.box3}`}>
-        box 3
+        <SquadronUsersList />
       </div>
       <div className={`${styles.box} ${styles.box4}`}>
         <FlightsList />
-      </div>
-      <div className={`${styles.box} ${styles.box5}`}>
-        box 5
-      </div>
-      <div className={`${styles.box} ${styles.box6}`}>
-        box 6
       </div>
       <div className={`${styles.box} ${styles.box7}`}>
         <ArmamentInfoBarChart />

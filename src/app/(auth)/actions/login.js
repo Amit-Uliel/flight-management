@@ -16,7 +16,7 @@ export async function login(formData) {
 
     // Fetch all user fields from the database using Prisma
     const user = await prisma.user.findUnique({
-        where: { militaryId: militaryId },
+        where: { militaryId },
     });
 
     if (!user) {

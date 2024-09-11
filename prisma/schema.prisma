@@ -32,6 +32,7 @@ model User {
   role       String
   squadron   Squadron? @relation(fields: [squadronId], references: [squadronId])
   squadronId Int
+  rank        Rank
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 }
@@ -144,4 +145,24 @@ enum AssignmentStatus {
   ONGOING
   COMPLETED
   CANCELED
+}
+
+enum Rank {
+  TORAI          // טוראי
+  RAV_TORAI      // רב טוראי
+  SAMAL          // סמל
+  SAMAL_RISHON   // סמל ראשון
+  RAV_SAMAL      // רב סמל
+  RAV_SAMAL_MITKADAM // רב סמל מתקדם
+  RAV_SAMAL_BAKHIR   // רב סמל בכיר
+  RAV_NAGAD_MISNE    // רב נגד משנה
+  RAV_NAGAD          // רב נגד
+  SAGAN          // סגן
+  SEREN          // סרן
+  RAV_SEREN      // רב סרן
+  SAGAN_ALUF     // סגן אלוף
+  ALUF_MISHNE    // אלוף משנה
+  TAT_ALUF       // תת אלוף
+  ALUF           // אלוף
+  RAV_ALUF       // רב אלוף
 }

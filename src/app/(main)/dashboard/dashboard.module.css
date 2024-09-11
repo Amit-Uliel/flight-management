@@ -19,7 +19,14 @@
     grid-row: span 3;
 }
 
+.dashboard .box2,
 .dashboard .box7{
     grid-column: span 2;
     grid-row: span 2;
+}
+
+.dashboard .box2{
+    background-color: #181A1B;
+    max-height: 390px;
+    overflow-y: auto;
 }

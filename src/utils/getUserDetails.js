@@ -1,6 +1,9 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { createClient } from './supabase/server';
+
+const supabase = createClient();
 
 // Function to retrieve the entire user details object
 export async function getUserDetails() {
@@ -34,4 +37,25 @@ export async function getUserName() {
 export async function getSquadronId() {
     const userDetails = await getUserDetails();
     return userDetails?.squadronId || '';
+}
+
+export async function getRank() {
+    const userDetails = await getUserDetails();
+    return userDetails?.rank || '';
+}
+
+export async function getProfileImageUrl() {
+    const userDetails = await getUserDetails();
+
+    // Get public URL for the profile image
+    const { data: profileImageUrl, error } = supabase.storage
+        .from('profile-images')
+        .getPublicUrl(`${userDetails.militaryId}/profile.jpeg`);
+
+    if (error) {
+        console.error(error);
+        throw new Error('failed to fetch profile image');
+    }
+
+    return profileImageUrl.publicUrl || '';
 }
