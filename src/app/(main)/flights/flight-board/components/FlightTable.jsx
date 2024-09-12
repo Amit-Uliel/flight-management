@@ -185,81 +185,84 @@ const FlightTable = () => {
                     onSelect={handleMissionStatusSelection}
                 />
             )}
-            <table className={styles.flightTable}>
-                <thead>
-                    <tr>
-                        <th>מספר טיסה</th>
-                        <th>שם משימה</th>
-                        <th>זמן המראה</th>
-                        <th>זמן נחיתה מתוכנן</th>
-                        <th>הערות</th>
-                        <th>סטטוס</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {flightData.length > 0 ? (
-                        flightData.map((flight) => {
-                        const takeoff = formatDate(flight.takeoffTime);
-                        const landing = formatDate(flight.scheduledLandingTime);
-                        return (
-                            <tr key={flight.flightId}>
-                                <td
-                                    className={styles.flightId}
-                                    onClick={() => handleFlightClick(flight.flightId)}
-                                >
-                                    {flight.flightId}
-                                </td>
-                                <td>{flight.mission.missionName}</td>
-                                <td>
-                                    <div className={styles.dateTimeContainer}>
-                                        <span>{takeoff.formattedTime}</span>
-                                        <span>{takeoff.formattedDate}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className={styles.dateTimeContainer}>
-                                        <span>{landing.formattedTime}</span>
-                                        <span>{landing.formattedDate}</span>
-                                    </div>
-                                </td>
-                                <td>{flight.notes}</td>
-                                <td>
-                                    {flight.status === 'COMPLETED' || flight.status === 'CANCELED' ? (
-                                        // Display read-only status for completed or canceled flights
-                                        <span className={`${styles.status} ${getStatusClass(flight.status)}`}>
-                                            {statusTranslations[flight.status]}
-                                        </span>
-                                    ) : (
-                                        // Render the select dropdown for other statuses
-                                        <select
-                                            className={`${styles.status} ${getStatusClass(flight.status)}`}
-                                            value={flight.status}
-                                            onChange={(e) =>
-                                                handleStatusChange(
-                                                    flight.flightId,
-                                                    e.target.value,
-                                                    flight.mission.missionId
-                                                )
-                                            }
-                                        >
-                                            <option value="SCHEDULED">מתקיימת</option>
-                                            <option value="IN_FLIGHT">בטיסה</option>
-                                            <option value="LANDED">נחתה</option>
-                                            <option value="CANCELED">בוטלה</option>
-                                            <option value="COMPLETED">הושלמה</option>
-                                        </select>
-                                    )}
-                                </td>
-                            </tr>
-                        );
-                        })
-                    ) : (
+            <div className={styles.flightTableBox}>
+                <h2 className={styles.title}>לוח טיסות</h2>
+                <table className={styles.flightTable}>
+                    <thead>
                         <tr>
-                            <td colSpan="6">אין נתונים להצגה</td>
+                            <th>מספר טיסה</th>
+                            <th>שם משימה</th>
+                            <th>זמן המראה</th>
+                            <th>זמן נחיתה מתוכנן</th>
+                            <th>הערות</th>
+                            <th>סטטוס</th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {flightData.length > 0 ? (
+                            flightData.map((flight) => {
+                            const takeoff = formatDate(flight.takeoffTime);
+                            const landing = formatDate(flight.scheduledLandingTime);
+                            return (
+                                <tr key={flight.flightId}>
+                                    <td
+                                        className={styles.flightId}
+                                        onClick={() => handleFlightClick(flight.flightId)}
+                                    >
+                                        {flight.flightId}
+                                    </td>
+                                    <td>{flight.mission.missionName}</td>
+                                    <td>
+                                        <div className={styles.dateTimeContainer}>
+                                            <span>{takeoff.formattedTime}</span>
+                                            <span>{takeoff.formattedDate}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className={styles.dateTimeContainer}>
+                                            <span>{landing.formattedTime}</span>
+                                            <span>{landing.formattedDate}</span>
+                                        </div>
+                                    </td>
+                                    <td>{flight.notes}</td>
+                                    <td>
+                                        {flight.status === 'COMPLETED' || flight.status === 'CANCELED' ? (
+                                            // Display read-only status for completed or canceled flights
+                                            <span className={`${styles.status} ${getStatusClass(flight.status)}`}>
+                                                {statusTranslations[flight.status]}
+                                            </span>
+                                        ) : (
+                                            // Render the select dropdown for other statuses
+                                            <select
+                                                className={`${styles.status} ${getStatusClass(flight.status)}`}
+                                                value={flight.status}
+                                                onChange={(e) =>
+                                                    handleStatusChange(
+                                                        flight.flightId,
+                                                        e.target.value,
+                                                        flight.mission.missionId
+                                                    )
+                                                }
+                                            >
+                                                <option value="SCHEDULED">מתקיימת</option>
+                                                <option value="IN_FLIGHT">בטיסה</option>
+                                                <option value="LANDED">נחתה</option>
+                                                <option value="CANCELED">בוטלה</option>
+                                                <option value="COMPLETED">הושלמה</option>
+                                            </select>
+                                        )}
+                                    </td>
+                                </tr>
+                            );
+                            })
+                        ) : (
+                            <tr>
+                                <td colSpan="6">אין נתונים להצגה</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
         </>
     );
     };

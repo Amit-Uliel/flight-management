@@ -1,4 +1,7 @@
-/* components/FlightTable.module.css */
+.flightTableBox{
+    width: 1300px;
+}
+
 .flightTable {
     width: 100%;
     border-collapse: collapse;
@@ -6,6 +9,11 @@
     color: #ffffff;
     cursor: default;
     box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.3);
+}
+
+.title{
+    margin-block: 20px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
 .flightTable th, .flightTable td {
