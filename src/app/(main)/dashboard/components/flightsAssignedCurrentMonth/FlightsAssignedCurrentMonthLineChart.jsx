@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import styles from './FlightsAssignedCurrentMonthLineChart.module.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import useFetch from '@/hooks/useFetch';
@@ -25,6 +25,14 @@ export default function FlightsAssignedCurrentMonthLineChart() {
     return (
         <div className={styles.FlightsAssignedCurrentMonthLineChartBox}>
             <div className={styles.titleBox}>
+            <Image
+                src="/calendar.png"
+                alt="calendar icon"
+                width={38}
+                height={38}
+                quality={100}
+                className={styles.calendarIcon}
+            />
                 <h2>טיסות שהוקצו החודש</h2>
             </div>
             {chartData?.length > 0 && (

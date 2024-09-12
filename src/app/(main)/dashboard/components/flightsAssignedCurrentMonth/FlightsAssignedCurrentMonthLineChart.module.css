@@ -6,7 +6,12 @@
 }
 
 .titleBox {
-    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.titleBox .calendarIcon{
+    margin-left: 10px;
 }
 
 .chart{

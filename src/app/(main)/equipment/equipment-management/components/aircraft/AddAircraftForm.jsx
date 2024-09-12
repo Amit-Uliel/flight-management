@@ -18,7 +18,7 @@ export default function AircraftForm() {
         setSquadron(squadronId); // Set squadronId into the state
       } catch (error) {
         console.error('Failed to fetch squadronId:', error);
-        setError('לא הצליח לטעון מספר טייסת, אנא נסה להיכנס שוב או לדבר עם תמיכה');
+        setError('לא הצליח לטעון מספר טייסת, אנא נסה להיכנס שוב או ליצור קשר עם תמיכה');
       }
     };
 
@@ -56,7 +56,6 @@ export default function AircraftForm() {
       setSuccessMessage('מטוס נוסף בהצלחה');
       setTailNumber('');
       setModel('');
-      setSquadron('');
     } catch (error) {
       console.error('Failed to add aircraft:', error);
       setError(error.message || 'בעיה בהוספת מטוס');

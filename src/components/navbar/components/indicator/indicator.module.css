@@ -1,0 +1,44 @@
+.container {
+    background-color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* direction: rtl; */
+}
+
+.relative {
+    position: relative;
+    direction: rtl;
+    padding: 3px;
+}
+
+.dropdownHider{
+    background-color: var(--bg);
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 20;
+}
+
+.roleContainer {
+    background-color: var(--secondary-bg);
+    position: relative;
+    z-index: 30;
+    padding: 5px 15px;
+    margin-left: 2px;
+    font-size: 1.3rem;
+    color: white;
+    cursor: pointer;
+    border-radius: 0px;
+    transform: translateX(-4px);
+    transition: .5s;
+}
+
+.roleContainer:hover{
+    padding: 5px 20px;
+}
+
+.roleName {
+    margin: 3px;
+}

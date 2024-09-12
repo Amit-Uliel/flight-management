@@ -13,14 +13,7 @@ const useFetch = (url) => {
                 const response = await fetch(url);
 
                 if (!response.ok) {
-                    // Attempt to parse error response
-                    let errorData;
-                    try {
-                        errorData = await response.json();
-                    } catch {
-                        // If parsing fails, throw a generic error
-                        throw new Error('An error occurred while fetching data');
-                    }
+                    const errorData = await response.json();
                     throw new Error(errorData?.message || 'לא הצליח לייבא נתונים');
                 }
 

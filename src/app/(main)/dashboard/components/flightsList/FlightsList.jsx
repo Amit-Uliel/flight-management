@@ -46,7 +46,7 @@ export default function FlightsList() {
                     quality={100}
                     className={styles.flightStatusesIcon}
                 />
-                <h2 className={styles.title}>סטטוסי 10 טיסות אחרונות</h2>
+                <h2 className={styles.title}>סטטוסי 15 טיסות אחרונות</h2>
             </div>
             <div className={styles.headerRow}>
                 <span className={styles.headerId}>מספר טיסה</span>

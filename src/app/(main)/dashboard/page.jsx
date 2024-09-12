@@ -23,9 +23,6 @@ export default function Dashboard() {
         <div className={`${styles.box} ${styles.box8}`}>
           <FlightsAssignedCurrentMonthLineChart />
         </div>
-        <div className={`${styles.box} ${styles.box9}`}>
-          box 9
-        </div>
       </div>
     </div>
   )

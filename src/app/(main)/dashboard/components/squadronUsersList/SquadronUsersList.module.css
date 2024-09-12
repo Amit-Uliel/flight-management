@@ -56,13 +56,6 @@
     object-fit: cover;
 }
 
-.noImage{
-    position: absolute;
-    z-index: 0;
-    transform: translateX(-50%);
-    left: 50%;
-}
-
 .username {
     font-size: 1.3rem;
     font-weight: bold;

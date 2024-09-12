@@ -10,7 +10,7 @@ export async function GET(){
             orderBy: {
                 updatedAt: 'desc',
             },
-            take: 10,
+            take: 15,
             include: {
                 mission: true,
             },
