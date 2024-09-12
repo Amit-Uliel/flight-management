@@ -63,7 +63,7 @@ const FlightTable = () => {
     const [currentMissionId, setCurrentMissionId] = useState(null); // Store the current mission ID
     const router = useRouter();
     const [currentPage, setCurrentPage] = useState(1);
-    const flightsPerPage = 8;
+    const flightsPerPage = 6;
 
     // Calculate the range of flights to display
     const indexOfLastFlight = currentPage * flightsPerPage;
@@ -201,100 +201,100 @@ const FlightTable = () => {
                 >
                     לוח טיסות
                 </motion.h2>
-                <motion.table 
-                    className={styles.flightTable}
+                <motion.div className={styles.tableWrapper}
                     variants={variants}
                     initial='hidden'
                     animate='visible'
-                    transition={{ duration: 0.4, ease: "easeInOut", delay: 0.8 }}
-                >
-                    <thead>
-                        <tr>
-                            <th>מספר טיסה</th>
-                            <th>שם משימה</th>
-                            <th>זמן המראה</th>
-                            <th>זמן נחיתה מתוכנן</th>
-                            <th>הערות</th>
-                            <th>סטטוס</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <AnimatePresence mode="wait">
-                            {currentFlights.length > 0 ? (
-                                currentFlights.map((flight) => {
-                                const takeoff = formatDate(flight.takeoffTime);
-                                const landing = formatDate(flight.scheduledLandingTime);
-                                return (
-                                    <motion.tr key={flight.flightId}
+                    transition={{ duration: 0.4, ease: "easeInOut", delay: 0.8 }}>
+                    <table className={styles.flightTable}>
+                        <thead>
+                            <tr>
+                                <th>מספר טיסה</th>
+                                <th>שם משימה</th>
+                                <th>זמן המראה</th>
+                                <th>זמן נחיתה מתוכנן</th>
+                                <th>הערות</th>
+                                <th>סטטוס</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <AnimatePresence mode="wait">
+                                {currentFlights.length > 0 ? (
+                                    currentFlights.map((flight) => {
+                                    const takeoff = formatDate(flight.takeoffTime);
+                                    const landing = formatDate(flight.scheduledLandingTime);
+                                    return (
+                                        <motion.tr key={flight.flightId}
+                                            variants={tableRowVariants}
+                                            initial='hidden'
+                                            animate='visible'
+                                            exit='hidden'
+                                            transition={{ duration: 0.5, ease: "easeInOut" }}
+                                        >
+                                            <td
+                                                className={styles.flightId}
+                                                onClick={() => handleFlightClick(flight.flightId)}
+                                            >
+                                                {flight.flightId}
+                                            </td>
+                                            <td>{flight.mission.missionName}</td>
+                                            <td>
+                                                <div className={styles.dateTimeContainer}>
+                                                    <span>{takeoff.formattedTime}</span>
+                                                    <span>{takeoff.formattedDate}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className={styles.dateTimeContainer}>
+                                                    <span>{landing.formattedTime}</span>
+                                                    <span>{landing.formattedDate}</span>
+                                                </div>
+                                            </td>
+                                            <td>{flight.notes}</td>
+                                            <td>
+                                                {flight.status === 'COMPLETED' || flight.status === 'CANCELED' ? (
+                                                    <span className={`${styles.status} ${getStatusClass(flight.status)}`}>
+                                                        {statusTranslations[flight.status]}
+                                                    </span>
+                                                ) : (
+                                                    <select
+                                                        className={`${styles.status} ${getStatusClass(flight.status)}`}
+                                                        value={flight.status}
+                                                        onChange={(e) =>
+                                                            handleStatusChange(
+                                                                flight.flightId,
+                                                                e.target.value,
+                                                                flight.mission.missionId
+                                                            )
+                                                        }
+                                                    >
+                                                        <option value="SCHEDULED">מתקיימת</option>
+                                                        <option value="IN_FLIGHT">בטיסה</option>
+                                                        <option value="LANDED">נחתה</option>
+                                                        <option value="CANCELED">בוטלה</option>
+                                                        <option value="COMPLETED">הושלמה</option>
+                                                    </select>
+                                                )}
+                                            </td>
+                                        </motion.tr>
+                                    );
+                                    })
+                                ) : (
+                                    <motion.tr
+                                        key="noDataRow"
                                         variants={tableRowVariants}
                                         initial='hidden'
                                         animate='visible'
                                         exit='hidden'
                                         transition={{ duration: 0.5, ease: "easeInOut" }}
                                     >
-                                        <td
-                                            className={styles.flightId}
-                                            onClick={() => handleFlightClick(flight.flightId)}
-                                        >
-                                            {flight.flightId}
-                                        </td>
-                                        <td>{flight.mission.missionName}</td>
-                                        <td>
-                                            <div className={styles.dateTimeContainer}>
-                                                <span>{takeoff.formattedTime}</span>
-                                                <span>{takeoff.formattedDate}</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className={styles.dateTimeContainer}>
-                                                <span>{landing.formattedTime}</span>
-                                                <span>{landing.formattedDate}</span>
-                                            </div>
-                                        </td>
-                                        <td>{flight.notes}</td>
-                                        <td>
-                                            {flight.status === 'COMPLETED' || flight.status === 'CANCELED' ? (
-                                                <span className={`${styles.status} ${getStatusClass(flight.status)}`}>
-                                                    {statusTranslations[flight.status]}
-                                                </span>
-                                            ) : (
-                                                <select
-                                                    className={`${styles.status} ${getStatusClass(flight.status)}`}
-                                                    value={flight.status}
-                                                    onChange={(e) =>
-                                                        handleStatusChange(
-                                                            flight.flightId,
-                                                            e.target.value,
-                                                            flight.mission.missionId
-                                                        )
-                                                    }
-                                                >
-                                                    <option value="SCHEDULED">מתקיימת</option>
-                                                    <option value="IN_FLIGHT">בטיסה</option>
-                                                    <option value="LANDED">נחתה</option>
-                                                    <option value="CANCELED">בוטלה</option>
-                                                    <option value="COMPLETED">הושלמה</option>
-                                                </select>
-                                            )}
-                                        </td>
+                                        <td colSpan="6">אין נתונים להצגה</td>
                                     </motion.tr>
-                                );
-                                })
-                            ) : (
-                                <motion.tr
-                                    key="noDataRow"
-                                    variants={tableRowVariants}
-                                    initial='hidden'
-                                    animate='visible'
-                                    exit='hidden'
-                                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                                >
-                                    <td colSpan="6">אין נתונים להצגה</td>
-                                </motion.tr>
-                            )}
-                        </AnimatePresence>
-                    </tbody>
-                </motion.table>
+                                )}
+                            </AnimatePresence>
+                        </tbody>
+                    </table>
+                </motion.div>
                 <div className={styles.pagination}>
                     {Array.from({ length: totalPages }, (_, index) => (
                         <button
