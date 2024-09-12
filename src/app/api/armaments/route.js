@@ -26,7 +26,7 @@ export async function POST(request) {
       data: {
         armamentType: type,
         weight,
-        quantity, // Start with the specified quantity
+        quantity,
       },
     });
 

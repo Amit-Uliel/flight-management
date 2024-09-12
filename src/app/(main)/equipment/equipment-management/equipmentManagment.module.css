@@ -1,4 +1,8 @@
-.container {
+.container{
+    overflow: hidden;
+}
+
+.wrapper {
     padding: 20px;
     border-radius: 10px;
     max-width: 1200px;
@@ -25,12 +29,12 @@
 }
   
 .tabButton:hover {
-    background-color: #304653;
+    background-color: #2f3e5b;
 }
   
 .activeTabButton {
     background-color: #FFFFFF;
-    color: #4B6572;
+    color: var(--bg);
     font-weight: bold;
     transform: translateY(-5px);
 }

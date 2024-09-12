@@ -30,8 +30,7 @@
 }
 
 .chaoticOrbit::after {
-    animation: orbit var(--uib-speed) linear calc(var(--uib-speed) / -2)
-    infinite;
+    animation: orbit var(--uib-speed) linear calc(var(--uib-speed) / -2) infinite;
 }
 
 @keyframes rotate936 {
@@ -158,4 +157,9 @@
     align-items: center;
     cursor: pointer;
     transition: .2s ease-in-out;
+}
+
+.icon{
+    position: absolute;
+    transform: translate(-55px, -4px);
 }

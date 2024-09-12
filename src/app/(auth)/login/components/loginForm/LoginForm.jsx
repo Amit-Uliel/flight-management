@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { login } from '../../actions/login';
-import styles from './styles/LoginForm.module.css';
+import { login } from '../../../actions/login';
+import styles from './LoginForm.module.css';
 import OrbitLoadingButton from '@/components/ui/buttons/orbitLoadingButton/OrbitLoadingButton';
 
 export default function LoginForm() {
@@ -62,6 +62,7 @@ export default function LoginForm() {
         initialText = {'התחבר'}
         isLoading={isLoading}
         loadingText={'מתחבר'}
+        icon={'/boarding.png'}
       />
     </form>
   );

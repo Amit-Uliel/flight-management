@@ -205,7 +205,8 @@ const FlightTable = () => {
                     variants={variants}
                     initial='hidden'
                     animate='visible'
-                    transition={{ duration: 0.4, ease: "easeInOut", delay: 0.8 }}>
+                    transition={{ duration: 0.4, ease: "easeInOut", delay: 0.8 }}
+                >
                     <table className={styles.flightTable}>
                         <thead>
                             <tr>
@@ -295,7 +296,13 @@ const FlightTable = () => {
                         </tbody>
                     </table>
                 </motion.div>
-                <div className={styles.pagination}>
+                <motion.div 
+                    className={styles.pagination}
+                    variants={variants}
+                    initial='hidden'
+                    animate='visible'
+                    transition={{ duration: 0.4, ease: 'easeInOut', delay: 1.2 }}
+                >
                     {Array.from({ length: totalPages }, (_, index) => (
                         <button
                             key={index + 1}
@@ -305,7 +312,7 @@ const FlightTable = () => {
                             {index + 1}
                         </button>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </>
     );

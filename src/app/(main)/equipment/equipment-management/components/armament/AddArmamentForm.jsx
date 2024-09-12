@@ -45,7 +45,8 @@ export default function ArmamentForm() {
       });
 
       if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
+        const errorData = await response.json();
+        throw new Error(errorData.error);
       }
 
       const data = await response.json();

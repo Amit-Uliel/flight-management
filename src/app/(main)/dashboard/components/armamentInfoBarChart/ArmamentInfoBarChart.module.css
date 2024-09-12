@@ -6,10 +6,15 @@
     justify-content: space-between;
 }
 
+.header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 .armamentInfoBarChartBox .titleBox {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
 }
 
 .armamentInfoBarChartBox .titleBox .misslesIcon {
@@ -20,8 +25,51 @@
     white-space: nowrap;
 }
 
+.paginationControls {
+    display: flex;
+    margin-right: auto;
+    gap: 15px;
+    margin-left: 50px;
+}
+
+.paginationControls button {
+    padding: 5px;
+    font-size: 14px;
+    background-color: #295d94;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.paginationControls button:hover {
+    background-color: #3e6a91;
+}
+
+.paginationControls button:disabled {
+    background-color: #ddd;
+    color: rgb(74, 74, 74);
+    cursor: not-allowed;
+}
+
 .armamentInfoBarChartBox .chart{
     direction: ltr;
     height: 300px;
     width: 100%;
 }
+
+.customTooltip {
+    direction: rtl;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.label, .value {
+    margin: 0;
+}
+

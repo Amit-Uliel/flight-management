@@ -30,7 +30,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .firstImage, .lastImage {
@@ -46,8 +46,6 @@
     filter: drop-shadow(0 0 40px white);
 }
 
-
-
 .loginButton {
     width: 100%;
     padding: 12px;
@@ -62,4 +60,8 @@
 
 .loginButton:hover {
     background-color: #0056b3;
+}
+
+.loginFormWrapper{
+    width: 100%;
 }
