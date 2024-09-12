@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './styles/FlightTable.module.css';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/utils/supabase/client';
 import MissionStatusModal from './MissionStatusModal';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const statusTranslations = {
     SCHEDULED: "מתוכננת",
@@ -13,6 +13,16 @@ const statusTranslations = {
     CANCELED: "בוטלה",
     COMPLETED: "הושלמה",
 };
+
+const variants = {
+    hidden: {opacity: 0, y: 20},
+    visible: {opacity: 1, y: 0},
+}
+
+const tableRowVariants = {
+    hidden: {opacity: 0,},
+    visible: {opacity: 1,},
+}
 
 // Format date and time
 const formatDate = (dateString) => {
@@ -52,7 +62,19 @@ const FlightTable = () => {
     const [showModal, setShowModal] = useState(false); // Modal visibility state
     const [currentMissionId, setCurrentMissionId] = useState(null); // Store the current mission ID
     const router = useRouter();
-    const supabase = createClient();
+    const [currentPage, setCurrentPage] = useState(1);
+    const flightsPerPage = 8;
+
+    // Calculate the range of flights to display
+    const indexOfLastFlight = currentPage * flightsPerPage;
+    const indexOfFirstFlight = indexOfLastFlight - flightsPerPage;
+    const currentFlights = flightData.slice(indexOfFirstFlight, indexOfLastFlight);
+    const totalPages = Math.ceil(flightData.length / flightsPerPage);
+
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+      
 
     useEffect(() => {
         // Fetch initial flights data
@@ -71,25 +93,9 @@ const FlightTable = () => {
             }
         };
 
-        fetchFlights(); // Initial fetch call
+        fetchFlights();
 
-        // Subscribe to real-time updates
-        const flightSubscription = supabase
-        .channel('realtime-flights')
-        .on(
-            'postgres_changes',
-            { event: '*', schema: 'public', table: 'Flight' },
-            (payload) => {
-                console.log(payload);
-            }
-        )
-        .subscribe();
-
-        // Cleanup function to unsubscribe from real-time updates
-        return () => {
-            supabase.removeChannel(flightSubscription);
-        };
-    }, [supabase]);
+    }, []);
 
     // Function to handle flight status change
     const handleStatusChange = async (flightId, newStatus, missionId) => {
@@ -186,8 +192,22 @@ const FlightTable = () => {
                 />
             )}
             <div className={styles.flightTableBox}>
-                <h2 className={styles.title}>לוח טיסות</h2>
-                <table className={styles.flightTable}>
+                <motion.h2 
+                    className={styles.title}
+                    variants={variants}
+                    initial='hidden'
+                    animate='visible'
+                    transition={{ duration: 0.4, ease: "easeInOut", delay: 0.4 }}
+                >
+                    לוח טיסות
+                </motion.h2>
+                <motion.table 
+                    className={styles.flightTable}
+                    variants={variants}
+                    initial='hidden'
+                    animate='visible'
+                    transition={{ duration: 0.4, ease: "easeInOut", delay: 0.8 }}
+                >
                     <thead>
                         <tr>
                             <th>מספר טיסה</th>
@@ -199,69 +219,93 @@ const FlightTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {flightData.length > 0 ? (
-                            flightData.map((flight) => {
-                            const takeoff = formatDate(flight.takeoffTime);
-                            const landing = formatDate(flight.scheduledLandingTime);
-                            return (
-                                <tr key={flight.flightId}>
-                                    <td
-                                        className={styles.flightId}
-                                        onClick={() => handleFlightClick(flight.flightId)}
+                        <AnimatePresence mode="wait">
+                            {currentFlights.length > 0 ? (
+                                currentFlights.map((flight) => {
+                                const takeoff = formatDate(flight.takeoffTime);
+                                const landing = formatDate(flight.scheduledLandingTime);
+                                return (
+                                    <motion.tr key={flight.flightId}
+                                        variants={tableRowVariants}
+                                        initial='hidden'
+                                        animate='visible'
+                                        exit='hidden'
+                                        transition={{ duration: 0.5, ease: "easeInOut" }}
                                     >
-                                        {flight.flightId}
-                                    </td>
-                                    <td>{flight.mission.missionName}</td>
-                                    <td>
-                                        <div className={styles.dateTimeContainer}>
-                                            <span>{takeoff.formattedTime}</span>
-                                            <span>{takeoff.formattedDate}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={styles.dateTimeContainer}>
-                                            <span>{landing.formattedTime}</span>
-                                            <span>{landing.formattedDate}</span>
-                                        </div>
-                                    </td>
-                                    <td>{flight.notes}</td>
-                                    <td>
-                                        {flight.status === 'COMPLETED' || flight.status === 'CANCELED' ? (
-                                            // Display read-only status for completed or canceled flights
-                                            <span className={`${styles.status} ${getStatusClass(flight.status)}`}>
-                                                {statusTranslations[flight.status]}
-                                            </span>
-                                        ) : (
-                                            // Render the select dropdown for other statuses
-                                            <select
-                                                className={`${styles.status} ${getStatusClass(flight.status)}`}
-                                                value={flight.status}
-                                                onChange={(e) =>
-                                                    handleStatusChange(
-                                                        flight.flightId,
-                                                        e.target.value,
-                                                        flight.mission.missionId
-                                                    )
-                                                }
-                                            >
-                                                <option value="SCHEDULED">מתקיימת</option>
-                                                <option value="IN_FLIGHT">בטיסה</option>
-                                                <option value="LANDED">נחתה</option>
-                                                <option value="CANCELED">בוטלה</option>
-                                                <option value="COMPLETED">הושלמה</option>
-                                            </select>
-                                        )}
-                                    </td>
-                                </tr>
-                            );
-                            })
-                        ) : (
-                            <tr>
-                                <td colSpan="6">אין נתונים להצגה</td>
-                            </tr>
-                        )}
+                                        <td
+                                            className={styles.flightId}
+                                            onClick={() => handleFlightClick(flight.flightId)}
+                                        >
+                                            {flight.flightId}
+                                        </td>
+                                        <td>{flight.mission.missionName}</td>
+                                        <td>
+                                            <div className={styles.dateTimeContainer}>
+                                                <span>{takeoff.formattedTime}</span>
+                                                <span>{takeoff.formattedDate}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className={styles.dateTimeContainer}>
+                                                <span>{landing.formattedTime}</span>
+                                                <span>{landing.formattedDate}</span>
+                                            </div>
+                                        </td>
+                                        <td>{flight.notes}</td>
+                                        <td>
+                                            {flight.status === 'COMPLETED' || flight.status === 'CANCELED' ? (
+                                                <span className={`${styles.status} ${getStatusClass(flight.status)}`}>
+                                                    {statusTranslations[flight.status]}
+                                                </span>
+                                            ) : (
+                                                <select
+                                                    className={`${styles.status} ${getStatusClass(flight.status)}`}
+                                                    value={flight.status}
+                                                    onChange={(e) =>
+                                                        handleStatusChange(
+                                                            flight.flightId,
+                                                            e.target.value,
+                                                            flight.mission.missionId
+                                                        )
+                                                    }
+                                                >
+                                                    <option value="SCHEDULED">מתקיימת</option>
+                                                    <option value="IN_FLIGHT">בטיסה</option>
+                                                    <option value="LANDED">נחתה</option>
+                                                    <option value="CANCELED">בוטלה</option>
+                                                    <option value="COMPLETED">הושלמה</option>
+                                                </select>
+                                            )}
+                                        </td>
+                                    </motion.tr>
+                                );
+                                })
+                            ) : (
+                                <motion.tr
+                                    key="noDataRow"
+                                    variants={tableRowVariants}
+                                    initial='hidden'
+                                    animate='visible'
+                                    exit='hidden'
+                                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                                >
+                                    <td colSpan="6">אין נתונים להצגה</td>
+                                </motion.tr>
+                            )}
+                        </AnimatePresence>
                     </tbody>
-                </table>
+                </motion.table>
+                <div className={styles.pagination}>
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                            key={index + 1}
+                            onClick={() => paginate(index + 1)}
+                            className={currentPage === index + 1 ? styles.activePage : ''}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                </div>
             </div>
         </>
     );

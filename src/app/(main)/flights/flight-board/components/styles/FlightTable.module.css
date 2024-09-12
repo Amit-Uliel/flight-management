@@ -81,3 +81,37 @@
 .statusCompleted {
     color: #a2a2a2;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination button:hover {
+    background-color: #4a76ff;
+    color: white;
+}
+
+.pagination button.activePage {
+    background-color: #4a76ff;
+    color: white;
+    cursor: default;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    color: #888;
+    cursor: not-allowed;
+}
