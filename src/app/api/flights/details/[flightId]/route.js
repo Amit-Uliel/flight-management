@@ -10,6 +10,7 @@ export async function GET(req, { params }) {
         const flightDetails = await prisma.flight.findUnique({
             where: { flightId: parseInt(flightId) },
             include: {
+                user: true,
                 mission: {
                     include: {
                         assignments: {

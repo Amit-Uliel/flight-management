@@ -1,10 +1,32 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { cookies } from 'next/headers';
 
 const prisma = new PrismaClient();
 
 export async function POST(request) {
     try {
+        // get user cookies
+        const cookieStore = cookies();
+        const userData = cookieStore.get('userData');
+
+        if(!userData){
+            return NextResponse.json('אין נתוני משתמש', {status: 401})
+        }
+
+        // get user squadron and military id
+        const user = JSON.parse(userData.value);
+        const squadronId = user?.squadronId;
+        const militaryId = user?.militaryId;
+
+        if (!squadronId) {
+            return NextResponse.json({ error: 'לא נמצא מספר טייסת עבור המשתמש' }, { status: 400 });
+        }
+
+        if (!militaryId) {
+            return NextResponse.json({ error: 'לא נמצא מספר מספר אישי עבור המשתמש' }, { status: 400 });
+        }
+
         const {
             missionName,
             selectedMissionId,
@@ -175,6 +197,8 @@ export async function POST(request) {
                     takeoffTime: new Date(takeoffTime),
                     scheduledLandingTime: new Date(scheduledLandingTime),
                     notes: notes || '',
+                    squadronId,
+                    militaryId,
                 },
             });
 

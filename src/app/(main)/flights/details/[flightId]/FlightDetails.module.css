@@ -67,28 +67,44 @@
 }
 
 .table th, .table td {
-    border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
 }
 
 .table th {
-    background-color: #272727;
-    color: white;
+    background-color: #1f2a44;
+    color: #ffffff;
     font-weight: bold;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 12px;
+    border: 1px solid #4a5c87;
 }
 
-.table tr{
-    background-color: #616161;
+.table tr {
+    background-color: #2b3a5e;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .table tr:nth-child(even) {
-    background-color: #353535;
+    background-color: #23304f;
 }
 
 .table tr:hover {
-    background-color: #ffffff;
-    color: black;
+    background-color: #3c4977;
+    color: #ffffff;
+}
+
+.table td {
+    border: 1px solid #4a5c87;
+    padding: 12px;
+    text-align: center;
+    color: #d1d9e6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.table tr:hover td {
+    color: #ffffff;
 }
 
 .list{

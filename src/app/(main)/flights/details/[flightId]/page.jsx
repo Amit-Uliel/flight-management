@@ -6,6 +6,7 @@ import styles from './FlightDetails.module.css';
 import RadarLoader from '@/components/ui/loaders/RadarLoader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faX, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+import { motion } from 'framer-motion';
 
 // Translation dictionaries and date formatting function
 const flightStatusTranslation = {
@@ -43,6 +44,17 @@ const formatDateTime = (dateString) => {
     });
     return { formattedDate, formattedTime };
 };
+
+const variants = {
+    hidden: {
+        opacity: 0,
+        y: 20,
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+    }
+}
 
 const FlightDetails = () => {
     const { flightId } = useParams();
@@ -82,12 +94,26 @@ const FlightDetails = () => {
         );
     }
 
-    const { mission } = flightData;
+    const { mission, user } = flightData;
 
     return (
-        <div className={styles.flightDetailsContainer}>
-            <div className={styles.section}>
+        <motion.div 
+            className={styles.flightDetailsContainer}
+            variants={variants}
+            initial='hidden'
+            animate='visible'
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+        >
+            <motion.div 
+                className={styles.section}
+                variants={variants}
+                initial='hidden'
+                animate='visible'
+                transition={{ duration: 0.4, ease: 'easeOut', delay: 0.4 }}
+            >
                 <h2 className={styles.title}>פרטי טיסה {flightData.flightId}</h2>
+                <p><strong>מספר טייסת:</strong> {flightData.squadronId}</p>
+                <p><strong>יוצר טיסה:</strong> {user.name}</p>
                 <div className={styles.dateTimeRow}>
                     <p><strong> תאריך המראה:</strong> {formatDateTime(flightData.takeoffTime).formattedDate}</p>
                     <p><strong>זמן המראה:</strong> {formatDateTime(flightData.takeoffTime).formattedTime}</p>
@@ -120,19 +146,31 @@ const FlightDetails = () => {
                         <FontAwesomeIcon className={styles.editIcon} icon={faPenToSquare} /> ערוך טיסה
                     </button>
                 )}
-            </div>
+            </motion.div>
 
-            {mission && (
-                <div className={styles.section}>
-                    <h2 className={styles.title}>פרטי המשימה</h2>
-                    <p><strong>שם המשימה:</strong> {mission.missionName}</p>
-                    <p><strong>סטטוס משימה:</strong> {missionStatusTranslation[mission.MissionStatus]}</p>
-                    <p><strong>נוצר בתאריך:</strong> {formatDateTime(mission.createdAt).formattedDate} {formatDateTime(mission.createdAt).formattedTime}</p>
-                </div>
-            )}
+           
+            <motion.div 
+                className={styles.section}
+                variants={variants}
+                initial='hidden'
+                animate='visible'
+                transition={{ duration: 0.4, ease: 'easeOut', delay: 0.8 }}
+            >
+                <h2 className={styles.title}>פרטי המשימה</h2>
+                <p><strong>שם המשימה:</strong> {mission.missionName}</p>
+                <p><strong>סטטוס משימה:</strong> {missionStatusTranslation[mission.MissionStatus]}</p>
+                <p><strong>נוצר בתאריך:</strong> {formatDateTime(mission.createdAt).formattedDate} {formatDateTime(mission.createdAt).formattedTime}</p>
+            </motion.div>
+            
 
             {mission?.assignments && mission.assignments.length > 0 && (
-                <div className={styles.tableContainer}>
+                <motion.div 
+                    className={styles.tableContainer}
+                    variants={variants}
+                    initial='hidden'
+                    animate='visible'
+                    transition={{ duration: 0.4, ease: 'easeOut', delay: 1.2 }}
+                >
                     <h2 className={styles.title}>מטוסים שהשתתפו בטיסה</h2>
 
                     {/* Check if the flight is canceled */}
@@ -176,9 +214,9 @@ const FlightDetails = () => {
                             </tbody>
                         </table>
                     )}
-                </div>
+                </motion.div>
             )}
-        </div>
+        </motion.div>
     );
 };
 

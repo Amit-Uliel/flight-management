@@ -2,7 +2,7 @@
     position: relative;
     width: 150px;
     height: 150px;
-    background: transparent;
+    background: rgb(36, 36, 36);
     border-radius: 50%;
     box-shadow: 25px 25px 75px rgba(0,0,0,0.55);
     border: 1px solid #333;

@@ -19,17 +19,13 @@ export default function Links() {
             ]
         },
         {
-            title: "חישוב דלק",
-            path: "/fuel-calculator",
-        },
-        {
             title: "ציוד",
             path: "/equipment",
             dropdown: [
                 { title: "ניהול ציוד", path: "/equipment/equipment-management"},
                 { title: "מלאי ציוד", path: "/equipment/equipment-storage"},
             ]
-        }
+        },
     ];
 
     return (

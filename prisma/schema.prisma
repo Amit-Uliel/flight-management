@@ -33,6 +33,7 @@ model User {
   squadron   Squadron? @relation(fields: [squadronId], references: [squadronId])
   squadronId Int
   rank        Rank
+  flights Flight[]
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 }
@@ -41,6 +42,7 @@ model Squadron {
   squadronId Int        @id
   users      User[]
   aircrafts  Aircraft[]
+  flight Flight[]
 }
 
 model Aircraft {
@@ -86,7 +88,6 @@ model Assignment {
   takeOffTime             DateTime
   scheduledLandingTime    DateTime
   actualLandingTime       DateTime?
-  status                  AssignmentStatus          @default(ONGOING)
   camera                  Camera                   @relation(fields: [cameraType], references: [cameraType])
   cameraType              String
   AssignmentArmamentUsage AssignmentArmamentUsage[]
@@ -116,6 +117,10 @@ model Flight {
   notes                String
   mission              Mission      @relation(fields: [missionId], references: [missionId])
   missionId            Int          
+  squadron Squadron @relation(fields: [squadronId], references: [squadronId])
+  squadronId Int
+  user User @relation(fields: [militaryId], references: [militaryId])
+  militaryId String
   createdAt            DateTime     @default(now())
   updatedAt            DateTime     @updatedAt
 }
@@ -137,12 +142,6 @@ enum FlightStatus {
 enum MissonStatus {
   ONGOING
   ONHOLD
-  COMPLETED
-  CANCELED
-}
-
-enum AssignmentStatus {
-  ONGOING
   COMPLETED
   CANCELED
 }

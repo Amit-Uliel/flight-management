@@ -130,7 +130,7 @@ const FlightTable = () => {
     };
 
     // Function to handle modal selection
-   const handleMissionStatusSelection = async (selectedStatus) => {
+    const handleMissionStatusSelection = async (selectedStatus) => {
         if (currentMissionId) {
             try {
                 // Update the mission status first
