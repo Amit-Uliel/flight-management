@@ -28,8 +28,8 @@ export default function FlightsAssignedCurrentMonthLineChart() {
             <Image
                 src="/calendar.png"
                 alt="calendar icon"
-                width={38}
-                height={38}
+                width={35}
+                height={35}
                 quality={100}
                 className={styles.calendarIcon}
             />

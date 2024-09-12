@@ -50,7 +50,7 @@ model Aircraft {
   squadron                Squadron                  @relation(fields: [squadronId], references: [squadronId])
   squadronId              Int
   assignments             Assignment[]
-  isAvailable             Boolean                   @default(true) // track availability
+  isAvailable             Boolean                   @default(true)
   AssignmentArmamentUsage AssignmentArmamentUsage[]
 }
 

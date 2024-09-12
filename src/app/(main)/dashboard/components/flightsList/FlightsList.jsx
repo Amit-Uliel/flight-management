@@ -41,8 +41,8 @@ export default function FlightsList() {
                 <Image
                     src="/flight-statuses.png"
                     alt="flight statuses icon"
-                    width={38}
-                    height={38}
+                    width={35}
+                    height={35}
                     quality={100}
                     className={styles.flightStatusesIcon}
                 />
