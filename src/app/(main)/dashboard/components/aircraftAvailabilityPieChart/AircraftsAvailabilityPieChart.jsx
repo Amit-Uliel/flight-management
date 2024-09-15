@@ -50,7 +50,7 @@ const AircraftsAvailabilityPieChart = () => {
         <ResponsiveContainer width="100%" height={'100%'}>
           <PieChart>
             <Pie
-              data={aircraftsAvailability || ''}
+              data={aircraftsAvailability.length > 0 ? aircraftsAvailability : []}
               labelLine={false}
               innerRadius={'70%'}
               outerRadius={'90%'}

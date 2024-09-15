@@ -27,20 +27,21 @@ const RANK = {
   RAV_ALUF: 'רב אלוף',
 };
 
+const supabase = createClient();
+
 export default function SquadronUsersList() {
     const { data: users } = useFetch('/api/users/squadron');
     const { data: userCookie } = useFetch('/api/users/cookies');
     const [imagesUrls, setImagesUrls] = useState({});
     const [currentPage, setCurrentPage] = useState(1);
     const usersPerPage = 4;
-    const supabase = createClient();
 
     useEffect(() => {
         const fetchProfileImages = async () => {
             const newImagesUrls = {};
 
             await Promise.all(users?.map(async (user) => {
-                const { data, error } = supabase
+                const { data } = supabase
                 .storage
                 .from('profile-images')
                 .getPublicUrl(`${user.militaryId}/profile.jpeg`);
@@ -121,8 +122,8 @@ export default function SquadronUsersList() {
                             <div className={styles.imageBox}>
                                 {imagesUrls[user.militaryId] && (
                                     <img
-                                        src={imagesUrls[user.militaryId]}
-                                        alt=''
+                                        src={imagesUrls[user.militaryId] || '/no-image.png'}
+                                        alt='profile image'
                                         className={styles.profileImage}
                                     />
                                 )}
@@ -133,7 +134,7 @@ export default function SquadronUsersList() {
                                 <span className={styles.role}>{user.role}</span>
                             </div>
                         </motion.div>
-                    )) : ''}
+                    )) : null}
                 </AnimatePresence>
             </div>
             <div className={styles.pagination}>

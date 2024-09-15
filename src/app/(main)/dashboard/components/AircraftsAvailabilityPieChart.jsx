@@ -79,7 +79,7 @@ const AircraftsAvailabilityPieChart = () => {
               ))}
             </Pie>
             <Legend 
-              verticalAlign="top" align='left' layout='horizontal' wrapperStyle={}
+              verticalAlign="top" align='left' layout='horizontal'
             />
           </PieChart>
         </ResponsiveContainer>
