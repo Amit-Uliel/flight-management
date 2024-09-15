@@ -1,4 +1,4 @@
-import Card from '../Card/Card';
+import Card from '../card/Card';
 import AddArmamentForm from './AddArmamentForm';
 import UpdateArmamentForm from './UpdateArmamentForm';
 import DeleteArmamentForm from './DeleteArmamentForm';

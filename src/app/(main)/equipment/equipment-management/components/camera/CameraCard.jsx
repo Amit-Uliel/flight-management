@@ -1,4 +1,4 @@
-import Card from '../Card/Card';
+import Card from '../card/Card';
 import AddCameraForm from './AddCameraForm';
 import DeleteCameraForm from './DeleteCameraForm';
 import UpdateCameraForm from './UpdateCameraForm';

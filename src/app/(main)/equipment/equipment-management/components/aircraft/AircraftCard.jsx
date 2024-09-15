@@ -1,4 +1,4 @@
-import Card from '../Card/Card';
+import Card from '../card/Card';
 import AddAircraftForm from './AddAircraftForm';
 import UpdateAircraftForm from './UpdateAircraftForm';
 import DeleteAircraftForm from './DeleteAircraftForm';
