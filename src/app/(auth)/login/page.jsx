@@ -62,6 +62,7 @@ export default function Home() {
               height={100}
               quality={100}
               alt="Air Force logo"
+              priority={true}
             />
           </motion.div>
           <motion.div variants={logoVariants}>

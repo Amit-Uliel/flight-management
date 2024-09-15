@@ -1,4 +1,4 @@
-import styles from '../styles/indicator.module.css';
+import styles from './indicator.module.css';
 import { logout } from '../../../../app/(auth)/actions/logout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ export default async function Indicator() {
     return (
         <div className={styles.container}> 
             <span className={styles.userName}>
-                ברוך הבא, {userName}
+                ברוך הבא, <br />{userName}
             </span>
             <div className={styles.roleContainer}>
                 <FontAwesomeIcon icon={faUser} className={styles.icon} />

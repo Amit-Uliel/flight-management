@@ -31,6 +31,9 @@ export async function GET() {
                     { status: 'COMPLETED' },
                     { status: 'CANCELED' }
                 ],
+                updatedAt: {
+                    gte: new Date(new Date().getTime() - 48 * 60 * 60 * 1000), // Flights updated in the last 48 hours
+                },
             },
             include: {
                 mission: true, // Include related mission data

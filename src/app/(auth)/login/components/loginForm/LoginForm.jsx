@@ -26,10 +26,10 @@ export default function LoginForm() {
 
     try {
       setIsLoading(true);
-      await login(formData); // Call login function with formData
+      await login(formData);
     } catch (error) {
       console.error(error);
-      setError('מספר אישי או סיסמא אינם נכונים'); // Set error message on failure
+      setError('מספר אישי או סיסמא אינם נכונים');
     } finally {
       setIsLoading(false);
     }

@@ -59,14 +59,14 @@ export default function EditFlightPage() {
             });
 
             if (response.ok) {
-                alert('Flight updated successfully!');
+                alert('טיסה נערכה בהצלחה!');
                 router.push(`/flights/details/${flightId}`);
             } else {
-                alert('Failed to update flight');
+                alert('בעיה בעריכת טיסה');
             }
         } catch (error) {
             console.error('Failed to update flight:', error);
-            alert('Error updating flight');
+            alert('בעיה בעריכת טיסה');
         } finally {
             setIsLoading(false);
         }

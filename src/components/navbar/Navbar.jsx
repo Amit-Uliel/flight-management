@@ -1,12 +1,15 @@
-// "use client";
-
 import Image from 'next/image';
 import Links from './components/links/Links';
 import styles from './navbar.module.css';
 import Indicator from './components/indicator/Indicator';
+import { getRoleName } from '@/utils/getUserDetails';
 
 // the navigation bar
-export default function Navbar() {
+export default async function Navbar() {
+
+  const role = await getRoleName();
+  const isAdmin = role === 'אדמין';
+
   return (
     <div className={styles.navbar}>
       <Image
@@ -19,7 +22,7 @@ export default function Navbar() {
         priority={true}
       />
       <div className={styles.links}>
-        <Links />
+        <Links isAdmin={isAdmin} />
       </div>
       <div className={styles.indicator}>
         <Indicator />

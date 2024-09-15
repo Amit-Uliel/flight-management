@@ -2,9 +2,14 @@ import styles from './links.module.css';
 import NavLink from "./navLink/NavLink";
 
 // links for the navigation bar
-export default function Links() {
+export default function Links({ isAdmin }) {
 
-    const links = [
+    const links = isAdmin ? [
+        {
+            title: "רישום משתמש",
+            path: "/admin/create-user",
+        },
+    ] : [
         {
             title: "ראשי",
             path: "/dashboard",

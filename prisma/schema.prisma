@@ -31,7 +31,7 @@ model User {
   name String
   role       String
   squadron   Squadron? @relation(fields: [squadronId], references: [squadronId])
-  squadronId Int
+  squadronId Int?
   rank        Rank
   flights Flight[]
   createdAt  DateTime  @default(now())
