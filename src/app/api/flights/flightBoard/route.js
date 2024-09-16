@@ -24,7 +24,7 @@ export async function GET() {
                 OR: [
                     {
                         status: {
-                            in: ['SCHEDULED', 'IN_FLIGHT'],
+                            in: ['SCHEDULED', 'IN_FLIGHT', 'LANDED'],
                         },
                     },
                     {
