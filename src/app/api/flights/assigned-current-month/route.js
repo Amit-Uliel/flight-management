@@ -1,17 +1,26 @@
 import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
+import { getSquadronId } from '@/utils/getUserDetails';
 
 const prisma = new PrismaClient();
 
-export async function GET(req) {
+export async function GET() {
   const now = new Date();
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+  // Fetch the squadronId
+  const squadronId = await getSquadronId();
+
+  if (!squadronId) {
+      return NextResponse.json({ error: 'לא נמצא מספר טייסת עבור המשתמש' }, { status: 400 });
+  }
 
   try {
     // Query for all flights created this month
     const flights = await prisma.flight.findMany({
       where: {
+        squadronId,
         createdAt: {
           gte: startOfMonth,
           lte: endOfMonth,
