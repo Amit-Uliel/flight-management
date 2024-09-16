@@ -124,9 +124,9 @@ export default function UpdateAircraftForm() {
                 disabled={!model}
             >
                 <option value="">בחר מודל</option>
-                <option value="HERMES_450">Hermes 450</option>
-                <option value="HERMES_900">Hermes 900</option>
-                <option value="HERMES_1000">Hermes 1000</option>
+                <option value="HERMES_450">הרמס 450</option>
+                <option value="HERMES_900">הרמס 900</option>
+                <option value="HERMES_1000">הרמס 1000</option>
             </select>
 
             <label className={styles.label} htmlFor="squadron">טייסת</label>
