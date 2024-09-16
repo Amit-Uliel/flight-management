@@ -18,6 +18,7 @@ export default function AircraftSelectionTable({ selectedAircrafts, setSelectedA
     const [showNoAircraftMessage, setShowNoAircraftMessage] = useState(false);
 
     useEffect(() => {
+        console.log(availableAircraft);
         if (availableAircraft.length === 0) {
             const timer = setTimeout(() => {
                 setShowNoAircraftMessage(true);
@@ -73,7 +74,7 @@ export default function AircraftSelectionTable({ selectedAircrafts, setSelectedA
                         </tr>
                     </thead>
                     <tbody>
-                        {availableAircraft.map((aircraft) => (
+                        {(Array.isArray(availableAircraft) ? availableAircraft : []).map((aircraft) => (
                             <tr key={aircraft.tailNumber}>
                                 <td>
                                     <input

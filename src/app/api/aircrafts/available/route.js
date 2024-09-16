@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { cookies } from 'next/headers';
 
-const prismaClient = new PrismaClient();
+const prisma = new PrismaClient();
 
 // get all the aircraft from the current user squadron that are available for a mission
 export async function GET() {
@@ -21,7 +21,7 @@ export async function GET() {
       return NextResponse.json({ error: 'לא נמצא מספר טייסת עבור המשתמש' }, { status: 400 });
     }
 
-    const availableAircraft = await prismaClient.aircraft.findMany({
+    const availableAircraft = await prisma.aircraft.findMany({
       where: { squadronId ,isAvailable: true },
     });
     return NextResponse.json(availableAircraft, { status: 200 });

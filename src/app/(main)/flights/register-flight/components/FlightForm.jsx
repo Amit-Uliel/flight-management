@@ -39,9 +39,17 @@ export default function FlightForm() {
         try {
             const response = await fetch('/api/missions/onhold');
             const data = await response.json();
-            setOnHoldMissions(data);
+
+            // Ensure data is an array before setting it
+            if (Array.isArray(data)) {
+                setOnHoldMissions(data);
+            } else {
+                setOnHoldMissions([]);
+                console.error('Unexpected data format:', data);
+            }
         } catch (error) {
             console.error('Error fetching on-hold missions:', error);
+            setOnHoldMissions([]); // Set as empty array on error
         }
     };
 
