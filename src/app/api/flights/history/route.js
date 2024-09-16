@@ -6,15 +6,14 @@ const prisma = new PrismaClient();
 
 // fetch flights for history board
 export async function GET() {
+    // Fetch the squadronId
     const squadronId = await getSquadronId();
+
+    if (!squadronId) {
+        return NextResponse.json({ error: 'לא נמצא מספר טייסת עבור המשתמש' }, { status: 400 });
+    }
     
     try {
-        // Fetch the squadronId
-
-        if (!squadronId) {
-            return NextResponse.json({ error: 'לא נמצא מספר טייסת עבור המשתמש' }, { status: 400 });
-        }
-
         // Fetch flights with a status of COMPLETED or CANCELED and matching the user squadron
         const flights = await prisma.flight.findMany({
             where: {

@@ -6,15 +6,14 @@ import { getSquadronId } from '@/utils/getUserDetails';
 const prisma = new PrismaClient();
 
 export async function GET() {
+    // Fetch the squadronId
     const squadronId = await getSquadronId();
+
+    if (!squadronId) {
+        return NextResponse.json({ error: 'לא נמצא מספר טייסת עבור המשתמש' }, { status: 400 });
+    }
     
     try {
-        // Fetch the squadronId
-
-        if (!squadronId) {
-            return NextResponse.json({ error: 'לא נמצא מספר טייסת עבור המשתמש' }, { status: 400 });
-        }
-
         // Calculate the date and time from 5 minutes ago
         const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
 

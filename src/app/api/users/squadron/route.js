@@ -4,16 +4,15 @@ import { getSquadronId } from '@/utils/getUserDetails';
 
 const prisma = new PrismaClient();
 
-export async function GET(req) {
+export async function GET() {
+    // Fetch the squadronId
     const squadronId = await getSquadronId();
-    
+
+    if (!squadronId) {
+        return NextResponse.json({ error: 'לא נמצא מספר טייסת עבור המשתמש' }, { status: 400 });
+    }
+
     try {
-        // Fetch the squadronId
-
-        if (!squadronId) {
-            return NextResponse.json({ error: 'לא נמצא מספר טייסת עבור המשתמש' }, { status: 400 });
-        }
-
         // Fetch users from the squadron
         const users = await prisma.user.findMany({
             where: {
