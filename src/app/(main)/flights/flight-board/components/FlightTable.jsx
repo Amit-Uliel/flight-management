@@ -64,6 +64,7 @@ const FlightTable = () => {
     const router = useRouter();
     const [currentPage, setCurrentPage] = useState(1);
     const flightsPerPage = 6;
+    const [squadronId, setSquadronId] = useState(0);
 
     // Calculate the range of flights to display
     const indexOfLastFlight = currentPage * flightsPerPage;
@@ -74,7 +75,6 @@ const FlightTable = () => {
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
-      
 
     useEffect(() => {
         // Fetch initial flights data
@@ -84,7 +84,7 @@ const FlightTable = () => {
                 const data = await response.json();
 
                 if (!response.ok) {
-                throw new Error(data.error || 'Failed to fetch flights');
+                    throw new Error(data.error || 'Failed to fetch flights');
                 }
 
                 setFlightData(data);
@@ -95,7 +95,7 @@ const FlightTable = () => {
 
         fetchFlights();
 
-    }, []);
+    }, [squadronId]);
 
     // Function to handle flight status change
     const handleStatusChange = async (flightId, newStatus, missionId) => {

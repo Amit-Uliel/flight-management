@@ -1,34 +1,17 @@
 import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { getSquadronId } from '@/utils/getUserDetails';
 
 const prisma = new PrismaClient();
 
-// function to get the user's squadronId from cookies
-async function getSquadronIdFromCookies() {
-    const cookieStore = cookies();
-    const userDataCookie = cookieStore.get('userData');
-
-    if (userDataCookie) {
-        try {
-            const userDetails = JSON.parse(userDataCookie.value);
-            return userDetails.squadronId;
-        } catch (error) {
-            console.error('Error parsing user data from cookies:', error);
-            return null;
-        }
-    }
-
-    return null;
-}
-
 export async function GET(req) {
+    const squadronId = await getSquadronId();
+    
     try {
-        // Get the squadronId from cookies
-        const squadronId = await getSquadronIdFromCookies();
+        // Fetch the squadronId
 
         if (!squadronId) {
-            return NextResponse.json({ error: 'Squadron ID not found' }, { status: 400 });
+            return NextResponse.json({ error: 'לא נמצא מספר טייסת עבור המשתמש' }, { status: 400 });
         }
 
         // Fetch users from the squadron

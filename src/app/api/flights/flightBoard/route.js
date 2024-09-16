@@ -1,23 +1,15 @@
+// /app/api/flights/flightBoard/route.js
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
-import { cookies } from 'next/headers';
+import { getSquadronId } from '@/utils/getUserDetails';
 
 const prisma = new PrismaClient();
 
-// method to fetch flights to flight board
 export async function GET() {
+    const squadronId = await getSquadronId();
+    
     try {
-        // get user cookies
-        const cookieStore = cookies();
-        const userData = cookieStore.get('userData');
-
-        if(!userData){
-            return NextResponse.json('אין נתוני משתמש', {status: 401})
-        }
-
-        // get user squadron
-        const user = JSON.parse(userData.value);
-        const squadronId = user?.squadronId;
+        // Fetch the squadronId
 
         if (!squadronId) {
             return NextResponse.json({ error: 'לא נמצא מספר טייסת עבור המשתמש' }, { status: 400 });
