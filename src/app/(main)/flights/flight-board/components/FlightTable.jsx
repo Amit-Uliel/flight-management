@@ -61,40 +61,25 @@ const getStatusClass = (status) => {
 const FlightTable = () => {
     const [flightData, setFlightData] = useState([]);
     const [sortCriteria, setSortCriteria] = useState('');
+    const [sortedFlights, setSortedFlights] = useState([]);
     const [showModal, setShowModal] = useState(false); // Modal visibility state
     const [currentMissionId, setCurrentMissionId] = useState(null);
     const router = useRouter();
     const [currentPage, setCurrentPage] = useState(1);
     const flightsPerPage = 6;
-    const [squadronId, setSquadronId] = useState(0);
 
     // Calculate the range of flights to display
     const indexOfLastFlight = currentPage * flightsPerPage;
     const indexOfFirstFlight = indexOfLastFlight - flightsPerPage;
-    const currentFlights = flightData.slice(indexOfFirstFlight, indexOfLastFlight);
-    const totalPages = Math.ceil(flightData.length / flightsPerPage);
+    const currentFlights = sortedFlights.slice(indexOfFirstFlight, indexOfLastFlight);
+    const totalPages = Math.ceil(sortedFlights.length / flightsPerPage);
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
-    // Sort data based on criteria
+    // Fetch initial flights data
     useEffect(() => {
-        const sortFlights = () => {
-            const sortedData = [...flightData];
-            if (sortCriteria === 'takeoffTime') {
-                sortedData.sort((a, b) => new Date(a.takeoffTime) - new Date(b.takeoffTime));
-            } else if (sortCriteria === 'status') {
-                sortedData.sort((a, b) => a.status.localeCompare(b.status));
-            }
-            setFlightData(sortedData);
-        };
-
-        sortFlights();
-    }, [flightData, sortCriteria]);
-
-    useEffect(() => {
-        // Fetch initial flights data
         const fetchFlights = async () => {
             try {
                 const response = await fetch('/api/flights/flightBoard');
@@ -111,8 +96,20 @@ const FlightTable = () => {
         };
 
         fetchFlights();
+    }, []);
 
-    }, [squadronId]);
+    // Sort flights data whenever `flightData` or `sortCriteria` changes
+    useEffect(() => {
+        let sortedData = [...flightData];
+        if (sortCriteria === 'takeoffTime') {
+            sortedData.sort((a, b) => new Date(a.takeoffTime) - new Date(b.takeoffTime));
+        } else if (sortCriteria === 'scheduledLandingTime') {
+            sortedData.sort((a, b) => new Date(a.scheduledLandingTime) - new Date(b.scheduledLandingTime));
+        } else if (sortCriteria === 'status') {
+            sortedData.sort((a, b) => a.status.localeCompare(b.status));
+        }
+        setSortedFlights(sortedData);
+    }, [flightData, sortCriteria]);
 
     // Function to handle flight status change
     const handleStatusChange = async (flightId, newStatus, missionId) => {
@@ -243,6 +240,7 @@ const FlightTable = () => {
                     <select className={styles.sortBySelect} id="sort" value={sortCriteria} onChange={handleSortChange}>
                         <option value="">-- בחר --</option>
                         <option value="takeoffTime">זמן המראה</option>
+                        <option value="scheduledLandingTime">זמן נחיתה מתוכנן</option>
                         <option value="status">סטטוס</option>
                     </select>
                 </motion.div>
