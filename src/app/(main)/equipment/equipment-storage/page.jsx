@@ -17,7 +17,7 @@ export default function EquipmentStorage() {
     useEffect(() => {
         const fetchAircrafts = async () => {
             try {
-                const response = await fetch('/api/aircrafts');
+                const response = await fetch('/api/aircrafts/squadron');
                 const data = await response.json();
                 setAircraftData(data);
             } catch (error) {

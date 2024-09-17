@@ -13,7 +13,7 @@ export default function OrbitLoadingButton({ className, initialText, isLoading, 
       ) : (
         <>
           <span>{initialText}</span>
-          {icon && <Image src={icon} className={styles.icon} quality={100} width={35} height={35} />}
+          {icon && <Image src={icon} alt='icon' className={styles.icon} quality={100} width={35} height={35} />}
         </>
       )}
     </button>

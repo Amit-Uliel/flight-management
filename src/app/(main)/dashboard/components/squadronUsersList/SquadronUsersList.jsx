@@ -121,10 +121,13 @@ export default function SquadronUsersList() {
                         >
                             <div className={styles.imageBox}>
                                 {imagesUrls[user.militaryId] && (
-                                    <img
+                                    <Image
                                         src={imagesUrls[user.militaryId] || '/no-image.png'}
                                         alt='profile image'
                                         className={styles.profileImage}
+                                        width={100}
+                                        height={100}
+                                        quality={100}
                                     />
                                 )}
                             </div>

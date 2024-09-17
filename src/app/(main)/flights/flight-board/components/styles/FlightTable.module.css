@@ -16,6 +16,34 @@
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
+.sortContainer{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.sortByLabel{
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+}
+
+.sortByIcon{
+}
+
+.sortBySelect{
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    font-size: 1.1rem;
+    outline: none;
+    color: white;
+    background-color: transparent;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 1);
+    text-align: center;
+    padding: 0 4px;
+}
+
 .tableWrapper{
     height: 350px;
 }

@@ -5,6 +5,7 @@ import styles from './styles/FlightTable.module.css';
 import { useRouter } from 'next/navigation';
 import MissionStatusModal from './MissionStatusModal';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 const statusTranslations = {
     SCHEDULED: "מתוכננת",
@@ -59,8 +60,9 @@ const getStatusClass = (status) => {
 
 const FlightTable = () => {
     const [flightData, setFlightData] = useState([]);
+    const [sortCriteria, setSortCriteria] = useState('');
     const [showModal, setShowModal] = useState(false); // Modal visibility state
-    const [currentMissionId, setCurrentMissionId] = useState(null); // Store the current mission ID
+    const [currentMissionId, setCurrentMissionId] = useState(null);
     const router = useRouter();
     const [currentPage, setCurrentPage] = useState(1);
     const flightsPerPage = 6;
@@ -75,6 +77,21 @@ const FlightTable = () => {
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
+
+    // Sort data based on criteria
+    useEffect(() => {
+        const sortFlights = () => {
+            const sortedData = [...flightData];
+            if (sortCriteria === 'takeoffTime') {
+                sortedData.sort((a, b) => new Date(a.takeoffTime) - new Date(b.takeoffTime));
+            } else if (sortCriteria === 'status') {
+                sortedData.sort((a, b) => a.status.localeCompare(b.status));
+            }
+            setFlightData(sortedData);
+        };
+
+        sortFlights();
+    }, [flightData, sortCriteria]);
 
     useEffect(() => {
         // Fetch initial flights data
@@ -180,6 +197,10 @@ const FlightTable = () => {
         }
     };
 
+    const handleSortChange = (e) => {
+        setSortCriteria(e.target.value);
+    };
+
     const handleFlightClick = (flightId) => {
         router.push(`/flights/details/${flightId}`);
     };
@@ -201,6 +222,30 @@ const FlightTable = () => {
                 >
                     לוח טיסות
                 </motion.h2>
+                <motion.div 
+                    className={styles.sortContainer}
+                    variants={variants}
+                    initial='hidden'
+                    animate='visible'
+                    transition={{ duration: 0.4, ease: "easeInOut", delay: 0.8 }}
+                >
+                    <label className={styles.sortByLabel} htmlFor="sort">
+                        <Image
+                            src="/sort.png"
+                            alt="sortBy icon"
+                            width={22}
+                            height={22}
+                            quality={100}
+                            className={styles.sortByIcon}
+                        />
+                        <span>מיין לפי:</span>
+                    </label>
+                    <select className={styles.sortBySelect} id="sort" value={sortCriteria} onChange={handleSortChange}>
+                        <option value="">-- בחר --</option>
+                        <option value="takeoffTime">זמן המראה</option>
+                        <option value="status">סטטוס</option>
+                    </select>
+                </motion.div>
                 <motion.div className={styles.tableWrapper}
                     variants={variants}
                     initial='hidden'

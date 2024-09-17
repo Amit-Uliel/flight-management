@@ -41,6 +41,51 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.sortContainer{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.sortByLabel{
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+}
+
+.sortByIcon{
+}
+
+.sortBySelect{
+    padding: 0 0;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    font-size: 1.1rem;
+    outline: none;
+    color: white;
+    background-color: transparent;
+    text-align: center;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 1);
+}
+
+.sortOrderButton{
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 1);
+    padding: 1px 4px;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    margin-right: 15px;
+    background-color: #527fba4a;
+    border: 1px solid #167bff;
+    cursor: pointer;
+    transition: .3s ease-out;
+}
+
+.sortOrderButton:hover{
+    box-shadow: 0 5px 4px 0 rgba(0, 0, 0, .6);
+}
+
 .tableContainer {
     margin-bottom: 20px;
     width: 60%;
