@@ -9,6 +9,14 @@ export default function Links({ isAdmin }) {
             title: "רישום משתמש",
             path: "/admin/create-user",
         },
+        {
+            title: "עדכון משתמש",
+            path: "/admin/update-user",
+        },
+        {
+            title: "מחיקת משתמש",
+            path: "/admin/delete-user",
+        },
     ] : [
         {
             title: "ראשי",

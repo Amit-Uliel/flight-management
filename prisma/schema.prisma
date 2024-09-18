@@ -28,6 +28,7 @@ datasource db {
 
 model User {
   militaryId String    @id @unique
+  uuid String @unique
   name String
   role       String
   squadron   Squadron? @relation(fields: [squadronId], references: [squadronId])

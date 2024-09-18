@@ -8,15 +8,16 @@ CREATE TYPE "FlightStatus" AS ENUM ('SCHEDULED', 'IN_FLIGHT', 'LANDED', 'COMPLET
 CREATE TYPE "MissonStatus" AS ENUM ('ONGOING', 'ONHOLD', 'COMPLETED', 'CANCELED');
 
 -- CreateEnum
-CREATE TYPE "AssignmentStatus" AS ENUM ('ONGOING', 'COMPLETED', 'CANCELED');
+CREATE TYPE "Rank" AS ENUM ('TORAI', 'RAV_TORAI', 'SAMAL', 'SAMAL_RISHON', 'RAV_SAMAL', 'RAV_SAMAL_MITKADAM', 'RAV_SAMAL_BAKHIR', 'RAV_NAGAD_MISNE', 'RAV_NAGAD', 'SAGAN', 'SEREN', 'RAV_SEREN', 'SAGAN_ALUF', 'ALUF_MISHNE', 'TAT_ALUF', 'ALUF', 'RAV_ALUF');
 
 -- CreateTable
 CREATE TABLE "User" (
     "militaryId" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
+    "uuid" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "role" TEXT NOT NULL,
-    "squadronId" INTEGER NOT NULL,
+    "squadronId" INTEGER,
+    "rank" "Rank" NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -77,7 +78,6 @@ CREATE TABLE "Assignment" (
     "takeOffTime" TIMESTAMP(3) NOT NULL,
     "scheduledLandingTime" TIMESTAMP(3) NOT NULL,
     "actualLandingTime" TIMESTAMP(3),
-    "status" "AssignmentStatus" NOT NULL DEFAULT 'ONGOING',
     "cameraType" TEXT NOT NULL,
 
     CONSTRAINT "Assignment_pkey" PRIMARY KEY ("assignmentId")
@@ -103,6 +103,8 @@ CREATE TABLE "Flight" (
     "status" "FlightStatus" NOT NULL DEFAULT 'SCHEDULED',
     "notes" TEXT NOT NULL,
     "missionId" INTEGER NOT NULL,
+    "squadronId" INTEGER NOT NULL,
+    "militaryId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -113,16 +115,16 @@ CREATE TABLE "Flight" (
 CREATE UNIQUE INDEX "User_militaryId_key" ON "User"("militaryId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_uuid_key" ON "User"("uuid");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Assignment_tailNumber_missionId_key" ON "Assignment"("tailNumber", "missionId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "AssignmentArmamentUsage_assignmentId_tailNumber_armamentTyp_key" ON "AssignmentArmamentUsage"("assignmentId", "tailNumber", "armamentType");
 
--- CreateIndex
-CREATE UNIQUE INDEX "Flight_missionId_key" ON "Flight"("missionId");
-
 -- AddForeignKey
-ALTER TABLE "User" ADD CONSTRAINT "User_squadronId_fkey" FOREIGN KEY ("squadronId") REFERENCES "Squadron"("squadronId") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "User" ADD CONSTRAINT "User_squadronId_fkey" FOREIGN KEY ("squadronId") REFERENCES "Squadron"("squadronId") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Aircraft" ADD CONSTRAINT "Aircraft_squadronId_fkey" FOREIGN KEY ("squadronId") REFERENCES "Squadron"("squadronId") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -147,3 +149,9 @@ ALTER TABLE "AssignmentArmamentUsage" ADD CONSTRAINT "AssignmentArmamentUsage_ar
 
 -- AddForeignKey
 ALTER TABLE "Flight" ADD CONSTRAINT "Flight_missionId_fkey" FOREIGN KEY ("missionId") REFERENCES "Mission"("missionId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Flight" ADD CONSTRAINT "Flight_squadronId_fkey" FOREIGN KEY ("squadronId") REFERENCES "Squadron"("squadronId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Flight" ADD CONSTRAINT "Flight_militaryId_fkey" FOREIGN KEY ("militaryId") REFERENCES "User"("militaryId") ON DELETE RESTRICT ON UPDATE CASCADE;

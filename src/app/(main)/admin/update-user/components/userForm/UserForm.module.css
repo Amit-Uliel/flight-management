@@ -1,0 +1,129 @@
+.userFormBox {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    direction: rtl;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.getUserBox {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.getUserBox label {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.inputBox {
+    position: relative;
+    display: flex;
+}
+
+.inputGetUser {
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 10px 12px;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%) scale(0.3);
+    transform-origin: center;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    color: #333;
+}
+
+.formContainer label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 10px;
+    color: #333;
+}
+
+.formContainer input,
+.formContainer select {
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.formContainer input:focus,
+.formContainer select:focus {
+    border-color: #007bff;
+}
+
+.errorMessage {
+    padding: 15px;
+    background-color: #ffe6e6;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+}
+
+.submitButton {
+    width: 100%;
+    margin-top: 15px;
+    background-color: var(--bg);
+    color: white;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    background-color: #41526f;
+}
+
+.snackbarBox{
+    position: fixed;
+    right: 200px;
+    bottom: 10px;
+    display: inline-block;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
