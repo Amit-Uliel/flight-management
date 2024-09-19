@@ -49,8 +49,8 @@ export default function UserForm() {
     const [debouncedId, setDebouncedId] = useState(militaryId);
     const [snackbar, setSnackbar] = useState({ message: '', type: '' });
     const [formData, setFormData] = useState({ name: '', role: '', password: '', rank: '', squadronId: '', });
+    const [submitLoading, setSubmitLoading] = useState(false);
     const { data, isLoading, error, status } = useFetch(debouncedId ? `/api/users/${debouncedId}` : null);
-    const { patch, isLoading: isPatching, error: patchError, success } = usePatch();
 
     // Debounce the militaryId input
     useEffect(() => {
@@ -107,32 +107,38 @@ export default function UserForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setSubmitLoading(true);
+
         // Client-side validation for empty fields except password
         if (!formData.name || !formData.role || !formData.rank || !formData.squadronId) {
             setSnackbar({ message: 'יש למלא את כל השדות הנדרשים', type: 'error' });
+            setSubmitLoading(false);
             return;
         }
 
         // Client-side validation
         if (formData.password && formData.password.length < 6) {
             setSnackbar({ message: 'הסיסמה חייבת להכיל לפחות 6 תווים', type: 'error' });
+            setSubmitLoading(false);
             return;
         }
         
-        const data = {
-            name: formData.name,
-            role: formData.role,
-            rank: formData.rank,
-            squadronId: formData.squadronId,
-            password: formData.password,
-        }
-
         try {
+            const data = {
+                name: formData.name,
+                role: formData.role,
+                rank: formData.rank,
+                squadronId: formData.squadronId,
+                password: formData.password,
+            }
+
             await updateUser(militaryId, data);
             setSnackbar({ message: 'המשתמש עודכן בהצלחה', type: 'success' });
         } catch (error) {
             console.error(error);
             setSnackbar({ message: 'בעיה בעדכון משתמש', type: 'error' });
+        } finally {
+            setSubmitLoading(false);
         }
     } 
 
@@ -228,7 +234,7 @@ export default function UserForm() {
                             <OrbitLoadingButton 
                                 initialText={'עדכון פרטי משתמש'}
                                 loadingText={'מעדכן משתמש'}
-                                isLoading={isPatching}
+                                isLoading={submitLoading}
                                 className={styles.submitButton}
                             />
                         </form>

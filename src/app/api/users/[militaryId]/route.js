@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+
+// get user by military id
 export async function GET(req, { params }){
     const { militaryId } = params;
     
@@ -27,35 +29,4 @@ export async function GET(req, { params }){
     } catch {
         return NextResponse.json({error: 'לא הצליח לייבא משתמש'}, {status: 500});
     }
-}
-
-// update user fields
-export async function PATCH(req, { params }) {
-    const { militaryId } = params;
-
-    try {
-        const data = await req.json();
-
-         // Update other user fields with Prisma
-         const updatedUser = await prisma.user.update({
-            where: {
-                militaryId,
-            },
-            data: {
-                name: data.name,
-                role: data.role,
-                rank: data.rank,
-                squadronId: data.squadronId,
-            },
-        });
-
-        return NextResponse.json(updatedUser, { status: 200 });
-    } catch (error) {
-        console.error('Error updating user:', error);
-        return NextResponse.json({ error: 'עדכון משתמש נכשל' }, { status: 500 });
-    }
-}
-
-// delete user details
-export async function DELETE(){
 }

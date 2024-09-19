@@ -67,14 +67,35 @@ export default function UserRegistrationForm() {
         e.preventDefault();
         setErrorMessage('');
         setSuccessMessage('');
-
+    
+        // Client-side validation
+        if (!formData.militaryId || !formData.password || !formData.name || !formData.role || !formData.rank || !formData.profileImage) {
+            setErrorMessage('אנא מלא את כל השדות הנדרשים.');
+            return;
+        }
+    
+        if (formData.password.length < 6) {
+            setErrorMessage('הסיסמה חייבת להכיל לפחות 6 תווים.');
+            return;
+        }
+    
+        if (formData.role !== 'אדמין' && formData.squadronId === '') {
+            setErrorMessage('יש לבחור מספר טייסת עבור משתמש שאינו אדמין.');
+            return;
+        }
+    
+        if (formData.role === 'אדמין' && formData.squadronId !== '') {
+            setErrorMessage('אדמין אינו משויך לטייסת.');
+            return;
+        }
+    
         try {
             setIsLoading(true);
             const formDataToSend = new FormData();
             Object.keys(formData).forEach(key => {
                 formDataToSend.append(key, formData[key]);
             });
-
+    
             await signup(formDataToSend);
             setSuccessMessage('משתמש נוצר בהצלחה');
         } catch (error) {
@@ -98,8 +119,7 @@ export default function UserRegistrationForm() {
                         id="militaryId" 
                         name="militaryId" 
                         value={formData.militaryId} 
-                        onChange={handleChange} 
-                        required 
+                        onChange={handleChange}  
                         className={styles.input}
                     />
                 </div>
@@ -111,7 +131,6 @@ export default function UserRegistrationForm() {
                         name="password" 
                         value={formData.password} 
                         onChange={handleChange} 
-                        required 
                         className={styles.input}
                     />
                 </div>
@@ -123,7 +142,6 @@ export default function UserRegistrationForm() {
                         name="name" 
                         value={formData.name} 
                         onChange={handleChange} 
-                        required 
                         className={styles.input}
                     />
                 </div>
@@ -133,8 +151,7 @@ export default function UserRegistrationForm() {
                         id="role" 
                         name="role" 
                         value={formData.role} 
-                        onChange={handleChange} 
-                        required 
+                        onChange={handleChange}
                         className={styles.select}
                     >
                         <option value="">-- בחר תפקיד --</option>
@@ -151,8 +168,7 @@ export default function UserRegistrationForm() {
                         id="squadronId" 
                         name="squadronId"
                         value={formData.squadronId} 
-                        onChange={handleChange} 
-                        required 
+                        onChange={handleChange}
                         className={styles.select}
                     >
                         <option value=""> בחר טייסת (אדמין לא בוחר טייסת)</option>
@@ -172,8 +188,7 @@ export default function UserRegistrationForm() {
                         id="rank" 
                         name="rank" 
                         value={formData.rank} 
-                        onChange={handleChange} 
-                        required 
+                        onChange={handleChange}
                         className={styles.select}
                     >
                         <option value="">-- בחר דרגה --</option>
@@ -192,7 +207,6 @@ export default function UserRegistrationForm() {
                         name="profileImage" 
                         accept="image/*"
                         onChange={handleChange}
-                        required
                         className={styles.fileInput}
                     />
                 </div>
