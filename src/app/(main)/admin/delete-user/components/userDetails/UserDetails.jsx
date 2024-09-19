@@ -39,23 +39,13 @@ const UserDetails = () => {
     const [profileImageUrl, setProfileImageUrl] = useState(null);
     const [snackbar, setSnackbar] = useState({ message: '', type: '' });
     const [isDeleting, setIsDeleting] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false);
     const { data, error, isLoading } = useFetch(debouncedId ? `/api/users/${debouncedId}` : null);
-    
-    // Track if details are currently transitioning
-    const [isTransitioning, setIsTransitioning] = useState(false);
 
     // Debounce the militaryId input
     useEffect(() => {
         const handler = setTimeout(() => {
-            // If militaryId is different, trigger exit animation
-            if (debouncedId !== militaryId) {
-                setIsTransitioning(true); // Start exit animation
-                setDebouncedId(''); // Clear current data to trigger exit animation
-                setTimeout(() => {
-                    setDebouncedId(militaryId); // Set new ID after exit animation completes
-                    setIsTransitioning(false); // Reset transition state
-                }, 500);
-            }
+            setDebouncedId(militaryId);
         }, 500);
 
         return () => {
@@ -65,8 +55,8 @@ const UserDetails = () => {
 
     // Fetch the profile image from Supabase Storage
     useEffect(() => {
-        if (debouncedId) {
-            const fetchProfileImage = async () => {
+        const fetchProfileImage = async () => {
+            if (debouncedId) {
                 const { data: image } = supabase
                     .storage
                     .from('profile-images')
@@ -88,11 +78,11 @@ const UserDetails = () => {
                 } else {
                     setProfileImageUrl('/no-image.png');
                 }
-            };
+            }
+        };
 
-            fetchProfileImage();
-        }
-    }, [debouncedId]);
+        fetchProfileImage();
+    }, [debouncedId]); // Include debouncedId in the dependency array
 
     const handleDelete = async () => {
         // Show a confirmation dialog in Hebrew
@@ -103,7 +93,13 @@ const UserDetails = () => {
         try {
             await deleteUser(militaryId);
             setSnackbar({ message: 'המשתמש נמחק בהצלחה', type: 'success' });
-            setIsTransitioning(true); // Trigger exit animation
+            setIsDeleted(true); // Trigger the exit animation for user details
+            setMilitaryId('');
+
+            // Reset isDeleted after a delay (e.g., after animation completes)
+            setTimeout(() => {
+                setIsDeleted(false);
+            }, 500); // Match this duration with your exit animation duration
         } catch (error) {
             console.error('Error deleting user:', error);
             setSnackbar({ message: error.message || 'שגיאה במחיקת המשתמש', type: 'error' });
@@ -145,12 +141,12 @@ const UserDetails = () => {
                 <div className={styles.errorMessage}>לא נמצא פרטי משתמש</div>
             )}
             <AnimatePresence mode="wait">
-                {!isTransitioning && data && (
+                {data && !isDeleted && ( // Check if not deleted
                     <motion.div
-                        key={data.id}
+                        key={debouncedId}  // Use debouncedId as the key
                         initial={{ x: '100%', opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: '-100%', opacity: 0 }}
+                        exit={{ x: '-100%', opacity: 0 }} // Slide left on exit
                         transition={{ duration: 0.5 }}
                     >
                         <div className={styles.details}>
