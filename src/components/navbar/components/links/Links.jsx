@@ -6,16 +6,25 @@ export default function Links({ isAdmin }) {
 
     const links = isAdmin ? [
         {
-            title: "רישום משתמש",
-            path: "/admin/create-user",
+            title: "ראשי",
+            path: "/admin",
         },
         {
-            title: "עדכון משתמש",
-            path: "/admin/update-user",
+            title: "פעולות משתמש",
+            path: "/admin/user-actions",
+            dropdown: [
+                { title: "רישום משתמש", path: "/admin/create-user" },
+                { title: "עדכון משתמש", path: "/admin/update-user" },
+                { title: "מחיקת משתמש", path: "/admin/delete-user" },
+            ],
         },
         {
-            title: "מחיקת משתמש",
-            path: "/admin/delete-user",
+            title: "פעולות טייסת",
+            path: "/admin/squadron-actions",
+            dropdown: [
+                { title: "יצירת טייסת", path: "/admin/create-squadron" },
+                { title: "מחיקת טייסת", path: "/admin/delete-squadron" },
+            ],
         },
     ] : [
         {

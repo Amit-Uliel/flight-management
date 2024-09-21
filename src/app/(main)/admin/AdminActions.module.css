@@ -1,0 +1,47 @@
+
+.AdminActionsBox{
+    --box-width: 400px;
+    --box-gap: 30px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, var(--box-width));
+    grid-auto-rows: minmax(180px, auto);
+    gap: var(--box-gap);
+    padding: 100px;
+    direction: rtl;
+}
+
+.box{
+    border-radius: 15px;
+    border: 1px solid #aeb1b6;
+    box-shadow: 0 0 7px 0 #aeb1b6;
+    overflow: hidden;
+}
+
+.squadronBox{
+    grid-column: span 3;
+    display: flex;
+    justify-content: center;
+    gap: var(--box-gap);
+}
+
+.box4,
+.box5{
+    width: var(--box-width);
+}
+
+.link{
+    background-color: #2b3a55;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    height: 100%;
+    width: 100%;
+}
+
+.icon{
+    transform: translateY(-10px);
+}

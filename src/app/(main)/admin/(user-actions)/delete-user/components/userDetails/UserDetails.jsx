@@ -122,20 +122,22 @@ const UserDetails = () => {
     return (
         <div className={styles.userDetailsContainer}>
             <h1 className={styles.title}>מחיקת משתמש</h1>
-            <label htmlFor="getUser" className={styles.getUserLabel}>הזן מספר אישי של המשתמש</label>
-            <div className={styles.inputBox}>
-                <input 
-                    type="text" 
-                    id='getUser'
-                    value={militaryId} 
-                    onChange={(e) => setMilitaryId(e.target.value)}
-                    className={styles.inputGetUser}
-                />
-                {isLoading && (
-                    <div className={styles.loader}>
-                        <SearchLoader />
-                    </div>
-                )}
+            <div className={styles.getUserBox}>
+                <label htmlFor="getUser" className={styles.getUserLabel}>הזן מספר אישי של המשתמש:</label>
+                <div className={styles.inputBox}>
+                    <input 
+                        type="text" 
+                        id='getUser'
+                        value={militaryId} 
+                        onChange={(e) => setMilitaryId(e.target.value)}
+                        className={styles.inputGetUser}
+                    />
+                    {isLoading && (
+                        <div className={styles.loader}>
+                            <SearchLoader />
+                        </div>
+                    )}
+                </div>
             </div>
             {error && !data && (
                 <div className={styles.errorMessage}>לא נמצא פרטי משתמש</div>

@@ -47,7 +47,7 @@ export async function login(formData) {
     // Revalidate and redirect
     revalidatePath('/', 'layout');
     if (isAdmin){
-        redirect('/admin/create-user');
+        redirect('/admin');
     } else {
         redirect('/dashboard');
     }

@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styles from './UserForm.module.css';
 import useFetch from '@/hooks/useFetch';
 import SearchLoader from '@/components/ui/loaders/search/SearchLoader';
-import usePatch from '@/hooks/usePatch';
 import { updateUser } from '@/app/actions/UpdateUser';
 import Snackbar from '@/components/ui/snackbar/Snackbar';
 import OrbitLoadingButton from '@/components/ui/buttons/orbitLoadingButton/OrbitLoadingButton';
