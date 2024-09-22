@@ -53,7 +53,7 @@ export default function Admin() {
             variants={boxVariants}
             whileHover="hover"
         >
-            <Link href={'/admin/create-user'}
+            <Link href={'/admin/user-actions/create-user'}
                 className={styles.link}
             >
                 <Image
@@ -71,7 +71,7 @@ export default function Admin() {
             variants={boxVariants}
             whileHover="hover"
         >
-            <Link href={'/admin/update-user'}
+            <Link href={'/admin/user-actions/update-user'}
                 className={styles.link}
             >
                 <Image
@@ -89,7 +89,7 @@ export default function Admin() {
             variants={boxVariants}
             whileHover="hover"
         >
-            <Link href={'/admin/delete-user'}
+            <Link href={'/admin/user-actions/delete-user'}
                 className={styles.link}
             >
                 <Image
@@ -108,7 +108,7 @@ export default function Admin() {
                 variants={boxVariants}
                 whileHover="hover"
             >
-                <Link href={'/admin/create-squadron'}
+                <Link href={'/admin/squadron-actions/create-squadron'}
                     className={styles.link}
                 >
                     <Image
@@ -126,7 +126,7 @@ export default function Admin() {
                 variants={boxVariants}
                 whileHover="hover"
             >
-                <Link href={'/admin/delete-squadron'}
+                <Link href={'/admin/squadron-actions/delete-squadron'}
                     className={styles.link}
                 >
                     <Image

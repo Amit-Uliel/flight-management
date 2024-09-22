@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from './navLink.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function NavLink({ item }) {
     const pathName = usePathname();

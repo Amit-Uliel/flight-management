@@ -13,17 +13,17 @@ export default function Links({ isAdmin }) {
             title: "פעולות משתמש",
             path: "/admin/user-actions",
             dropdown: [
-                { title: "רישום משתמש", path: "/admin/create-user" },
-                { title: "עדכון משתמש", path: "/admin/update-user" },
-                { title: "מחיקת משתמש", path: "/admin/delete-user" },
+                { title: "רישום משתמש", path: "/admin/user-actions/create-user" },
+                { title: "עדכון משתמש", path: "/admin/user-actions/update-user" },
+                { title: "מחיקת משתמש", path: "/admin/user-actions/delete-user" },
             ],
         },
         {
             title: "פעולות טייסת",
             path: "/admin/squadron-actions",
             dropdown: [
-                { title: "יצירת טייסת", path: "/admin/create-squadron" },
-                { title: "מחיקת טייסת", path: "/admin/delete-squadron" },
+                { title: "יצירת טייסת", path: "/admin/squadron-actions/create-squadron" },
+                { title: "מחיקת טייסת", path: "/admin/squadron-actions/delete-squadron" },
             ],
         },
     ] : [

@@ -1,0 +1,12 @@
+.createSquadronContainer{
+    position: relative;
+    height: 100%;
+}
+
+.snackbarBox {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    z-index: 1000;
+    width: auto;
+}
