@@ -22,8 +22,7 @@ export default function NavLink({ item }) {
             ) : (
                 <Link 
                     href={item.path}
-                    className={`${styles.link} 
-                        ${pathName === (item.path) && styles.active}`}
+                    className={`${styles.link} ${pathName === (item.path) && styles.active}`}
                 >
                     {item.title}
                 </Link>
