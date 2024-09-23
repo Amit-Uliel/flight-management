@@ -1,13 +1,67 @@
-.deleteSquadronContainer{
-    position: relative;
+.deleteSquadronContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    direction: rtl;
+    gap: 20px;
+    padding: 20px;
     height: 100%;
+}
+
+.titleBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.title{
+    font-size: 1.5rem;
+}
+
+.deleteSquadronForm{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputGroup{
+    display: flex;
+    flex-direction: column;
+}
+
+.squadronLabel{
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+}
+
+.squadronInput{
+    outline: none;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    border: none;
+}
+
+.submitButton{
+    background-color: #2b374e;
+    color: white;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    padding: 3px;
+    border: 1px solid white;
+    transition: .3s ease-out;
+    overflow: hidden;
+}
+
+.submitButton:hover {
+    transform: scale(1.05);
 }
 
 .snackbarBox {
     position: fixed;
     left: 50%;
     bottom: 20px;
-    transform: translateX(-50%); 
     z-index: 1000;
     width: auto;
 }

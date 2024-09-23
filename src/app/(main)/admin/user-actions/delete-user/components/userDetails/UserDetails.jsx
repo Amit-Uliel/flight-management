@@ -121,7 +121,16 @@ const UserDetails = () => {
 
     return (
         <div className={styles.userDetailsContainer}>
-            <h1 className={styles.title}>מחיקת משתמש</h1>
+            <div className={styles.titleBox}>
+                <Image
+                    src='/recycle-bin.png'
+                    width={30}
+                    height={30}
+                    quality={100}
+                    alt="delete user"
+                />
+                <h1 className={styles.title}>מחיקת משתמש</h1>
+            </div>
             <div className={styles.getUserBox}>
                 <label htmlFor="getUser" className={styles.getUserLabel}>הזן מספר אישי של המשתמש:</label>
                 <div className={styles.inputBox}>

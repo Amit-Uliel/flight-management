@@ -6,6 +6,7 @@ import styles from './DeleteSquadron.module.css';
 import OrbitLoadingButton from "@/components/ui/buttons/orbitLoadingButton/OrbitLoadingButton";
 import Snackbar from "@/components/ui/snackbar/Snackbar";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const snackbarVariants = {
   hidden: {
@@ -61,13 +62,26 @@ export default function DeleteSquadron() {
 
   return (
     <div className={styles.deleteSquadronContainer}>
-      <form onSubmit={handleDeleteSquadron}>
-        <label htmlFor="squadronId">מספר טייסת</label>
-        <input type="text" id="squadronId" name="squadronId" />
+      <div className={styles.titleBox}>
+        <Image
+          src='/torn-paper.png'
+          width={30}
+          height={30}
+          quality={100}
+          alt="torn paper" 
+        />
+        <h1 className={styles.title}>מחיקת טייסת</h1>
+      </div>
+      <form className={styles.deleteSquadronForm} onSubmit={handleDeleteSquadron}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="squadronId" className={styles.squadronLabel}>מספר טייסת</label>
+          <input type="text" className={styles.squadronInput} id="squadronId" name="squadronId" />
+        </div>
         <OrbitLoadingButton 
           initialText={'מחק טייסת'}
           loadingText={'מוחק טייסת'}
           isLoading={isLoading}
+          className={styles.submitButton}
         />
       </form>
       <AnimatePresence>

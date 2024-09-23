@@ -4,15 +4,19 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    background-color: #f9f9f9;
     direction: rtl;
 }
 
-.formTitle {
-    text-align: center;
+.titleBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 20px;
+}
+
+.formTitle {
     font-size: 1.5rem;
-    color: #333;
 }
 
 .form {
@@ -29,7 +33,6 @@
 .label {
     margin-bottom: 5px;
     font-weight: bold;
-    color: #333;
 }
 
 .input,
@@ -38,6 +41,12 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    outline: none;
+}
+
+.input:focus,
+.select:focus{
+    border: 1px solid rgb(0, 183, 255);
 }
 
 .submitButtonBox{
@@ -47,20 +56,20 @@
 .submitButton {
     width: 100%;
     padding: 10px;
-    background-color: var(--bg);
+    background-color: rgb(31, 127, 48);
+    border: 1px solid green;
     color: white;
-    border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
 }
 
 .submitButton:hover {
-    opacity: 0.9;
+    background-color: rgb(31, 127, 48, 0.5);
 }
 
 .fileInput{
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .errorMessage {

@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { createSquadron } from "@/app/actions/squadrons/createSquadron";
 import Snackbar from "@/components/ui/snackbar/Snackbar";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const snackbarVariants = {
     hidden: {
@@ -61,13 +62,26 @@ export default function CreateSquadron() {
 
     return (
         <div className={styles.createSquadronContainer}>
-            <form onSubmit={handleCreateSquadron}>
-                <label htmlFor="squadronId">מספר טייסת</label>
-                <input type="text" id="squadronId" name="squadronId" />
+            <div className={styles.titleBox}>
+                <Image
+                    src='/add-record.png'
+                    width={30}
+                    height={30}
+                    quality={100}
+                    alt="add record" 
+                />
+                <h1 className={styles.title}>יצירת טייסת</h1>
+            </div>
+            <form className={styles.createSquadronForm} onSubmit={handleCreateSquadron}>
+                <div className={styles.inputGroup}>
+                    <label htmlFor="squadronId" className={styles.squadronLabel}>מספר טייסת</label>
+                    <input type="text" className={styles.squadronInput} id="squadronId" name="squadronId" />
+                </div>
                 <OrbitLoadingButton 
                     initialText={'צור טייסת'}
                     loadingText={'יוצר טייסת'}
                     isLoading={isLoading}
+                    className={styles.submitButton}
                 />
             </form>
             <AnimatePresence>

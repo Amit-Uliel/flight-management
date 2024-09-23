@@ -5,6 +5,7 @@ import styles from './UserRegistrationForm.module.css';
 import useFetch from '@/hooks/useFetch';
 import { signup } from '@/app/(auth)/actions/login';
 import OrbitLoadingButton from '@/components/ui/buttons/orbitLoadingButton/OrbitLoadingButton';
+import Image from 'next/image';
 
 const rankOptions = [
     { value: 'TORAI', label: 'טוראי' },
@@ -108,7 +109,16 @@ export default function UserRegistrationForm() {
 
     return (
         <div className={styles.formContainer}>
-            <h2 className={styles.formTitle}>יצירת משתמש חדש</h2>
+            <div className={styles.titleBox}>
+                <Image
+                    src='/create-user.png'
+                    width={30}
+                    height={30}
+                    quality={100}
+                    alt="create user"
+                />
+                <h1 className={styles.formTitle}>יצירת משתמש חדש</h1>
+            </div>
             {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
             {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
             <form className={styles.form} onSubmit={handleSubmit}>

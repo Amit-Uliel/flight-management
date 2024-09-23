@@ -8,6 +8,7 @@ import SearchLoader from '@/components/ui/loaders/search/SearchLoader';
 import { updateUser } from '@/app/actions/UpdateUser';
 import Snackbar from '@/components/ui/snackbar/Snackbar';
 import OrbitLoadingButton from '@/components/ui/buttons/orbitLoadingButton/OrbitLoadingButton';
+import Image from 'next/image';
 
 const RANK = {
     TORAI: 'טוראי',
@@ -154,6 +155,16 @@ export default function UserForm() {
 
     return (
         <div className={styles.userFormBox}>
+            <div className={styles.titleBox}>
+                <Image
+                    src='/update-user.png'
+                    width={30}
+                    height={30}
+                    quality={100}
+                    alt="update user"
+                />
+                <h1 className={styles.title}>עדכון משתמש</h1>
+            </div>
             <div className={styles.getUserBox}>
                 <label htmlFor="getUser">מספר אישי של המשתמש:</label>
                 <div className={styles.inputBox}>
