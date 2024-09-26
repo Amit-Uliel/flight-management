@@ -96,8 +96,6 @@ export default function UpdateCameraForm() {
                 ))}
             </select>
 
-            {selectedCameraType && (<p>כמות נוכחית: {currentQuantity}</p>)}
-                
             <div className={styles.operationButtons}>
                 <button
                     type="button"
@@ -114,6 +112,8 @@ export default function UpdateCameraForm() {
                     -
                 </button>
             </div>
+
+            {selectedCameraType && (<p className={styles.currentQuantity}>כמות נוכחית: {currentQuantity}</p>)}
 
             <label className={styles.label} htmlFor="updateQuantity">
                 {operation === 'increase' ? 'הכנס כמות להוספה' : 'הכנס כמות להורדה'}

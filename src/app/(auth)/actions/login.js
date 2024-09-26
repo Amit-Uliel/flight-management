@@ -129,5 +129,5 @@ export async function signup(formData) {
 
     // Revalidate and redirect
     revalidatePath('/', 'layout');
-    redirect('/admin/create-user');
+    redirect('/admin/user-actions/create-user');
 }

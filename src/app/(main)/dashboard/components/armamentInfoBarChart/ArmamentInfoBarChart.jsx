@@ -6,7 +6,7 @@ import useFetch from "@/hooks/useFetch";
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-const COLORS = ['#4E79A7', '#F28E2B', '#E15759', '#76B7B2', '#59A14F', '#EDC948'];
+const COLORS = ['#F28E2B', '#E15759', '#76B7B2', '#59A14F', '#EDC948'];
 const ITEMS_PER_PAGE = COLORS.length;
 
 const getRectanglePath = (x, y, width, height) => {
