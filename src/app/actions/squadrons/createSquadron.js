@@ -1,6 +1,7 @@
 'use server';
 
 import { PrismaClient } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 
@@ -42,6 +43,7 @@ export async function createSquadron(formData){
             }
         });
 
+        revalidatePath('/admin/user-actions/create-user');
         return { message: 'טייסת נוצרה בהצלחה' };
     } catch(error) {
         console.error(error);
