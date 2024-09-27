@@ -4,8 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import styles from '../styles/forms.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import useFetch from '@/hooks/useFetch';
 
 export default function UpdateAircraftForm() {
+    const { data: squadrons } = useFetch('/api/squadrons')
     const [tailNumber, setTailNumber] = useState('');
     const [model, setModel] = useState('');
     const [squadron, setSquadron] = useState('');
@@ -138,8 +140,11 @@ export default function UpdateAircraftForm() {
                 disabled={!model}
             >
                 <option value="">בחר טייסת</option>
-                <option value="161">161</option>
-                <option value="166">166</option>
+                {squadrons?.map((squadron) => (
+                    <option key={squadron.squadronId} value={squadron.squadronId}>
+                        {squadron.squadronId}
+                    </option>
+                ))}
             </select>
 
             <button className={styles.button} type="submit" disabled={!model || !squadron}>
