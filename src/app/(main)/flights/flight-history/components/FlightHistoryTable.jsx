@@ -27,12 +27,14 @@ const FlightHistoryTable = ({ flights }) => {
         const formattedDate = date.toLocaleDateString('he-IL', {
             year: 'numeric',
             month: '2-digit',
-            day: '2-digit'
+            day: '2-digit',
+            timeZone: 'UTC',
         });
         const formattedTime = date.toLocaleTimeString('he-IL', {
             hour: '2-digit',
             minute: '2-digit',
-            hour12: false
+            hour12: false,
+            timeZone: 'UTC',
         });
         return { formattedDate, formattedTime };
     };

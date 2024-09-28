@@ -37,9 +37,7 @@ export default function EditFlightPage() {
     // Function to format date for datetime-local input
     const formatDateTimeForInput = (dateString) => {
         const date = new Date(dateString);
-        const offset = date.getTimezoneOffset();
-        date.setMinutes(date.getMinutes() - offset); // Adjust for timezone offset
-        return date.toISOString().slice(0, 16); // Return in YYYY-MM-DDTHH:MM format
+        return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
     };
 
     const handleSaveChanges = async (e) => {
