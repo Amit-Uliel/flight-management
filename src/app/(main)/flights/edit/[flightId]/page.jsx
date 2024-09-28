@@ -22,9 +22,8 @@ export default function EditFlightPage() {
                 const data = await response.json();
                 setFlightData(data);
     
-                // Convert date strings to the correct format for datetime-local inputs
-                setTakeoffTime(formatDateTimeForInput(data.takeoffTime));
-                setScheduledLandingTime(formatDateTimeForInput(data.scheduledLandingTime));
+                setTakeoffTime(convertToUTCFormat(data.takeoffTime));
+                setScheduledLandingTime(convertToUTCFormat(data.scheduledLandingTime));
                 setNotes(data.notes);
             } catch (error) {
                 console.error('Failed to fetch flight details:', error);
@@ -34,10 +33,17 @@ export default function EditFlightPage() {
         fetchFlightDetails();
     }, [flightId]);
     
-    // Function to format date for datetime-local input
-    const formatDateTimeForInput = (dateString) => {
+    // Function to convert date to UTC format for datetime-local input
+    const convertToUTCFormat = (dateString) => {
         const date = new Date(dateString);
-        return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+        // Ensure the date is represented in UTC format
+        const year = date.getUTCFullYear();
+        const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+        const day = String(date.getUTCDate()).padStart(2, '0');
+        const hours = String(date.getUTCHours()).padStart(2, '0');
+        const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+        
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
     };
 
     const handleSaveChanges = async (e) => {
