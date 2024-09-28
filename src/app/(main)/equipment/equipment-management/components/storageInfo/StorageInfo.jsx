@@ -40,7 +40,7 @@ export default function StorageInfo() {
 
   return (
     <section className={styles.storageInfo}>
-      <h2>מידע על מלאי</h2>
+      <h3 className={styles.totalTitle}>סה״כ מלאי</h3>
       <div className={styles.storageGrid}>
         <div className={styles.storageItem}>
           <h3 className={styles.title}>מטוסים</h3>

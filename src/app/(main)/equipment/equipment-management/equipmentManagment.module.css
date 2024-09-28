@@ -9,6 +9,11 @@
     margin: 0 auto;
     direction: rtl;
 }
+
+.pageTitle{
+    text-align: center;
+    margin-bottom: 20px;
+}
   
 .tabs {
     display: flex;
@@ -41,7 +46,7 @@
 
 .activeTabButton:hover{
     background-color: #FFF;
-    color: #4B6572;
+    color: var(--bg);
 }
   
 .tabContent {

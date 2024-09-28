@@ -10,7 +10,7 @@ export default function RegisterFlight() {
     <div className={styles.main}>
       <div className={styles.container}>
         <h2 className={styles.title}>
-          הוספת טיסה &nbsp; <FontAwesomeIcon className={styles.icon} icon={faPlaneDeparture} />
+          רישום טיסה &nbsp; <FontAwesomeIcon className={styles.icon} icon={faPlaneDeparture} />
         </h2>
         <FlightForm />
       </div>

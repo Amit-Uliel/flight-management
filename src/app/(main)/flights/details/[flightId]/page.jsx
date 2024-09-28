@@ -171,7 +171,7 @@ const FlightDetails = () => {
                     animate='visible'
                     transition={{ duration: 0.4, ease: 'easeOut', delay: 1.2 }}
                 >
-                    <h2 className={styles.title}>מטוסים שהשתתפו בטיסה</h2>
+                    <h2 className={styles.title}>מטוסים בטיסה</h2>
 
                     {/* Check if the flight is canceled */}
                     {flightData.status === 'CANCELED' ? (

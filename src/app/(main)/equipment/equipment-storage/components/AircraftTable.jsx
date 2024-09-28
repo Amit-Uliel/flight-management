@@ -75,7 +75,7 @@ export default function AircraftTable({ aircrafts }) {
 
     return (
         <div className={styles.tableContainer}>
-            <h2>מטוסים</h2>
+            <h2 className={styles.subTitle}>מטוסים</h2>
             <div className={styles.sortContainer}>
                 <label className={styles.sortByLabel} htmlFor="sort">
                     <Image

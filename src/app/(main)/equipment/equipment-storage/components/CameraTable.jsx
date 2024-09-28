@@ -60,7 +60,7 @@ export default function CameraTable({ cameras }) {
 
     return (
         <div className={styles.tableContainer}>
-            <h2>מצלמות</h2>
+            <h2 className={styles.subTitle}>מצלמות</h2>
             <div className={styles.sortContainer}>
                 <label className={styles.sortByLabel} htmlFor="sort">
                     <Image

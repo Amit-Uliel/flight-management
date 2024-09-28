@@ -1,9 +1,19 @@
 .storageInfo {
-    padding: 10px 100px;
+    padding: 20px 20px;
     margin-bottom: 40px;
     border-radius: 10px;
     text-align: center;
     direction: rtl;
+    border: 1px solid #0d7ad396;
+    box-shadow: 0 2px 10px 0 #131313;
+}
+
+.totalTitle{
+    text-align: right;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    font-weight: normal;
+    letter-spacing: 2px;
 }
   
 .storageGrid {

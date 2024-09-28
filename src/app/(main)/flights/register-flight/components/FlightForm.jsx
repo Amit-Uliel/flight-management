@@ -5,6 +5,7 @@ import AircraftSelectionTable from './AircraftSelectionTable';
 import AircraftConfiguration from './AircraftConfiguration';
 import styles from './styles/flightForm.module.css';
 import OrbitLoadingButton from '@/components/ui/buttons/orbitLoadingButton/OrbitLoadingButton';
+import Image from 'next/image';
 
 export default function FlightForm() {
     const [missionName, setMissionName] = useState('');
@@ -156,29 +157,40 @@ export default function FlightForm() {
 
             <label className={styles.label} htmlFor="missionSelection">בחר משימה קיימת או צור משימה חדשה</label>
             <div className={styles.missionContainer}>
-                <select
-                    className={styles.input}
-                    id="missionSelection"
-                    value={selectedMissionId}
-                    onChange={(e) => {
-                        setSelectedMissionId(e.target.value);
-                        // Clear the missionName state when selecting an existing mission
-                        if (e.target.value) {
-                            setMissionName('');
-                        }
-                    }}
-                >
-                    <option value="">-- בחר משימה קיימת --</option>
-                    {onHoldMissions.map((mission) => (
-                        <option key={mission.missionId} value={mission.missionId}>
-                            {mission.missionName}
-                        </option>
-                    ))}
-                </select>
-
-                {/* Show the mission name input only if no mission is selected */}
+                <div className={styles.missionMethodBox}>
+                    <label className={styles.label} htmlFor="missionName">בחר משימה קיימת</label>
+                    <select
+                        className={styles.missionSelect}
+                        id="missionSelection"
+                        value={selectedMissionId}
+                        onChange={(e) => {
+                            setSelectedMissionId(e.target.value);
+                            // Clear the missionName state when selecting an existing mission
+                            if (e.target.value) {
+                                setMissionName('');
+                            }
+                        }}
+                    >
+                        <option value="">-- בחר משימה --</option>
+                        {onHoldMissions.map((mission) => (
+                            <option key={mission.missionId} value={mission.missionId}>
+                                {mission.missionName}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className={styles.imageBox}>
+                    <Image
+                        src='/crossroads.png'
+                        width={130}
+                        height={110}
+                        quality={100}
+                        alt='צומת'
+                        className={styles.crossroadsIcon}
+                    />
+                </div>
                 {!selectedMissionId && (
-                    <>
+                    <div className={styles.missionMethodBox}>
                         <label className={styles.label} htmlFor="missionName">צור משימה</label>
                         <input
                             className={styles.input}
@@ -188,7 +200,7 @@ export default function FlightForm() {
                             value={missionName}
                             onChange={(e) => setMissionName(e.target.value)}
                         />
-                    </>
+                    </div>
                 )}
             </div>
             <AircraftSelectionTable

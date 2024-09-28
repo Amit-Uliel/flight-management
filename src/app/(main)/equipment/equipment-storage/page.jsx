@@ -4,11 +4,12 @@ import ArmamentTable from './components/ArmamentTable';
 import CameraTable from './components/CameraTable';
 import AircraftTable from './components/AircraftTable';
 import styles from './styles/EquipmentStorage.module.css';
+import StorageInfo from '../equipment-management/components/storageInfo/StorageInfo';
 import { useEffect, useState } from 'react';
 
 export default function EquipmentStorage() {
 
-    const [equipmentToShow, setEquipmentToShow] = useState('armaments');
+    const [equipmentToShow, setEquipmentToShow] = useState('aircrafts');
     const [aircraftData, setAircraftData] = useState([]);
     const [cameraData, setCameraData] = useState([]);
     const [armamentData, setArmamentData] = useState([]);
@@ -60,12 +61,12 @@ export default function EquipmentStorage() {
 
     const renderEquipmentStorage = () => {
         switch (equipmentToShow){
+            case 'aircrafts':
+                return <AircraftTable aircrafts={aircraftData} />;
             case 'armaments':
                 return <ArmamentTable armaments={armamentData} />;
             case 'cameras':
                 return <CameraTable cameras={cameraData} />;
-            case 'aircrafts':
-                return <AircraftTable aircrafts={aircraftData} />;
             default:
                 return <p>לא נמצא מלאי עם הציוד המבוקש</p>;
         }
@@ -74,21 +75,22 @@ export default function EquipmentStorage() {
     return (
         <div className={styles.storagePage}>
             <h1 className={styles.title}>מלאי ציוד</h1>
+            <StorageInfo />
             <div className={styles.tabs}>
-                <button className={`${styles.equipmentButton} ${equipmentToShow === 'armaments' ? styles.active : ''}`}
+                <button className={`${styles.tabButton} ${equipmentToShow === 'aircrafts' ? styles.active : ''}`}
+                    onClick={() => handleTabChange('aircrafts')}
+                >
+                    מלאי מטוסים
+                </button>
+                <button className={`${styles.tabButton} ${equipmentToShow === 'armaments' ? styles.active : ''}`}
                     onClick={() => handleTabChange('armaments')}
                 >
                     מלאי חימוש
                 </button>
-                <button className={`${styles.equipmentButton} ${equipmentToShow === 'cameras' ? styles.active : ''}`}
+                <button className={`${styles.tabButton} ${equipmentToShow === 'cameras' ? styles.active : ''}`}
                     onClick={() => handleTabChange('cameras')}
                 >
                     מלאי מצלמות
-                </button>
-                <button className={`${styles.equipmentButton} ${equipmentToShow === 'aircrafts' ? styles.active : ''}`}
-                    onClick={() => handleTabChange('aircrafts')}
-                >
-                    מלאי מטוסים
                 </button>
             </div>
             <div className={`${styles.fade} ${isFading ? styles.hidden : ''}`}>

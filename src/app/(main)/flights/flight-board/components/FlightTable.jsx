@@ -253,7 +253,19 @@ const FlightTable = () => {
                     <table className={styles.flightTable}>
                         <thead>
                             <tr>
-                                <th>מספר טיסה</th>
+                                <th>
+                                    <div className={styles.flightIdTableHead}>
+                                    <Image
+                                        src="/flightId-pointer.png"
+                                        alt="pointer icon"
+                                        width={22}
+                                        height={22}
+                                        quality={100}
+                                        className={styles.flightIdPointerIcon}
+                                    />
+                                        <span>מספר טיסה</span>
+                                    </div>
+                                </th>
                                 <th>שם משימה</th>
                                 <th>זמן המראה</th>
                                 <th>זמן נחיתה מתוכנן</th>

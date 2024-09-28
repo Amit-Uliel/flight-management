@@ -5,7 +5,6 @@ import styles from './equipmentManagment.module.css';
 import AircraftCard from './components/aircraft/AircraftCard';
 import ArmamentCard from './components/armament/ArmamentCard';
 import CameraCard from './components/camera/CameraCard';
-import StorageInfo from './components/storageInfo/StorageInfo';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const variants = {
@@ -63,7 +62,7 @@ export default function EquipmentManagment() {
   return (
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <StorageInfo />
+          <h2 className={styles.pageTitle}>ניהול ציוד</h2>
           <div className={styles.tabs}>
             <button
               className={`${styles.tabButton} ${activeTab === 'add' ? styles.activeTabButton : ''}`}

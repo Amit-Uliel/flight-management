@@ -81,14 +81,44 @@
     outline: none;
 }
 
+.flightIdTableHead{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.flightIdPointerIcon{
+    position: absolute;
+    right: 0;
+}
+
 .flightId {
+    position: relative;
     cursor: pointer;
     font-weight: bold;
     transition: .2s ease-in-out;
 }
 
-.flightId:hover {
-    text-shadow: 0 0 20px white;
+.flightId::before{
+    content: '';
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    background-color: #5189cd3c;
+    border-radius: 4px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    transition: .3s ease-in-out;
+}
+
+.flightId:hover::before{
+    opacity: 1;
+    width: 50px;
+    height: 30px;
 }
 
 /* Status Colors */
