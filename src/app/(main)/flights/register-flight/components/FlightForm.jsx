@@ -144,21 +144,6 @@ export default function FlightForm() {
         }
     };
 
-    const convertToUTC = (localDateTime) => {
-        const date = new Date(localDateTime);
-        return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
-    };
-    
-    const handleTakeoffTimeChange = (e) => {
-        const localDateTime = e.target.value;
-        setTakeoffTime(convertToUTC(localDateTime));
-    };
-    
-    const handleLandingTimeChange = (e) => {
-        const localDateTime = e.target.value;
-        setScheduledLandingTime(convertToUTC(localDateTime));
-    };
-
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.parentConfirmationContainer}>
@@ -264,7 +249,7 @@ export default function FlightForm() {
                 type="datetime-local"
                 id="takeoffTime"
                 value={takeoffTime}
-                onChange={handleTakeoffTimeChange}
+                onChange={(e) => setTakeoffTime(e.target.value)}
             />
 
             <label className={styles.label} htmlFor="scheduledLandingTime">זמן נחיתה מתוכנן</label>
@@ -273,7 +258,7 @@ export default function FlightForm() {
                 type="datetime-local"
                 id="scheduledLandingTime"
                 value={scheduledLandingTime}
-                onChange={handleLandingTimeChange}
+                onChange={(e) => setScheduledLandingTime(e.target.value)}
             />
 
             <label className={styles.label} htmlFor="notes">הערות</label>

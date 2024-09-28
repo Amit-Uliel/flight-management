@@ -32,11 +32,13 @@ const formatDate = (dateString) => {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
+        timeZone: 'UTC',
     });
     const formattedTime = date.toLocaleTimeString('en-GB', {
         hour: '2-digit',
         minute: '2-digit',
         hour12: false,
+        timeZone: 'UTC',
     });
     return { formattedDate, formattedTime };
 };
