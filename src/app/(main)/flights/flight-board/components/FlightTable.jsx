@@ -27,35 +27,35 @@ const tableRowVariants = {
 
 // Format date and time
 const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const formattedDate = date.toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  });
-  const formattedTime = date.toLocaleTimeString('en-GB', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-  return { formattedDate, formattedTime };
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+    });
+    const formattedTime = date.toLocaleTimeString('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    });
+    return { formattedDate, formattedTime };
 };
 
 const getStatusClass = (status) => {
-  switch (status) {
-    case 'SCHEDULED':
-      return styles.statusScheduled;
-    case 'IN_FLIGHT':
-      return styles.statusInFlight;
-    case 'LANDED':
-      return styles.statusLanded;
-    case 'CANCELED':
-      return styles.statusCanceled;
-    case 'COMPLETED':
-      return styles.statusCompleted;
-    default:
-      return '';
-  }
+    switch (status) {
+        case 'SCHEDULED':
+            return styles.statusScheduled;
+        case 'IN_FLIGHT':
+            return styles.statusInFlight;
+        case 'LANDED':
+            return styles.statusLanded;
+        case 'CANCELED':
+            return styles.statusCanceled;
+        case 'COMPLETED':
+            return styles.statusCompleted;
+        default:
+            return '';
+    }
 };
 
 const FlightTable = () => {
