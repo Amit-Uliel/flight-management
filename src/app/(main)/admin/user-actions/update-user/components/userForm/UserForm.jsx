@@ -30,6 +30,13 @@ const RANK = {
     RAV_ALUF: 'רב אלוף',
 };
 
+const roleOptions = [
+    { value: 'הטסה', label: 'הטסה' },
+    { value: 'מבצעים', label: 'מבצעים' },
+    { value: 'טכני', label: 'טכני' },
+    { value: 'אדמין', label: 'אדמין' },
+];
+
 // Animation variants for slide transitions
 const formVariants = {
     initial: { x: '100%', opacity: 0 },
@@ -45,6 +52,7 @@ const snackbarVariants = {
 };
 
 export default function UserForm() {
+    const { data: squadrons} = useFetch('/api/squadrons');
     const [militaryId, setMilitaryId] = useState('');
     const [debouncedId, setDebouncedId] = useState(militaryId);
     const [snackbar, setSnackbar] = useState({ message: '', type: '' });
@@ -119,6 +127,20 @@ export default function UserForm() {
         // Client-side validation
         if (formData.password && formData.password.length < 6) {
             setSnackbar({ message: 'הסיסמה חייבת להכיל לפחות 6 תווים', type: 'error' });
+            setSubmitLoading(false);
+            return;
+        }
+
+        // if the user in not admin and he didn't choose squadron id display an error
+        if (formData.role !== 'אדמין' &&  formData.squadronId === '') {
+            setSnackbar({ message: 'יש לבחור מספר טייסת עבור משתמש שאינו אדמין.', type: 'error' });
+            setSubmitLoading(false);
+            return;
+        }
+    
+        // if the user is admin and he chose squadron id display an error
+        if (formData.role === 'אדמין' &&  formData.squadronId !== '') {
+            setSnackbar({ message: 'אדמין אינו משויך לטייסת.' , type: 'error' });
             setSubmitLoading(false);
             return;
         }
@@ -202,14 +224,22 @@ export default function UserForm() {
                                     onChange={handleFormChange} 
                                 />
                             </label>
-                            <label>
-                                תפקיד:
-                                <input 
-                                    type="text" 
-                                    name="role"
-                                    value={formData.role || ''} 
-                                    onChange={handleFormChange} 
-                                />
+                            <label htmlFor="role">
+                                תפקיד
+                                <select 
+                                    id="role" 
+                                    name="role" 
+                                    value={formData.role} 
+                                    onChange={handleFormChange}
+                                    className={styles.select}
+                                >
+                                    <option value="">-- בחר תפקיד --</option>
+                                    {roleOptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
                             </label>
                             <label>
                                 דרגה:
@@ -223,15 +253,26 @@ export default function UserForm() {
                                     ))}
                                 </select>
                             </label>
-                            <label>
-                                טייסת:
-                                <input 
-                                    type="text" 
+                            <label htmlFor="squadronId">
+                                מספר טייסת
+                                <select 
+                                    id="squadronId" 
                                     name="squadronId"
-                                    value={formData.squadronId || ''} 
-                                    onChange={handleFormChange} 
-                                />
+                                    value={formData.squadronId} 
+                                    onChange={handleFormChange}
+                                    className={styles.select}
+                                >
+                                    <option value=""> בחר טייסת (אדמין לא בוחר טייסת)</option>
+                                    {squadrons?.map((squadron) => (
+                                        <option key={squadron.squadronId} value={squadron.squadronId}>
+                                            {squadron.squadronId}
+                                        </option>
+                                    ))}
+                                </select>
                             </label>
+                            {formData.role === 'אדמין' &&  formData.squadronId !== '' && (
+                                <p className={styles.adminNote}>אדמין אינו משויך לטייסת*</p>
+                            )}
                             <label>
                                 שינוי סיסמא:
                                 <input 

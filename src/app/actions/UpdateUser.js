@@ -33,6 +33,13 @@ export async function updateUser(militaryId, data) {
             }
         }
 
+        // Validate that squadronId is exactly 3 digits
+        if (!/^\d{3}$/.test(data.squadronId)) {
+            return NextResponse.json({ error: 'מספר טייסת צריך להיות בדיוק 3 ספרות' }, { status: 400 });
+        }
+
+        const squadronId = parseInt(data.squadronId, 10);
+
         // Update other user fields with Prisma
         const updatedUser = await prisma.user.update({
             where: {
@@ -42,7 +49,7 @@ export async function updateUser(militaryId, data) {
                 name: data.name,
                 role: data.role,
                 rank: data.rank,
-                squadronId: data.squadronId,
+                squadronId,
             },
         });
 

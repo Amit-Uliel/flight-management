@@ -66,12 +66,12 @@ export async function signup(formData) {
     const profileImage = formData.get('profileImage');
 
     // if the user is not admin and has no squadron id specified throw an error
-    if (role !== 'אדמין' && !squadronId) {
+    if (role !== 'אדמין' &&  !squadronId) {
         throw new Error('נדרש מספר טייסת למשתמשים שהם לא אדמין');
     }
 
     // if the role is admin and has squadron id throw an error
-    if (role === 'אדמין' && squadronId) {
+    if (role === 'אדמין' &&  squadronId) {
         throw new Error('אדמין לא יכול להיות משוייך לטייסת');
     }
 

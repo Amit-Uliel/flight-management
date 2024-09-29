@@ -69,7 +69,7 @@ export default function UserRegistrationForm() {
         setErrorMessage('');
         setSuccessMessage('');
     
-        // Client-side validation
+        // fields validation
         if (!formData.militaryId || !formData.password || !formData.name || !formData.role || !formData.rank || !formData.profileImage) {
             setErrorMessage('אנא מלא את כל השדות הנדרשים.');
             return;
@@ -80,12 +80,14 @@ export default function UserRegistrationForm() {
             return;
         }
     
-        if (formData.role !== 'אדמין' && formData.squadronId === '') {
+        // if the user in not admin and he didn't choose squadron id display an error
+        if (formData.role !== 'אדמין' &&  formData.squadronId === '') {
             setErrorMessage('יש לבחור מספר טייסת עבור משתמש שאינו אדמין.');
             return;
         }
     
-        if (formData.role === 'אדמין' && formData.squadronId !== '') {
+        // if the user is admin and he chose squadron id display an error
+        if (formData.role === 'אדמין' &&  formData.squadronId !== '') {
             setErrorMessage('אדמין אינו משויך לטייסת.');
             return;
         }
@@ -188,7 +190,7 @@ export default function UserRegistrationForm() {
                             </option>
                         ))}
                     </select>
-                    {formData.role === 'אדמין' && formData.squadronId !== '' && (
+                    {formData.role === 'אדמין' &&  formData.squadronId !== '' && (
                         <p className={styles.adminNote}>אדמין אינו משויך לטייסת*</p>
                     )}
                 </div>
