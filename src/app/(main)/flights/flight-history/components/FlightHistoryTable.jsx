@@ -99,7 +99,7 @@ const FlightHistoryTable = ({ flights }) => {
                                                 'לא דווח זמן נחיתה'
                                             )}
                                         </td>
-                                        <td className={styles.status}>{flight.status === 'COMPLETED' ? 'הושלם' : 'בוטלה'}</td>
+                                        <td className={styles.status}>{flight.status === 'COMPLETED' ? 'הושלמה' : 'בוטלה'}</td>
                                     </tr>
                                 );
                             })
