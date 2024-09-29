@@ -128,7 +128,7 @@ export default function UpdateCameraForm() {
             />
 
             <button className={styles.button} type="submit" disabled={isLoading || !updateQuantity}>
-                {isLoading ? '...מעדכן' : 'עדכון מצלמות'}
+                {isLoading ? 'מעדכן...' : 'עדכון מצלמות'}
             </button>
                 
             {error && <p className={styles.error}>{error}</p>}

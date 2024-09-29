@@ -133,7 +133,7 @@ export default function UpdateArmamentForm() {
             />
 
             <button className={styles.button} type="submit" disabled={isLoading || !updateQuantity}>
-                {isLoading ? '...מעדכן' : 'עדכון חימוש'}
+                {isLoading ? 'מעדכן...' : 'עדכון חימוש'}
             </button>   
             
             {error && <p className={styles.error}>{error}</p>}

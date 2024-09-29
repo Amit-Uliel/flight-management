@@ -37,16 +37,20 @@ export default function DeleteSquadron() {
   const [snackbar, setSnackbar] = useState({ message: '', type: '' });
 
   const handleDeleteSquadron = async (e) => {
-      e.preventDefault();
-      setIsLoading(true);
-      const formData = new FormData(e.target);
-      const response = await deleteSquadron(formData);
-      if (response.error) {
-          setSnackbar({ message: response.error, type: 'error' });
-      } else {
-          setSnackbar({ message: response.message, type: 'success' });
-      }
-      setIsLoading(false);
+    e.preventDefault();
+    
+    const isConfirmed = window.confirm('האם אתה בטוח שברצונך למחוק את הטייסת?');
+    if (!isConfirmed) return;
+
+    setIsLoading(true);
+    const formData = new FormData(e.target);
+    const response = await deleteSquadron(formData);
+    if (response.error) {
+        setSnackbar({ message: response.error, type: 'error' });
+    } else {
+        setSnackbar({ message: response.message, type: 'success' });
+    }
+    setIsLoading(false);
   }
 
   // Automatically hide the snackbar after 5 seconds

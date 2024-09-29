@@ -148,7 +148,7 @@ export default function UpdateAircraftForm() {
             </select>
 
             <button className={styles.button} type="submit" disabled={!model || !squadron}>
-                {isLoading ? '...מעדכן' : 'עדכון מטוס'}
+                {isLoading ? 'מעדכן...' : 'עדכון מטוס'}
             </button>
         </form>
     );
